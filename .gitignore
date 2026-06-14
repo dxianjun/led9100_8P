@@ -1,0 +1,36 @@
+# Keil build outputs
+**/Objects/
+**/Listings/
+*.axf
+*.hex
+*.map
+*.o
+*.obj
+*.crf
+*.d
+*.lst
+*.htm
+*.lnp
+*.sct
+
+# Keil/user-local files
+*.uvguix.*
+*.uvgui.*
+JLinkSettings.ini
+
+# Source Insight/cache
+*.si4project/
+*.si4project/cache/
+*.si4project/backup/
+*.si4project/search_results/
+
+# Local scratch
+Thumbs.db
+*.tmp
+*.zip
+*.chm
+
+# Reference/backups and release artifacts kept outside source control
+20260513/
+20260614/
+烧录档/

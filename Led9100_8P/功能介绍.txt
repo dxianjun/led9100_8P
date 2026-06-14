@@ -1,0 +1,10 @@
+Led9100_ciu
+TSSOP20/ SOP8
+
+20260614
+	Program Size: Code=10316 RO-data=500 RW-data=124 ZI-data=1188  
+	代码整合完成，待测试
+	
+	Program Size: Code=10428 RO-data=500 RW-data=124 ZI-data=1188  
+	优化代码，1、捕获一个周期，清0一次TimOut10mS[TTPWM_CHx] 2、没有pwm信号时，最快20ms，切换一次in通道
+	led9100ciu_20260614
