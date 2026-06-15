@@ -16,14 +16,16 @@ extern "C" {
 
 #define PWM_SCALE       12000U
 #define ARR_16K         3000U
-#define ARR_2K        	12000U
+#define ARR_2K        	24000U
+
+#define FIX_16K			0
 
 #define CHIP_9100	0
 #define CHIP_6800	1
 #define CHIP_9101	2
 
 
-#define	CHIP_VER	CHIP_9100
+#define	CHIP_VER	CHIP_9101
 
 #if (CHIP_VER==CHIP_9101)
 #define WAKE_UP_CHX		1	
@@ -33,23 +35,25 @@ extern "C" {
 
 
 #if (CHIP_VER==CHIP_9100)	// 9100
-#define MIN_PULSE	15U		// VerA定义为11，9+37=46,    实际输出的脉宽是 340ns(被死区砍成的380ns)
-#define DUTY_DELT	38U		// 加了死区后，在输出占空时，做一下补偿38(DT_SET)； (47-38)/1500*62.5us=  333ns
-#define DT_SET		38U		// VerA 38-1.583us
+#define MIN_PULSE	30U		// VerA定义为11，9+37=46,    实际输出的脉宽是 340ns(被死区砍成的380ns)
+#define DUTY_DELT	76U		// 加了死区后，在输出占空时，做一下补偿38(DT_SET)； (47-38)/1500*62.5us=  333ns
+#define DT_SET		76U		// VerA 38-1.583us
 #elif (CHIP_VER==CHIP_9101)		// 9101
-#define MIN_PULSE	3U		// VerA定义为11，9+37=46,    实际输出的脉宽是 340ns(被死区砍成的380ns)
-#define DUTY_DELT	9U		// 加了死区后，在输出占空时，做一下补偿38(DT_SET)； (47-38)/1500*62.5us=  333ns
-#define DT_SET		11U		// VerA 38-1.583us
+#define MIN_PULSE	4U		// VerA定义为11，9+37=46,    实际输出的脉宽是 340ns(被死区砍成的380ns)
+#define DUTY_DELT	20U		// 加了死区后，在输出占空时，做一下补偿38(DT_SET)； (47-38)/1500*62.5us=  333ns
+#define DT_SET		22U		// VerA 38-1.583us
 #else		// 6800
 // DT_SET只和CKD(TIM_ClockDivision)有关, 因此不变
 // 输入最小限定在3/30 = 0.1 = 0.1%, 只要低于0.1%，强制输出最小脉冲；因此特意将DUTY_DELT由11改为9；
-#define MIN_PULSE	3U		// VerB定义为3,  3+9=12, 实际输出的脉宽是41.7ns， 
-#define DUTY_DELT	9U		// 加了死区后，在输出占空时，做一下补偿(应该是11, 调整到了9)；(12-11)/3000*125us=41.7ns
-#define DT_SET		11U		// VerB 11- 458.3ns, 11/24=0.4583 = 458.3ns; 最小可以到440ns, 这个颗芯片做不了这么细
+#define MIN_PULSE	4U		// VerB定义为3,  3+9=12, 实际输出的脉宽是41.7ns， 
+#define DUTY_DELT	20U		// 加了死区后，在输出占空时，做一下补偿(应该是11, 调整到了9)；(12-11)/3000*125us=41.7ns
+#define DT_SET		22U		// VerB 11- 458.3ns, 11/24=0.4583 = 458.3ns; 最小可以到440ns, 这个颗芯片做不了这么细
 #endif
 
 
+
 extern uint8_t uc_sel_ch;
+extern uint16_t tim1_period_ticks;
 
 void tim1_gpio_init(void);
 void tim1_output_init(void);

@@ -53,7 +53,7 @@ void pwm_update_isr(void);
 void app_set_input_print(uint8_t enable);
 void app_set_output_print(uint8_t enable);
 void app_set_mode(uint8_t mode);
-void app_set_manual_level(uint8_t level);
+void app_set_manual_level(uint8_t ch,uint8_t level);
 void user_serv(void);
 
 #ifdef __cplusplus

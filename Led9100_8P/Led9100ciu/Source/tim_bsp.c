@@ -11,6 +11,8 @@
 #define INPUT_PERIOD_MIN        (2000U)     /* 24 kHz at 48 MHz */
 #define INPUT_PERIOD_MAX        (60000U)    /* 800 Hz at 48 MHz */
 #define INPUT_TIMEOUT_10MS      (6U)
+#define INPUT_TIMEOUT_DEBOUNCE_READS  (3U)
+#define INPUT_TIMEOUT_DEBOUNCE_DELAY  (48U)
 
 #define DET_CNT                 (8U)
 #define BIT_SHIFT               (3U)
@@ -30,6 +32,48 @@ typedef struct
 static volatile pwm_input_channel_t pwm_in1 = {0};
 static volatile pwm_input_channel_t pwm_in2 = {0};
 
+uint32_t g_ch1_ccx_value = 0U;
+uint32_t g_ch2_ccx_value = 0U;
+
+static void reset_pwm_input_channel(volatile pwm_input_channel_t *input)
+{
+    input->period_sum = 0U;
+    input->duty_sum = 0U;
+
+    input->cap_cnt = 0U;
+    input->updated = 0U;
+
+// 这2个参数不能清0，要保持当前的值
+//    input->freq_value = 0U;
+//    input->duty_value = 0U;	
+}
+
+static uint8_t read_pin_debounced(GPIO_t *gpiox, uint32_t pin)
+{
+    uint8_t i;
+    uint8_t high_count = 0U;
+
+    for (i = 0U; i < INPUT_TIMEOUT_DEBOUNCE_READS; i++)
+        {
+        if (std_gpio_get_input_pin(gpiox, pin))
+            {
+            high_count++;
+            }
+
+        if ((i + 1U) < INPUT_TIMEOUT_DEBOUNCE_READS)
+            {
+            delay_clk(INPUT_TIMEOUT_DEBOUNCE_DELAY);
+            }
+        }
+
+    return (high_count > (INPUT_TIMEOUT_DEBOUNCE_READS / 2U)) ? 1U : 0U;
+}
+
+#if (FIX_16K==1)
+uint16_t tim1_period_ticks = ARR_16K;
+#else
+uint16_t tim1_period_ticks = ARR_2K;
+#endif
 
 // 如果需要限制最大输出不能是高电平，将DUTY_MAX_ADJ设置为1；如果要求最大是高电平，将DUTY_MAX_ADJ设置为0
 #define DUTY_MAX_NO_ADJ			1	
@@ -117,8 +161,8 @@ static uint16_t clamp_output_period(uint32_t period_ticks)
 
 void tim1_apply_output(uint16_t period_ticks, uint16_t pulse1_ticks, uint16_t pulse2_ticks)
 {
-	uint16_t ccr1;
-	uint16_t ccr2;
+	uint16_t ccr3;
+	uint16_t ccr4;
 
 	period_ticks = clamp_output_period(period_ticks);
 
@@ -132,12 +176,12 @@ void tim1_apply_output(uint16_t period_ticks, uint16_t pulse1_ticks, uint16_t pu
 		pulse2_ticks = period_ticks;
 		}
 
-	ccr1 = pulse_to_ccr1(pulse1_ticks, period_ticks);
-	ccr2 = pulse_to_ccr2n(pulse2_ticks, period_ticks);
+	ccr3 = pulse_to_ccr1(pulse1_ticks, period_ticks);
+	ccr4 = pulse_to_ccr2n(pulse2_ticks, period_ticks);
 
 	std_tim_set_autoreload(TIM1, (uint16_t)(period_ticks - 1U));
-	std_tim_set_ccx_value(TIM1, TIM_CHANNEL_1, ccr1);
-	std_tim_set_ccx_value(TIM1, TIM_CHANNEL_2, ccr2);
+	std_tim_set_ccx_value(TIM1, TIM_CHANNEL_3, ccr3);
+	std_tim_set_ccx_value(TIM1, TIM_CHANNEL_4, ccr4);
 }
 
 
@@ -164,94 +208,90 @@ void tim1_gpio_init(void)
 {
     std_gpio_init_t gpio_init = {0};
 
-	std_rcc_gpio_clk_enable(RCC_PERIPH_CLK_GPIOA);
+    std_rcc_gpio_clk_enable(RCC_PERIPH_CLK_GPIOA);
     std_rcc_gpio_clk_enable(RCC_PERIPH_CLK_GPIOB);
+    std_rcc_gpio_clk_enable(RCC_PERIPH_CLK_GPIOC);
 
-    gpio_init.pin = GPIO_PIN_2;
     gpio_init.mode = GPIO_MODE_ALTERNATE;
     gpio_init.pull = GPIO_NOPULL;
     gpio_init.output_type = GPIO_OUTPUT_PUSHPULL;
-    gpio_init.alternate = GPIO_AF2_TIM1;
-    std_gpio_init(GPIOB, &gpio_init);
 
-    gpio_init.pin = GPIO_PIN_1;
-    gpio_init.alternate = GPIO_AF3_TIM1;
-    std_gpio_init(GPIOB, &gpio_init);
-
-#if 1	// 测试用
-	// tim1_ch4
-    gpio_init.pin = GPIO_PIN_7;
-    gpio_init.alternate = GPIO_AF4_TIM1;
-    std_gpio_init(GPIOB, &gpio_init);
-
-	// tim1_ch3
+    // Follow TIM3 inputs: TIM1_CH3(PA1/PB2), TIM1_CH4(PB7/PB1)
     gpio_init.pin = GPIO_PIN_1;
     gpio_init.alternate = GPIO_AF4_TIM1;
     std_gpio_init(GPIOA, &gpio_init);
-#endif
-}
 
+    gpio_init.pin = GPIO_PIN_2 | GPIO_PIN_1 | GPIO_PIN_7;
+    gpio_init.alternate = GPIO_AF4_TIM1;
+    std_gpio_init(GPIOB, &gpio_init);
+
+    // Test PWM outputs: TIM1_CH1(PA0), TIM1_CH2(PC1)
+    gpio_init.pin = GPIO_PIN_0;
+    gpio_init.alternate = GPIO_AF2_TIM1;
+    std_gpio_init(GPIOA, &gpio_init);
+
+    gpio_init.pin = GPIO_PIN_1;
+    gpio_init.alternate = GPIO_AF2_TIM1;
+    std_gpio_init(GPIOC, &gpio_init);
+}
 
 /*
 PWM1模式：CNT < CCRx 时输出为高电平。因此，在计数器的30个周期内输出高电平，剩余70个周期为低电平
 PWM2模式：CNT > CCRx 时输出为高电平。因此，在计数器的70个周期内输出高电平，剩余30个周期为低电平
 如果配置模式2，同时极性为NEG
 PWM2模式：CNT > CCRx 时输出为低电平。
-pwm2_n: CNT > CCRx 时输出为高电平。 因此，在计数器的70个周期内输出高电平，剩余30个周期为低电平
+// pwm2_n: CNT > CCRx 时输出为高电平。 因此，在计数器的70个周期内输出高电平，剩余30个周期为低电平
 */
 void tim1_output_init(void)
 {
     std_tim_basic_init_t basic_init = {0};
     std_tim_output_compare_init_t oc_init = {0};
     std_tim_break_init_t break_init = {0};
-		
-		/* TIM1时钟使能 */
+
+    /* TIM1时钟使能 */
     std_rcc_apb2_clk_enable(RCC_PERIPH_CLK_TIM1);
-		
-		 /* 配置TIM1计数器参数 */
+
+    /* 配置TIM1计数器参数 */
     basic_init.prescaler = 0U;
     basic_init.counter_mode = TIM_COUNTER_MODE_UP;
-    basic_init.period = ARR_2K - 1U;
+    basic_init.period = tim1_period_ticks - 1U;
     basic_init.clock_div = TIM_CLOCK_DTS_DIV1;
     basic_init.repeat_counter = 0U;
     std_tim_init(TIM1, &basic_init);
-		
-	/* 配置通道1输出模式为PWM1模式 */
-    oc_init.output_compare_mode = TIM_OUTPUT_MODE_PWM1;
+
     oc_init.output_state = TIM_OUTPUT_ENABLE;
-    oc_init.output_negtive_state = TIM_OUTPUT_NEGTIVE_DISABLE;
-    oc_init.pulse = 0U;
+    oc_init.output_negtive_state = TIM_OUTPUT_NEGTIVE_ENABLE;
     oc_init.output_pol = TIM_OUTPUT_POL_HIGH;
     oc_init.output_negtive_pol = TIM_OUTPUT_NEGTIVE_POL_HIGH;
     oc_init.output_idle_state = TIM_OUTPUT_IDLE_RESET;
     oc_init.output_negtive_idle_state = TIM_OUTPUT_NEGTIVE_IDLE_RESET;
+
+    /* TIM1_CH1(PA0): test PWM, PWM1 high active */
+    oc_init.output_compare_mode = TIM_OUTPUT_MODE_PWM1;
+    oc_init.pulse = 2000U;
     std_tim_output_compare_init(TIM1, &oc_init, TIM_CHANNEL_1);
-		
-	/* 配置通道2输出模式为PWM2模式 */
-	oc_init.output_compare_mode = TIM_OUTPUT_MODE_PWM2;
-    oc_init.output_state = TIM_OUTPUT_DISABLE;
-    oc_init.output_negtive_state = TIM_OUTPUT_NEGTIVE_ENABLE;
-	oc_init.output_negtive_pol = TIM_OUTPUT_NEGTIVE_POL_LOW;
-    oc_init.pulse = ARR_2K;
+
+    /* TIM1_CH2(PC1): test PWM, PWM1 high active */
+    oc_init.output_compare_mode = TIM_OUTPUT_MODE_PWM1;
+    oc_init.pulse = 2000U;
     std_tim_output_compare_init(TIM1, &oc_init, TIM_CHANNEL_2);
 
-	#if 1
-	//测试A1,B7 tim1_ch3, tim1_ch4, 输出pwm
-	oc_init.output_compare_mode = TIM_OUTPUT_MODE_PWM1;
-	oc_init.output_state = TIM_OUTPUT_ENABLE;
-	oc_init.output_negtive_state = TIM_OUTPUT_NEGTIVE_DISABLE;
-	oc_init.pulse = 1000U;
-	oc_init.output_pol = TIM_OUTPUT_POL_HIGH;
-	oc_init.output_negtive_pol = TIM_OUTPUT_NEGTIVE_POL_HIGH;
-	oc_init.output_idle_state = TIM_OUTPUT_IDLE_RESET;
-	oc_init.output_negtive_idle_state = TIM_OUTPUT_NEGTIVE_IDLE_RESET;
-	
-	std_tim_output_compare_init(TIM1, &oc_init, TIM_CHANNEL_3);
-	std_tim_output_compare_init(TIM1, &oc_init, TIM_CHANNEL_4);
-	
-	#endif
+    /* TIM1_CH3(PA1/PB2): follows TIM3 input, PWM1 high active */
+    oc_init.output_compare_mode = TIM_OUTPUT_MODE_PWM1;
+    oc_init.pulse = 0U;
+    std_tim_output_compare_init(TIM1, &oc_init, TIM_CHANNEL_3);
 
+    /* TIM1_CH4(PB7/PB1): follows TIM3 input, PWM2 high active */
+    oc_init.output_compare_mode = TIM_OUTPUT_MODE_PWM2;
+    oc_init.pulse = tim1_period_ticks;
+    std_tim_output_compare_init(TIM1, &oc_init, TIM_CHANNEL_4);
 	
+    std_tim_arrpreload_enable(TIM1);
+    std_tim_preloadccx_channel_enable(TIM1, TIM_CHANNEL_1);
+    std_tim_preloadccx_channel_enable(TIM1, TIM_CHANNEL_2);
+    std_tim_preloadccx_channel_enable(TIM1, TIM_CHANNEL_3);
+    std_tim_preloadccx_channel_enable(TIM1, TIM_CHANNEL_4);
+
     /* 配置断路输入参数 */
     break_init.off_state_run_mode = TIM_OSSR_ENABLE;
     break_init.off_state_idle_mode = TIM_OSSI_ENABLE;
@@ -331,11 +371,13 @@ void tim3_input_init(void)
     NVIC_EnableIRQ(TIM3_IRQn);
 }
 
+uint32_t g_enter_cnt = 0U;
+
 void Capture_switch(uint8_t uc_sel_ch)
 {
     /* 断开TIM3输入捕获通道1和通道2中断 */
     std_tim_interrupt_disable(TIM3, TIM_INTERRUPT_CC1 | TIM_INTERRUPT_CC2);
-    std_tim_clear_flag(TIM3, TIM_FLAG_CC1 | TIM_INTERRUPT_CC2);
+    std_tim_clear_flag(TIM3, TIM_FLAG_CC1 | TIM_FLAG_CC2);
 	
     /* 断开输入捕获 */
     std_tim_ccx_channel_disable(TIM3, TIM_CHANNEL_1);
@@ -343,6 +385,11 @@ void Capture_switch(uint8_t uc_sel_ch)
 
 	/* 停止TIM3计数 */
     std_tim_disable(TIM3);	
+	g_enter_cnt = 0;
+    g_ch1_ccx_value = 0U;
+    g_ch2_ccx_value = 0U;
+    reset_pwm_input_channel(&pwm_in1);
+    reset_pwm_input_channel(&pwm_in2);
 	
 	std_tim_input_capture_init_t input_capture_struct = {0};
 	if (uc_sel_ch==2U)	// 此时采样硬件ch2上的pwm信号
@@ -414,10 +461,13 @@ void bsp_tim3_capture_start(void)
 
 void tim1_output_start(void)
 {
-    std_tim_ccx_channel_enable(TIM1, TIM_CHANNEL_1);
-    std_tim_ccxn_channel_enable(TIM1, TIM_CHANNEL_2);
-    std_tim_moen_enable(TIM1);
-    std_tim_enable(TIM1);
+	std_tim_ccx_channel_enable(TIM1, TIM_CHANNEL_1);
+	std_tim_ccx_channel_enable(TIM1, TIM_CHANNEL_2);
+	std_tim_ccx_channel_enable(TIM1, TIM_CHANNEL_3);
+	std_tim_ccx_channel_enable(TIM1, TIM_CHANNEL_4);
+
+	std_tim_moen_enable(TIM1);
+	std_tim_enable(TIM1);
 }
 
 void input_timeout_check(void)
@@ -433,7 +483,7 @@ void input_timeout_check(void)
 			TimOut10mS[TTPWM_CH1] = 0; 
 			
 			pwm_in1.updated = 1U;
-			pwm_in1.duty_value = std_gpio_get_input_pin(GPIOB, GPIO_PIN_0) ? PWM_SCALE : 0U;
+			pwm_in1.duty_value = read_pin_debounced(GPIOB, GPIO_PIN_0) ? PWM_SCALE : 0U;
 			}
 		}
 	else if (uc_sel_ch== 2U)
@@ -443,7 +493,7 @@ void input_timeout_check(void)
 			TimOut10mS[TTPWM_CH2] = 0; 
 			
 			pwm_in2.updated = 1U;
-			pwm_in2.duty_value = std_gpio_get_input_pin(GPIOA, GPIO_PIN_7) ? PWM_SCALE : 0U;
+			pwm_in2.duty_value = read_pin_debounced(GPIOA, GPIO_PIN_7) ? PWM_SCALE : 0U;
 			}
 		}
 }
@@ -478,10 +528,7 @@ void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
 }
 
 /*------------------------------------------variables-------------------------------------------*/
-uint32_t g_enter_cnt = 0U;
 
-uint32_t g_ch1_ccx_value = 0U;
-uint32_t g_ch2_ccx_value = 0U;
 
 //uint32_t g_pwm_duty = 0x0U;
 //uint32_t g_pwm_frequency = 0x0U;
@@ -492,7 +539,7 @@ uint32_t g_ch2_ccx_value = 0U;
 */
 void TIM3_IRQHandler(void)
 {
-	if (uc_sel_ch)
+	if (uc_sel_ch==2U)
 		{
 		/* CC2上升沿捕获 */
 		if (std_tim_get_flag(TIM3, TIM_FLAG_CC2))
@@ -523,7 +570,7 @@ void TIM3_IRQHandler(void)
 					pwm_in2.period_sum = (pwm_in2.period_sum>>BIT_SHIFT);
 					pwm_in2.duty_sum = (pwm_in2.duty_sum>>BIT_SHIFT);
 					/* 计算占空比 */
-					pwm_in2.duty_value = ((pwm_in2.duty_sum + 1) * 100) / (pwm_in2.period_sum + 1);
+					pwm_in2.duty_value = ((pwm_in2.duty_sum + 1) * PWM_SCALE) / (pwm_in2.period_sum + 1);
 
 					/* 计算输入频率 */
 					pwm_in2.freq_value = (std_rcc_get_pclkfreq() / (pwm_in2.period_sum + 1));
@@ -548,7 +595,7 @@ void TIM3_IRQHandler(void)
 			std_tim_clear_flag(TIM3, TIM_FLAG_CC1);
 			}
 		}
-	else
+	else if (uc_sel_ch==1U)
 		{
 		/* CC1上升沿捕获 */
 		if (std_tim_get_flag(TIM3, TIM_FLAG_CC1))
@@ -580,7 +627,7 @@ void TIM3_IRQHandler(void)
 					pwm_in1.period_sum = (pwm_in1.period_sum>>BIT_SHIFT);
 					pwm_in1.duty_sum = (pwm_in1.duty_sum>>BIT_SHIFT);
 					/* 计算占空比 */
-					pwm_in1.duty_value = ((pwm_in1.duty_sum + 1) * 100) / (pwm_in1.period_sum + 1);
+					pwm_in1.duty_value = ((pwm_in1.duty_sum + 1) * PWM_SCALE) / (pwm_in1.period_sum + 1);
 
 					/* 计算输入频率 */
 					pwm_in1.freq_value = (std_rcc_get_pclkfreq() / (pwm_in1.period_sum + 1));

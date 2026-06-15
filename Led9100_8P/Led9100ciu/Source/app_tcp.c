@@ -47,15 +47,25 @@ void parse_cmd(uint8_t *buf, uint16_t len)
         app_set_mode(MODE_DIRECT);
         printf("mode=3\r\n");
         }
-    else if (strstr(cmd, "pwmLv=") != NULL)
+    else if (strstr(cmd, "pwmLv1=") != NULL)
         {
-        value = (uint16_t)strtoul(strstr(cmd, "pwmLv=") + 6, NULL, 10);
+        value = (uint16_t)strtoul(strstr(cmd, "pwmLv1=") + 7, NULL, 10);
         if (value > 100U)
             {
             value = 100U;
             }
-        app_set_manual_level((uint8_t)value);
-        printf("pwmLv=%u\r\n", value);
+        app_set_manual_level(1, (uint8_t)value);
+        printf("pwmLv1=%u\r\n", value);
+        }
+	else if (strstr(cmd, "pwmLv2=") != NULL)
+        {
+        value = (uint16_t)strtoul(strstr(cmd, "pwmLv2=") + 7, NULL, 10);
+        if (value > 100U)
+            {
+            value = 100U;
+            }
+        app_set_manual_level(2, (uint8_t)value);
+        printf("pwmLv2=%u\r\n", value);
         }
     else
         {
