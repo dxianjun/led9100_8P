@@ -140,18 +140,19 @@ int main(void)
 	tim3_input_init();
 	bsp_tim3_capture_start();
 
-	
+
 	tim1_gpio_init();
 	tim1_output_init();
 	tim1_output_start();
 
-	iwdg_init();
+	led_init();
+	// iwdg_init();
 
-    while (1)
-        {
-        WDG_ReloadCounter;
-        TimFlg_Hand();
-        user_serv();
-        }
+	while (1)
+		{
+		WDG_ReloadCounter;
+		TimFlg_Hand();
+		user_serv();
+		}
 }
 

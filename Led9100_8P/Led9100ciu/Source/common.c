@@ -28,7 +28,7 @@ void iwdg_init(void)
     while (std_rcc_get_rcl_ready() != 1U) {}
 
     std_iwdg_write_access_enable();
-    std_iwdg_set_overflow_period(IWDG_OVERFLOW_PERIOD_2048);
+    std_iwdg_set_overflow_period(IWDG_OVERFLOW_PERIOD_16384);
     std_iwdg_start();
 }
 

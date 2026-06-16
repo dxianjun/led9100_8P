@@ -1,6 +1,19 @@
 Led9100_ciu
 TSSOP20/ SOP8
 
+20260616
+	Program Size: Code=12496 RO-data=500 RW-data=144 ZI-data=1184  
+	功能验证ok, 只是不能开看门狗，开了以后，串口等都不能执行了；
+	led9101ciu_20260616
+
+20260615
+	Program Size: Code=10776 RO-data=500 RW-data=124 ZI-data=1188  
+	功能验证ok, 芯片切成9101, 
+	led9101ciu_20260615
+	Program Size: Code=12248 RO-data=500 RW-data=128 ZI-data=1184  
+	增加一些安全方面的措施，比如抗抖，预装载等；
+	led9101ciu_20260615_2
+
 20260614
 	Program Size: Code=10316 RO-data=500 RW-data=124 ZI-data=1188  
 	代码整合完成，待测试

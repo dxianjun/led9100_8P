@@ -10,6 +10,7 @@
 
 #define INPUT_PERIOD_MIN        (2000U)     /* 24 kHz at 48 MHz */
 #define INPUT_PERIOD_MAX        (60000U)    /* 800 Hz at 48 MHz */
+
 #define INPUT_TIMEOUT_10MS      (6U)
 #define INPUT_TIMEOUT_DEBOUNCE_READS  (3U)
 #define INPUT_TIMEOUT_DEBOUNCE_DELAY  (48U)
@@ -221,10 +222,11 @@ void tim1_gpio_init(void)
     gpio_init.alternate = GPIO_AF4_TIM1;
     std_gpio_init(GPIOA, &gpio_init);
 
-    gpio_init.pin = GPIO_PIN_2 | GPIO_PIN_1 | GPIO_PIN_7;
+    // gpio_init.pin = GPIO_PIN_2 | GPIO_PIN_1 | GPIO_PIN_7;
+	gpio_init.pin = GPIO_PIN_7;
     gpio_init.alternate = GPIO_AF4_TIM1;
     std_gpio_init(GPIOB, &gpio_init);
-
+	
     // Test PWM outputs: TIM1_CH1(PA0), TIM1_CH2(PC1)
     gpio_init.pin = GPIO_PIN_0;
     gpio_init.alternate = GPIO_AF2_TIM1;
@@ -366,8 +368,8 @@ void tim3_input_init(void)
     // std_tim_ccx_channel_enable(TIM3, TIM_CHANNEL_1);
     // std_tim_ccx_channel_enable(TIM3, TIM_CHANNEL_2);   
 
-    /* NVIC初始化 */
-    NVIC_SetPriority(TIM3_IRQn, NVIC_PRIO_0);
+    /* NVIC初始化 */ 
+    NVIC_SetPriority(TIM3_IRQn, NVIC_PRIO_0); // NVIC_PRIO_0 为最高优先级
     NVIC_EnableIRQ(TIM3_IRQn);
 }
 
@@ -388,12 +390,11 @@ void Capture_switch(uint8_t uc_sel_ch)
 	g_enter_cnt = 0;
     g_ch1_ccx_value = 0U;
     g_ch2_ccx_value = 0U;
-    reset_pwm_input_channel(&pwm_in1);
-    reset_pwm_input_channel(&pwm_in2);
-	
+
 	std_tim_input_capture_init_t input_capture_struct = {0};
 	if (uc_sel_ch==2U)	// 此时采样硬件ch2上的pwm信号
 		{
+		reset_pwm_input_channel(&pwm_in2);
 	    /* 配置为复位模式，且触发源为TI2FP2，触发极性为上升沿触发 */
 	    std_tim_slave_mode_config(TIM3, TIM_SLAVE_MODE_RESET);
 	    std_tim_trig_source_config(TIM3, TIM_TRIG_SOURCE_TI2FP2);
@@ -413,6 +414,7 @@ void Capture_switch(uint8_t uc_sel_ch)
 		}
     else if (uc_sel_ch==1U)	// 此时采样硬件ch1上的pwm信号
 		{
+		reset_pwm_input_channel(&pwm_in1);
 	    /* 配置为复位模式，且触发源为TI1FP1，触发极性为上升沿触发 */
 	    std_tim_slave_mode_config(TIM3, TIM_SLAVE_MODE_RESET);
 	    std_tim_trig_source_config(TIM3, TIM_TRIG_SOURCE_TI1FP1);
@@ -569,12 +571,23 @@ void TIM3_IRQHandler(void)
 
 					pwm_in2.period_sum = (pwm_in2.period_sum>>BIT_SHIFT);
 					pwm_in2.duty_sum = (pwm_in2.duty_sum>>BIT_SHIFT);
-					/* 计算占空比 */
-					pwm_in2.duty_value = ((pwm_in2.duty_sum + 1) * PWM_SCALE) / (pwm_in2.period_sum + 1);
 
-					/* 计算输入频率 */
-					pwm_in2.freq_value = (std_rcc_get_pclkfreq() / (pwm_in2.period_sum + 1));
+					// 频率在范围内，就计算占空比和频率; 不在范围内, 直接认为duty=0;
+					if ((pwm_in2.period_sum >= INPUT_PERIOD_MIN) && (pwm_in2.period_sum <= INPUT_PERIOD_MAX)) 
+						{
+						/* 计算占空比 */
+						pwm_in2.duty_value = (pwm_in2.duty_sum * PWM_SCALE + 1) / (pwm_in2.period_sum + 1);
 
+						/* 计算输入频率 */
+						pwm_in2.freq_value = (std_rcc_get_pclkfreq() / (pwm_in2.period_sum + 1));
+
+						if (pwm_in2.duty_value == 0) pwm_in2.duty_value=1;
+						}
+					else
+						{
+						pwm_in2.duty_value=0;
+						}
+					
 					// 计算完成后，把累加值清0
 					pwm_in2.period_sum = 0; pwm_in2.duty_sum = 0;
 
@@ -626,12 +639,23 @@ void TIM3_IRQHandler(void)
 
 					pwm_in1.period_sum = (pwm_in1.period_sum>>BIT_SHIFT);
 					pwm_in1.duty_sum = (pwm_in1.duty_sum>>BIT_SHIFT);
-					/* 计算占空比 */
-					pwm_in1.duty_value = ((pwm_in1.duty_sum + 1) * PWM_SCALE) / (pwm_in1.period_sum + 1);
 
-					/* 计算输入频率 */
-					pwm_in1.freq_value = (std_rcc_get_pclkfreq() / (pwm_in1.period_sum + 1));
+					// 频率在范围内，就计算占空比和频率; 不在范围内, 直接认为duty=0;
+					if ((pwm_in1.period_sum >= INPUT_PERIOD_MIN) && (pwm_in1.period_sum <= INPUT_PERIOD_MAX)) 
+						{
+						/* 计算占空比 */
+						pwm_in1.duty_value = (pwm_in1.duty_sum * PWM_SCALE + 1) / (pwm_in1.period_sum + 1);
 
+						/* 计算输入频率 */
+						pwm_in1.freq_value = (std_rcc_get_pclkfreq() / (pwm_in1.period_sum + 1));
+
+						
+						if (pwm_in1.duty_value == 0) pwm_in1.duty_value=1;
+						}
+					else
+						{
+						pwm_in1.duty_value = 0;
+						}
 					// 计算完成后，把累加值清0
 					pwm_in1.period_sum = 0; pwm_in1.duty_sum = 0;
 

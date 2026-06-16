@@ -5,11 +5,10 @@
 extern "C" {
 #endif
 
-#include "ciu32l051_std.h"
-
+#include "common.h"
 
 #define LED1_GPIO_PORT            GPIOB
-#define LED1_PIN                  GPIO_PIN_14
+#define LED1_PIN                  GPIO_PIN_1
 #define LED1_TOGGLE()             std_gpio_toggle_pin(LED1_GPIO_PORT, LED1_PIN)
 
 void led_init(void);

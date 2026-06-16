@@ -16,6 +16,7 @@ extern "C" {
 #include "tim_bsp.h"
 #include "usart_bsp.h"
 #include "app_service.h"
+#include "output_bsp.h"
 
 #ifdef __cplusplus
 }

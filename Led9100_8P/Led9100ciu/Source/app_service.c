@@ -289,20 +289,20 @@ uint8_t uc_ch1_en=0, uc_ch2_en=0;	// 这2个标记为是否将io口映射到pwm 输出；
 void chx_add_wakeUp(void)
 {
 	printf("wake up\n");
-	// 输出50us高电平
-
+	// 输出50us高电平	
+	// 24000U 2K的周期是500us,10% 就是50us
 	std_tim_set_ccx_value(TIM1, TIM_CHANNEL_3, 2470);
-	
-	// 无法实现同时高，除非占空大于50%
-	// TIM1->CCR2 = (uint16_t)(ui_duty_out_max - 1238);	// (uint16_t)(period_ticks - (DUTY_DELT + pulse_ticks));
+//	std_tim_set_ccx_value(TIM1, TIM_CHANNEL_4, 24000-2470);
 }
 #endif
+
+volatile uint8_t uc_cal_step=0;
 
 void app_task(void)
 {
     uint16_t duty;
 
-	if (f_cal_ok)
+	if (uc_cal_step == 1)
 		{
 		// 根据总亮度获取输出频率和总脉宽
 		brightness_to_output(brightness, &pulse_total_ticks, &period_ticks);
@@ -322,8 +322,8 @@ void app_task(void)
 		// 根据周期和总脉宽，以及插值后的pwm值，计算实际应该输出的脉冲
 		compute_output_pulses(pwm_duty, pwm_duty2, pulse_total_ticks, period_ticks, &pulse1_ticks, &pulse2_ticks);
 		// 根据输出周期和脉冲的理论值，调整死区去头等，写入寄存器
-		tim1_apply_output(period_ticks, pulse1_ticks, pulse2_ticks);
-		test_pwm_apply();
+		// tim1_apply_output(period_ticks, pulse1_ticks, pulse2_ticks);
+		// test_pwm_apply();
 
 		if (printf_output_en && (TimOut10mS[TTMR_DLY] >= 100U))
 	        {
@@ -331,7 +331,8 @@ void app_task(void)
 			
 	        printf("cur1=%u cur2=%u period=%u pulse1=%u pulse2=%u\r\n",pwm_duty,pwm_duty2,period_ticks,pulse1_ticks,pulse2_ticks);
 	        }
-		f_cal_ok = 2;
+		
+		uc_cal_step = 2;
 		}
 
 			
@@ -341,9 +342,15 @@ void app_task(void)
         {		
         pwm_duty_tag = limit_u16(duty, PWM_SCALE);
         if (printf_input_en)
-            {
-            printf("IN1 duty=%u\r\n", pwm_duty_tag/120);
-            }
+			{
+			static uint16_t ch1_bk=0;
+			uint16_t ch1_duty=pwm_duty_tag/12;
+			if (ch1_duty != ch1_bk) 
+				{
+				printf("IN1 duty=%u 0.1%%\r\n", ch1_duty);
+				ch1_bk = ch1_duty;
+				}
+			}
 
 		#if WAKE_UP_CHX
 		if (pwm_duty_tag > 0)
@@ -359,9 +366,10 @@ void app_task(void)
 				uc_ch1_en = 1;
 				}
 			}
-		else
+		else if (uc_ch1_en)
 			{
 			uc_ch1_en = 0;
+			printf("ch1 off\n");
 			}
 		#endif
 		
@@ -373,9 +381,16 @@ void app_task(void)
         {
         pwm_duty2_tag = limit_u16(duty, PWM_SCALE);
         if (printf_input_en)
-            {
-            printf("IN2 duty=%u\r\n", pwm_duty2_tag/120);
-            }
+			{
+			static uint16_t ch2_bk=0;
+			uint16_t ch2_duty=pwm_duty2_tag/12;
+			if (ch2_duty != ch2_bk) 
+				{
+				printf("IN2 duty=%u 0.1%%\r\n", ch2_duty);
+				ch2_bk = ch2_duty;
+				}
+			}
+		
 		#if WAKE_UP_CHX
 		if (pwm_duty2_tag > 0)
 			{
@@ -389,9 +404,10 @@ void app_task(void)
 				uc_ch2_en = 1;
 				}
 			}
-		else
+		else if (uc_ch2_en)
 			{
 			uc_ch2_en = 0;
+			printf("ch2 off\n");
 			}
 		#endif
 		
@@ -408,11 +424,11 @@ void pwm_update_isr(void)
 //    uint16_t out2;
 //    uint16_t period;
 
-	if (f_cal_ok == 2)	
+	if (uc_cal_step == 2)	
 		{
 		tim1_apply_output(period_ticks, pulse1_ticks, pulse2_ticks);
 		test_pwm_apply();
-		f_cal_ok = 0;
+		uc_cal_step = 0;
 		}
 	
 	if ((pwm_duty == pwm_duty_tag) && (pwm_duty2 == pwm_duty2_tag))
@@ -459,7 +475,7 @@ void pwm_update_isr(void)
 			}
 		}
 	// 计算搬到主循环里
-	f_cal_ok = 1;
+	uc_cal_step = 1;
 	
     //pwm_output_apply(out1, out2, period);
 }

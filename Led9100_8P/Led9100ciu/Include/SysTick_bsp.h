@@ -27,14 +27,18 @@ extern volatile bit_field_t TimFlg;
 extern unsigned short TimOut1mS[MAX1MS];
 extern unsigned short TimOut10mS[MAX10MS];
 
-#define Tim1ms_flg      TimFlg.bits.b0
-#define Tim10ms_flg     TimFlg.bits.b1
-#define Tim1s_flg       TimFlg.bits.b2
-#define f_cal_ok        TimFlg.bits.b3
+#define Tim0_1ms_flg 	TimFlg.bits.b0
+#define Tim1ms_flg      TimFlg.bits.b1
+#define Tim10ms_flg     TimFlg.bits.b2
+#define Tim1s_flg       TimFlg.bits.b3
+
 
 void SysTick_init(void);
 void TimFlg_Hand(void);
-void Delay_1ms(uint32_t nTime);
+
+void Delay_125us(__IO uint32_t nTime);
+void Delay_1ms(__IO uint32_t nTime);
+
 void delay_clk(uint32_t nclk);
 void SysTick_Handler(void);
 
