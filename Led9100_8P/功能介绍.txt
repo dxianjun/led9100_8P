@@ -5,6 +5,15 @@ TSSOP20/ SOP8
 	Program Size: Code=12496 RO-data=500 RW-data=144 ZI-data=1184  
 	功能验证ok, 只是不能开看门狗，开了以后，串口等都不能执行了；
 	led9101ciu_20260616
+	Program Size: Code=12580 RO-data=500 RW-data=144 ZI-data=1184  
+	看门狗可以开起来了；common.c里的代码不完整；
+	
+	Program Size: Code=12572 RO-data=500 RW-data=136 ZI-data=1184    
+	按TSSOP20配置，输出口调整，Led调试； 
+	led9101ciu_20260616_2
+
+	Program Size: Code=12204 RO-data=500 RW-data=132 ZI-data=1188  
+	按SOP8 配置，去掉一些多余的内容
 
 20260615
 	Program Size: Code=10776 RO-data=500 RW-data=124 ZI-data=1188  

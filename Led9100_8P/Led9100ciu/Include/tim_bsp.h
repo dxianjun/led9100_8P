@@ -19,6 +19,7 @@ extern "C" {
 #define ARR_2K        	24000U
 
 #define FIX_16K			0
+#define TSSOP20			1
 
 #define CHIP_9100	0
 #define CHIP_6800	1
@@ -49,8 +50,6 @@ extern "C" {
 #define DUTY_DELT	20U		// 加了死区后，在输出占空时，做一下补偿(应该是11, 调整到了9)；(12-11)/3000*125us=41.7ns
 #define DT_SET		22U		// VerB 11- 458.3ns, 11/24=0.4583 = 458.3ns; 最小可以到440ns, 这个颗芯片做不了这么细
 #endif
-
-
 
 extern uint8_t uc_sel_ch;
 extern uint16_t tim1_period_ticks;

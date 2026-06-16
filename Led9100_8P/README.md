@@ -7,8 +7,10 @@
 核心功能：
 
 - 采集两路 PWM 输入：`PWM_IN1 = PB0/TIM3_CH1`，`PWM_IN2 = PA7/TIM3_CH2`。
-- 跟随输入输出 PWM：`PWM_OUT1 = PA1/TIM1_CH3`，`PWM_OUT2 = PB7/TIM1_CH4`。
-- 测试 PWM 输出：`TEST_PWM1 = PA0/TIM1_CH1`，`TEST_PWM2 = PC1/TIM1_CH2(AF2)`。
+- 支持 `TSSOP20` / SOP8 两种输出脚位配置；当前默认 `TSSOP20 = 1`。
+- TSSOP20 跟随输入输出 PWM：`PWM_OUT1 = PA1/TIM1_CH3`，`PWM_OUT2 = PB7/TIM1_CH4`。
+- TSSOP20 测试 PWM 输出：`TEST_PWM1 = PA0/TIM1_CH1`，`TEST_PWM2 = PC1/TIM1_CH2(AF2)`。
+- SOP8 跟随输入输出 PWM：`PWM_OUT1 = PB2/TIM1_CH3`，`PWM_OUT2 = PB1/TIM1_CH4`；测试 PWM 和 LED 调试不启用。
 - UART1 调试通信：`PA3/UART1_TX`，`PA4/UART1_RX`。
 - 使用 SysTick 维护 125 us、1 ms、10 ms、1 s 软件计时。
 - 支持串口命令打开输入/输出打印、切换模式、分别设置两路测试 PWM 等级。
@@ -24,7 +26,7 @@
 | 标准库 | `Drivers/CIU32F003_Lib` |
 | CMSIS | `Drivers/CMSIS` |
 | 输出名 | `led9100ciu` |
-| 主版本标识 | `LED9101_8P_V1.01`（当前 `CHIP_VER = CHIP_9101`） |
+| 主版本标识 | `LED9101_8P_V1.01`（当前 `CHIP_VER = CHIP_9101`，`TSSOP20 = 1`） |
 
 ## 3. 目录结构
 
@@ -69,7 +71,7 @@ Led9100_8P/
 7. `uc_sel_ch = 1U`，`tim3_input_init()`，`bsp_tim3_capture_start()`：先启动 PWM_IN1 采样。
 8. `tim1_gpio_init()`、`tim1_output_init()`、`tim1_output_start()`：启动 TIM1 输出。
 9. `led_init()`：初始化 LED1。
-10. 独立看门狗初始化当前未打开，主循环和延时函数中仍保留喂狗调用。
+10. `iwdg_init()`：启动独立看门狗，当前使用 RCL 时钟并配置 `IWDG_OVERFLOW_PERIOD_2048`。
 11. 主循环执行 `TimFlg_Hand()` 和 `user_serv()`。
 
 ## 6. 外设与脚位
@@ -78,11 +80,13 @@ Led9100_8P/
 | --- | --- | --- | --- |
 | PWM_IN1 | PB0 | TIM3_CH1 | PWM 输入 1，允许 800 Hz - 24 kHz |
 | PWM_IN2 | PA7 | TIM3_CH2 | PWM 输入 2，允许 800 Hz - 24 kHz |
-| PWM_OUT1 | PA1 | TIM1_CH3 | 跟随输入输出通道 1，PWM1 模式，高电平有效 |
-| PWM_OUT2 | PB7 | TIM1_CH4 | 跟随输入输出通道 2，PWM2 模式，高电平有效 |
-| TEST_PWM1 | PA0 | TIM1_CH1 | 测试 PWM 输出 1，PWM1 模式，高电平有效 |
-| TEST_PWM2 | PC1 | TIM1_CH2(AF2) | 测试 PWM 输出 2，PWM1 模式，高电平有效 |
-| LED1 | PB1 | GPIO 输出 | SysTick 中翻转 |
+| PWM_OUT1 | PA1 | TIM1_CH3 | TSSOP20 跟随输入输出通道 1，PWM1 模式，高电平有效 |
+| PWM_OUT2 | PB7 | TIM1_CH4 | TSSOP20 跟随输入输出通道 2，PWM2 模式，高电平有效 |
+| PWM_OUT1 | PB2 | TIM1_CH3 | SOP8 跟随输入输出通道 1，PWM1 模式，高电平有效 |
+| PWM_OUT2 | PB1 | TIM1_CH4 | SOP8 跟随输入输出通道 2，PWM2 模式，高电平有效 |
+| TEST_PWM1 | PA0 | TIM1_CH1 | TSSOP20 测试 PWM 输出 1，PWM1 模式，高电平有效 |
+| TEST_PWM2 | PC1 | TIM1_CH2(AF2) | TSSOP20 测试 PWM 输出 2，PWM1 模式，高电平有效 |
+| LED1 | PB1 | GPIO 输出 | 仅 TSSOP20 初始化，SysTick 1 s 翻转一次 |
 | UART1_TX | PA3 | UART1_TX | 调试发送 |
 | UART1_RX | PA4 | UART1_RX | 调试接收 |
 | SWDIO | PB6 | SWDIO | 下载/调试 |
@@ -111,19 +115,20 @@ duty_value = (duty_sum * PWM_SCALE + 1) / (period_sum + 1)
 
 TIM1 输出由 `tim_bsp.c` 负责寄存器写入：
 
-- `TIM1_CH1(PA0)` 和 `TIM1_CH2(PC1)` 为测试 PWM，均使用 PWM1 模式。
-- `TIM1_CH3(PA1)` 为跟随输入输出 1，使用 PWM1 模式。
-- `TIM1_CH4(PB7)` 为跟随输入输出 2，使用 PWM2 模式。
-- CH1 - CH4 均为高电平有效，并启用 ARR/CCR 预装载。
+- `TSSOP20 = 1` 时，`TIM1_CH1(PA0)` 和 `TIM1_CH2(PC1)` 为测试 PWM，均使用 PWM1 模式。
+- `TSSOP20 = 1` 时，`TIM1_CH3(PA1)` 为跟随输入输出 1，`TIM1_CH4(PB7)` 为跟随输入输出 2。
+- `TSSOP20 = 0` 时，`TIM1_CH3(PB2)` 为跟随输入输出 1，`TIM1_CH4(PB1)` 为跟随输入输出 2，不启用 CH1/CH2 测试 PWM。
+- CH1 - CH3 使用 PWM1 模式，CH4 使用 PWM2 模式；已启用 ARR 预装载，实际启用的 CCR 通道也会打开预装载。
 - `tim1_apply_output(period_ticks, pulse1_ticks, pulse2_ticks)` 根据目标周期和脉宽写入 ARR、CH3 CCR、CH4 CCR。
 - 输出周期限制在 `ARR_16K` 到 `ARR_2K` 范围内。
 - `pulse_to_ccr1()` 和 `pulse_to_ccr2n()` 会结合 `MIN_PULSE`、`DUTY_DELT`、`DT_SET` 处理死区补偿和极限输出。
-- `pwmLv1`、`pwmLv2` 命令设置的是测试 PWM CH1/CH2 等级，跟随输出 CH3/CH4 仍由输入采样和亮度曲线计算。
+- `pwmLv1`、`pwmLv2` 命令在 TSSOP20 配置下设置测试 PWM CH1/CH2 等级；跟随输出 CH3/CH4 仍由输入采样和亮度曲线计算。
 
 当前 `CHIP_VER` 默认：
 
 ```c
 #define CHIP_VER CHIP_9101
+#define TSSOP20  1
 ```
 
 不同芯片版本会影响 `MIN_PULSE`、`DUTY_DELT`、`DT_SET`。
@@ -136,7 +141,7 @@ TIM1 输出由 `tim_bsp.c` 负责寄存器写入：
 - 当前非 `FIX_16K` 曲线中，pulse 和 period 相对早期 2 kHz 表已放大 2 倍；`FIX_16K=1` 时使用固定 3000 tick 周期表。
 - `compute_output_pulses()`：根据模式和两路输入计算 PWM1/PWM2 实际输出脉宽。
 - `app_task()`：处理输入更新、输入超时、输出计算和调试打印，计算完成后由 `uc_cal_step` 协调到 TIM1 更新中断写入。
-- `pwm_update_isr()`：在 TIM1 更新中断中平滑追踪目标占空比，并在合适时机写入 TIM1 输出和测试 PWM。
+- `pwm_update_isr()`：在 TIM1 更新中断中平滑追踪目标占空比，并在合适时机写入 TIM1 输出；TSSOP20 配置下同时刷新测试 PWM。
 - `user_serv()`：主循环服务函数，依次执行 `app_task()` 和 `tcp_hand()`。
 
 当前支持两种模式：
@@ -180,8 +185,8 @@ UART1 配置：
 | `outEn=0` | 关闭输出状态打印 |
 | `mode=2` | 切换到 `MODE_CCT` |
 | `mode=3` | 切换到 `MODE_DIRECT` |
-| `pwmLv1=0..100` | 手动设置测试 PWM1 等级 |
-| `pwmLv2=0..100` | 手动设置测试 PWM2 等级 |
+| `pwmLv1=0..100` | 手动设置 TSSOP20 测试 PWM1 等级 |
+| `pwmLv2=0..100` | 手动设置 TSSOP20 测试 PWM2 等级 |
 
 未知命令会打印命令提示；当前提示字符串中仍保留旧的 `pwmLv=0..100` 文案，实际解析命令以 `pwmLv1=`、`pwmLv2=` 为准。
 
@@ -202,9 +207,19 @@ UART1 配置：
 - 递增 10 ms 软件计数。
 - 调用 `uart1_rx_idle_check()` 做 UART1 10 ms 空闲收帧。
 
-`Delay_125us()` 和 `Delay_1ms()` 均按分段方式等待，并在等待过程中保留喂狗调用。`SysTick_Handler()` 当前会翻转 LED1。
+`Delay_125us()` 和 `Delay_1ms()` 均按分段方式等待，并在等待过程中保留喂狗调用。`SysTick_Handler()` 当前在 TSSOP20 配置下每 1 s 翻转一次 LED1。
 
-## 12. 编译与验证
+## 12. 看门狗
+
+`iwdg_init()` 当前流程：
+
+- 使能 RCL，并等待 `RCC_CSR2_RCLRDY`。
+- 打开 IWDG 写权限。
+- 设置溢出周期为 `IWDG_OVERFLOW_PERIOD_2048`。
+- 启动前先执行一次 `std_iwdg_refresh()`。
+- 主循环、`user_serv()` 和延时函数中保留喂狗调用。
+
+## 13. 编译与验证
 
 使用 Keil MDK 打开：
 
@@ -225,9 +240,9 @@ Led9100ciu/MDK/ciu32f003.uvprojx
 - `system_ciu32f003.c`
 - `startup_ciu32f003.s`
 
-代码已更新到 `LED9101_8P_V1.01` 方向，`功能介绍.txt` 中记录了 20260616 版本的程序大小和功能验证备注。README 更新本身未执行 Keil 全量编译。
+代码已更新到 `LED9101_8P_V1.01` 方向，`功能介绍.txt` 中记录了 20260616 版本的程序大小、看门狗验证、TSSOP20/SOP8 配置和输出口调整备注。README 更新本身未执行 Keil 全量编译。
 
-## 13. 开发注意事项
+## 14. 开发注意事项
 
 1. C 源码按 `开发规范.md` 使用 ANSI/GBK 编码；Markdown 使用 UTF-8 no BOM。
 2. 不修改模板工程中已有中文备注。

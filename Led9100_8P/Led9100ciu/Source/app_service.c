@@ -2,7 +2,7 @@
 
 #include "app_service.h"
 #include "app_tcp.h"
-
+#include "tim_bsp.h"
 
 
 typedef struct
@@ -186,6 +186,8 @@ uint16_t pulse_total_ticks=0;
 uint16_t period_ticks=0;
 uint16_t pulse1_ticks=0;
 uint16_t pulse2_ticks=0;
+
+#if (TSSOP20 == 1)
 static uint8_t test_level_ch1 = 0U;
 static uint8_t test_level_ch2 = 0U;
 
@@ -199,6 +201,7 @@ static void test_pwm_apply(void)
     ccr = (uint16_t)((uint32_t)tim1_period_ticks * test_level_ch2 / 100U);
     std_tim_set_ccx_value(TIM1, TIM_CHANNEL_2, ccr);
 }
+#endif
 
 uint16_t abs_delt(uint16_t a, uint16_t b)
 {
@@ -347,7 +350,7 @@ void app_task(void)
 			uint16_t ch1_duty=pwm_duty_tag/12;
 			if (ch1_duty != ch1_bk) 
 				{
-				printf("IN1 duty=%u 0.1%%\r\n", ch1_duty);
+				printf("IN1 duty=%u%%\r\n", ch1_duty);
 				ch1_bk = ch1_duty;
 				}
 			}
@@ -386,7 +389,7 @@ void app_task(void)
 			uint16_t ch2_duty=pwm_duty2_tag/12;
 			if (ch2_duty != ch2_bk) 
 				{
-				printf("IN2 duty=%u 0.1%%\r\n", ch2_duty);
+				printf("IN2 duty=%u%%\r\n", ch2_duty);
 				ch2_bk = ch2_duty;
 				}
 			}
@@ -427,7 +430,11 @@ void pwm_update_isr(void)
 	if (uc_cal_step == 2)	
 		{
 		tim1_apply_output(period_ticks, pulse1_ticks, pulse2_ticks);
+		
+		#if (TSSOP20 == 1)
 		test_pwm_apply();
+		#endif
+		
 		uc_cal_step = 0;
 		}
 	
@@ -504,8 +511,10 @@ void app_set_manual_level(uint8_t ch,uint8_t level)
         {
         level = 100U;
         }
-
+	
+	#if (TSSOP20 == 1)
     printf("tim1 period %d\n", tim1_period_ticks);
+
     if (ch==1)
         {
         test_level_ch1 = level;
@@ -516,6 +525,7 @@ void app_set_manual_level(uint8_t ch,uint8_t level)
         }
 
     test_pwm_apply();
+	#endif
 }
 void user_serv(void)
 {

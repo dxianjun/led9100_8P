@@ -7,14 +7,16 @@
 #include "SysTick_bsp.h"
 #include "usart_bsp.h"
 #include "output_bsp.h"
+#include "tim_bsp.h"
+
 
 volatile bit_field_t TimFlg = {0};
 unsigned short TimOut1mS[MAX1MS] = {0};
 unsigned short TimOut10mS[MAX10MS] = {0};
 
-static volatile uint32_t l_systick_125us = 0;
-static volatile uint32_t l_systick_ms = 0;
-static volatile uint32_t l_systick_s = 0;
+static volatile uint16_t l_systick_125us = 0;
+static volatile uint16_t l_systick_s = 0;
+//static volatile uint32_t l_systick_ms = 0;
 
 static volatile uint32_t l_delay_ms = 0;
 
@@ -122,14 +124,13 @@ void SysTick_Handler(void)
 {
 	l_systick_125us++;
 	Tim0_1ms_flg = 1U;
-	LED1_TOGGLE();
 	
 	if(l_systick_125us % 8 ==0)
 		{
 		Tim1ms_flg=1U;
 		
 		// tick 
-		l_systick_ms++;
+		// l_systick_ms++;
     	l_delay_ms++;
 		
 		if(l_systick_125us % 80 ==0)
@@ -140,6 +141,10 @@ void SysTick_Handler(void)
 				{
 				Tim1s_flg = 1U;
 				l_systick_s++;
+				
+				#if (TSSOP20 == 1)
+				LED1_TOGGLE();
+				#endif
 				
 				if (l_systick_125us >= 40000)
 					{

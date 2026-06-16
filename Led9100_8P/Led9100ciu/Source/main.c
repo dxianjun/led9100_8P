@@ -139,14 +139,14 @@ int main(void)
 	uc_sel_ch=1U;
 	tim3_input_init();
 	bsp_tim3_capture_start();
-
-
+	
 	tim1_gpio_init();
 	tim1_output_init();
 	tim1_output_start();
-
+	#if (TSSOP20 == 1)
 	led_init();
-	// iwdg_init();
+	#endif
+	iwdg_init();
 
 	while (1)
 		{

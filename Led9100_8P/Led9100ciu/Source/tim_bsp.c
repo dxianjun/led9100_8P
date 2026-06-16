@@ -217,7 +217,10 @@ void tim1_gpio_init(void)
     gpio_init.pull = GPIO_NOPULL;
     gpio_init.output_type = GPIO_OUTPUT_PUSHPULL;
 
+	// PB0-->PB2; PA7-->PB1
     // Follow TIM3 inputs: TIM1_CH3(PA1/PB2), TIM1_CH4(PB7/PB1)
+
+	#if (TSSOP20 == 1)
     gpio_init.pin = GPIO_PIN_1;
     gpio_init.alternate = GPIO_AF4_TIM1;
     std_gpio_init(GPIOA, &gpio_init);
@@ -235,6 +238,11 @@ void tim1_gpio_init(void)
     gpio_init.pin = GPIO_PIN_1;
     gpio_init.alternate = GPIO_AF2_TIM1;
     std_gpio_init(GPIOC, &gpio_init);
+	#else
+	gpio_init.pin = GPIO_PIN_2 | GPIO_PIN_1;
+	gpio_init.alternate = GPIO_AF4_TIM1;
+    std_gpio_init(GPIOB, &gpio_init);
+	#endif
 }
 
 /*
@@ -268,6 +276,7 @@ void tim1_output_init(void)
     oc_init.output_idle_state = TIM_OUTPUT_IDLE_RESET;
     oc_init.output_negtive_idle_state = TIM_OUTPUT_NEGTIVE_IDLE_RESET;
 
+	#if (TSSOP20 == 1)
     /* TIM1_CH1(PA0): test PWM, PWM1 high active */
     oc_init.output_compare_mode = TIM_OUTPUT_MODE_PWM1;
     oc_init.pulse = 2000U;
@@ -278,6 +287,10 @@ void tim1_output_init(void)
     oc_init.pulse = 2000U;
     std_tim_output_compare_init(TIM1, &oc_init, TIM_CHANNEL_2);
 
+	std_tim_preloadccx_channel_enable(TIM1, TIM_CHANNEL_1);
+    std_tim_preloadccx_channel_enable(TIM1, TIM_CHANNEL_2);
+	#endif
+	
     /* TIM1_CH3(PA1/PB2): follows TIM3 input, PWM1 high active */
     oc_init.output_compare_mode = TIM_OUTPUT_MODE_PWM1;
     oc_init.pulse = 0U;
@@ -289,8 +302,7 @@ void tim1_output_init(void)
     std_tim_output_compare_init(TIM1, &oc_init, TIM_CHANNEL_4);
 	
     std_tim_arrpreload_enable(TIM1);
-    std_tim_preloadccx_channel_enable(TIM1, TIM_CHANNEL_1);
-    std_tim_preloadccx_channel_enable(TIM1, TIM_CHANNEL_2);
+
     std_tim_preloadccx_channel_enable(TIM1, TIM_CHANNEL_3);
     std_tim_preloadccx_channel_enable(TIM1, TIM_CHANNEL_4);
 
@@ -463,8 +475,11 @@ void bsp_tim3_capture_start(void)
 
 void tim1_output_start(void)
 {
+	#if (TSSOP20 == 1)
 	std_tim_ccx_channel_enable(TIM1, TIM_CHANNEL_1);
 	std_tim_ccx_channel_enable(TIM1, TIM_CHANNEL_2);
+	#endif
+	
 	std_tim_ccx_channel_enable(TIM1, TIM_CHANNEL_3);
 	std_tim_ccx_channel_enable(TIM1, TIM_CHANNEL_4);
 
