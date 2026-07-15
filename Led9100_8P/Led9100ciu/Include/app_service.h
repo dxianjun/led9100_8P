@@ -44,7 +44,7 @@ typedef union
 #define MODE_DEFAULT     MODE_DIRECT
 
 extern bit16_field_t g_app_flag;
-extern uint8_t uc_modecfg;
+extern volatile uint8_t uc_modecfg;
 
 void sys_flg_init(void);
 void app_init(void);

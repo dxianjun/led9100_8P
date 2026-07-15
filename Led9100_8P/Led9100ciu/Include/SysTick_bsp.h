@@ -13,15 +13,15 @@ extern "C" {
 
 #include "common.h"
 
-#define TTMR_CK_CH		0	
-#define TTCPIN1         1
-#define TTCPIN2         2
-#define MAX1MS          3
+//#define TTMR_CK_CH		0	
+#define TTCPIN1         0
+#define TTPWM_CH       	1
+//#define TTCPIN2         1
+//#define TTPWM_CH2       4
+#define MAX1MS          2
 
 #define TTMR_DLY        0
-#define TTPWM_CH1       1
-#define TTPWM_CH2       2
-#define MAX10MS         3
+#define MAX10MS         1
 
 extern volatile bit_field_t TimFlg;
 extern unsigned short TimOut1mS[MAX1MS];
