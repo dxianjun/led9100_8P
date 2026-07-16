@@ -46,14 +46,12 @@ extern "C" {
 // 定频模式选择：FIX_16K=1时固定3000 ticks/16kHz；FIX_2K=1时固定24000 ticks/2kHz。
 // 两者均为0时，根据亮度曲线在3000~24000 ticks之间动态变频。
 #define FIX_16K                 0
-#define FIX_2K                  1
+#define FIX_2K                  0
 
 #if (FIX_16K == 1)
 #define DUTY_LIMIT_PERIOD_TICKS ARR_16K
-#elif (FIX_2K == 1)
-#define DUTY_LIMIT_PERIOD_TICKS ARR_2K
 #else
-#define DUTY_LIMIT_PERIOD_TICKS ARR_16K
+#define DUTY_LIMIT_PERIOD_TICKS ARR_2K
 #endif
 
 #if (DUTY_MAX_NO_ADJ == 0)
@@ -115,6 +113,8 @@ void tim1_apply_output(uint16_t period_ticks, uint16_t pulse1_ticks, uint16_t pu
 
 void tim3_gpio_init(void);
 void tim3_input_init(void);
+void tim3_nvic_init(void);
+
 void bsp_tim3_capture_start(void);
 void Capture_switch(uint8_t channel);
 

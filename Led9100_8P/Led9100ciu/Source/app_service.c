@@ -21,7 +21,7 @@ static uint16_t pwm_duty_tag = 0;
 static uint16_t pwm_duty2_tag = 0;
 
 
-static uint8_t printf_input_en = 1;
+static uint8_t printf_input_en = 0;
 static uint8_t printf_output_en = 0;
 volatile uint8_t uc_modecfg = MODE_DEFAULT;
 
@@ -240,8 +240,8 @@ static volatile uint16_t pulse1_ticks=0;
 static volatile uint16_t pulse2_ticks=0;
 
 #if (DEBUG_PWM_OUTPUT == 1)
-static uint8_t test_level_ch1 = 0U;
-static uint8_t test_level_ch2 = 0U;
+uint8_t test_level_ch1 = 0U;
+uint8_t test_level_ch2 = 0U;
 
 static void test_pwm_apply(void)
 {
@@ -554,7 +554,7 @@ void pwm_update_isr(void)
 		tim1_apply_output(period_ticks, pulse1_ticks, pulse2_ticks);
 		
 		#if (DEBUG_PWM_OUTPUT == 1)
-		test_pwm_apply();
+		// test_pwm_apply();
 		#endif
 		uc_cal_step = 0;		
 		}

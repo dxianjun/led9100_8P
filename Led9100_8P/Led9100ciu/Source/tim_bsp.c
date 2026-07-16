@@ -258,9 +258,16 @@ void tim1_output_init(void)
     oc_init.output_negtive_idle_state = TIM_OUTPUT_NEGTIVE_IDLE_RESET;
 
 	#if (DEBUG_PWM_OUTPUT == 1)
+	extern uint8_t test_level_ch1;
+	extern uint8_t test_level_ch2;
+	uint16_t ccr;
+	
+	test_level_ch1 = 10; test_level_ch2 = 10;
+	ccr = (uint16_t)((uint32_t)tim1_period_ticks * test_level_ch1 / 100U);
+	
     /* TIM1_CH1(PA0): test PWM, PWM1 high active */
     oc_init.output_compare_mode = TIM_OUTPUT_MODE_PWM1;
-    oc_init.pulse = 2400U;
+    oc_init.pulse = ccr;
     std_tim_output_compare_init(TIM1, &oc_init, TIM_CHANNEL_1);
 
     /* TIM1_CH2(PC1): test PWM, PWM1 high active */
@@ -355,12 +362,19 @@ void tim3_input_init(void)
 	    input_capture_struct.input_capture_sel = TIM_INPUT_CAPTURE_SEL_INDIRECTTI;
 	    std_tim_input_capture_init(TIM3, &input_capture_struct, TIM_CHANNEL_2);		
 		}
-
+ 
     /* 使能输入捕获 */
-    // std_tim_ccx_channel_enable(TIM3, TIM_CHANNEL_1);
-    // std_tim_ccx_channel_enable(TIM3, TIM_CHANNEL_2);   
+    std_tim_ccx_channel_enable(TIM3, TIM_CHANNEL_1);
+    std_tim_ccx_channel_enable(TIM3, TIM_CHANNEL_2);
+}
 
-    /* NVIC初始化 */ 
+/**
+* @brief  NVIC初始化
+* @retval 无
+*/
+void tim3_nvic_init(void)
+{
+    /* NVIC初始化 */
     NVIC_SetPriority(TIM3_IRQn, NVIC_PRIO_0);
     NVIC_EnableIRQ(TIM3_IRQn);
 }
@@ -369,73 +383,37 @@ volatile uint32_t g_enter_cnt = 0U;
 
 void Capture_switch(uint8_t channel)
 {
-    /* 断开TIM3输入捕获通道1和通道2中断 */
-    std_tim_interrupt_disable(TIM3, TIM_INTERRUPT_CC1 | TIM_INTERRUPT_CC2);
-    std_tim_clear_flag(TIM3, TIM_FLAG_CC1 | TIM_FLAG_CC2);
-	
-    /* 断开输入捕获 */
-    std_tim_ccx_channel_disable(TIM3, TIM_CHANNEL_1);
-    std_tim_ccx_channel_disable(TIM3, TIM_CHANNEL_2);
+	/* 1. 停止当前TIM3 */
+	std_tim_interrupt_disable(TIM3,
+	TIM_INTERRUPT_CC1 | TIM_INTERRUPT_CC2);
 
-	/* 停止TIM3计数 */
-    std_tim_disable(TIM3);	
-	g_enter_cnt = 0;
-    g_ch1_ccx_value = 0U;
-    g_ch2_ccx_value = 0U;
+	std_tim_ccx_channel_disable(TIM3, TIM_CHANNEL_1);
+	std_tim_ccx_channel_disable(TIM3, TIM_CHANNEL_2);
+	std_tim_disable(TIM3);
+
+	/* 2. 通过RCC完整复位TIM3 */
+	std_tim_deinit(TIM3);
+
+	/* 3. 准备新通道的软件状态 */
+	g_enter_cnt = 0U;
+	g_ch1_ccx_value = 0U;
+	g_ch2_ccx_value = 0U;
+
 	uc_sel_ch = channel;
-	input_state = (channel == 2U) ? INPUT_STATE_CAPTURE_CH2 : INPUT_STATE_CAPTURE_CH1;
-
-	std_tim_input_capture_init_t input_capture_struct = {0};
-	if (channel==2U)	// 此时采样硬件ch2上的pwm信号
+	if (channel == 2U)
 		{
 		reset_pwm_capture_state(&pwm_in2);
-	    /* 配置为复位模式，且触发源为TI2FP2，触发极性为上升沿触发 */
-	    std_tim_slave_mode_config(TIM3, TIM_SLAVE_MODE_RESET);
-	    std_tim_trig_source_config(TIM3, TIM_TRIG_SOURCE_TI2FP2);
-	    std_tim_set_input_pol(TIM3, TIM_CHANNEL_2, TIM_INPUT_POL_RISING);
-	    
-	    /* 配置TI2FP2映射到IC2上，且上升沿有效 */
-	    input_capture_struct.input_capture_pol = TIM_INPUT_POL_RISING;
-	    input_capture_struct.input_capture_sel = TIM_INPUT_CAPTURE_SEL_DIRECTTI;
-	    input_capture_struct.input_capture_prescaler = TIM_INPUT_CAPTURE_PSC_DIV1;
-	    input_capture_struct.input_capture_filter = 0x00;
-	    std_tim_input_capture_init(TIM3, &input_capture_struct, TIM_CHANNEL_2);
-	    
-	    /* 配置TI2FP2映射到IC1上，且下降沿有效 */
-	    input_capture_struct.input_capture_pol = TIM_INPUT_POL_FALLING;
-	    input_capture_struct.input_capture_sel = TIM_INPUT_CAPTURE_SEL_INDIRECTTI;
-	    std_tim_input_capture_init(TIM3, &input_capture_struct, TIM_CHANNEL_1);
 		}
-	else if (channel==1U)	// 此时采样硬件ch1上的pwm信号
+	else
 		{
 		reset_pwm_capture_state(&pwm_in1);
-	    /* 配置为复位模式，且触发源为TI1FP1，触发极性为上升沿触发 */
-	    std_tim_slave_mode_config(TIM3, TIM_SLAVE_MODE_RESET);
-	    std_tim_trig_source_config(TIM3, TIM_TRIG_SOURCE_TI1FP1);
-	    std_tim_set_input_pol(TIM3, TIM_CHANNEL_1, TIM_INPUT_POL_RISING);
-	    
-	    /* 配置TI1FP1映射到IC1上，且上升沿有效 */
-	    input_capture_struct.input_capture_pol = TIM_INPUT_POL_RISING;
-	    input_capture_struct.input_capture_sel = TIM_INPUT_CAPTURE_SEL_DIRECTTI;
-	    input_capture_struct.input_capture_prescaler = TIM_INPUT_CAPTURE_PSC_DIV1;
-	    input_capture_struct.input_capture_filter = 0x00;
-	    std_tim_input_capture_init(TIM3, &input_capture_struct, TIM_CHANNEL_1);
-	    
-	    /* 配置TI1FP1映射到IC2上，且下降沿有效 */
-	    input_capture_struct.input_capture_pol = TIM_INPUT_POL_FALLING;
-	    input_capture_struct.input_capture_sel = TIM_INPUT_CAPTURE_SEL_INDIRECTTI;
-	    std_tim_input_capture_init(TIM3, &input_capture_struct, TIM_CHANNEL_2);		
 		}
 
-    /* 使能TIM3输入捕获通道1和通道2中断 */
-    std_tim_interrupt_enable(TIM3, TIM_INTERRUPT_CC1 | TIM_INTERRUPT_CC2);
-    
-    /* 使能输入捕获 */
-    std_tim_ccx_channel_enable(TIM3, TIM_CHANNEL_1);
-    std_tim_ccx_channel_enable(TIM3, TIM_CHANNEL_2);
+	/* 4. 走与上电完全相同的初始化路径 */
+	tim3_input_init();
+	bsp_tim3_capture_start();
 
-	/* 启动TIM3计数 */
-    std_tim_enable(TIM3);	
+	TimOut1mS[TTPWM_CH] = 0U;
 }
 
 /**
@@ -447,10 +425,6 @@ void bsp_tim3_capture_start(void)
     /* 使能TIM3输入捕获通道1和通道2中断 */
     std_tim_interrupt_enable(TIM3, TIM_INTERRUPT_CC1 | TIM_INTERRUPT_CC2);
     
-    /* 使能输入捕获 */
-    std_tim_ccx_channel_enable(TIM3, TIM_CHANNEL_1);
-    std_tim_ccx_channel_enable(TIM3, TIM_CHANNEL_2);
-
 	/* 启动TIM3计数 */
     std_tim_enable(TIM3);	
 }
@@ -614,7 +588,7 @@ void TIM3_IRQHandler(void)
 					{
 					// 冻结本批4个周期，主循环计算完成后再切换到另一输入通道。
 					input_state = INPUT_STATE_CALCULATE_CH2;
-					// std_tim_interrupt_disable(TIM3, TIM_INTERRUPT_CC1 | TIM_INTERRUPT_CC2);
+					std_tim_interrupt_disable(TIM3, TIM_INTERRUPT_CC1 | TIM_INTERRUPT_CC2);
 					}
 				
 				// 每个周期，都要重置
@@ -660,7 +634,7 @@ void TIM3_IRQHandler(void)
 					{
 					// 冻结本批4个周期，主循环计算完成后再切换到另一输入通道。
 					input_state = INPUT_STATE_CALCULATE_CH1;
-					// std_tim_interrupt_disable(TIM3, TIM_INTERRUPT_CC1 | TIM_INTERRUPT_CC2);
+					std_tim_interrupt_disable(TIM3, TIM_INTERRUPT_CC1 | TIM_INTERRUPT_CC2);
 					}
 				
 				// 每个周期，都要重置
@@ -677,6 +651,7 @@ void TIM3_IRQHandler(void)
 			std_tim_clear_flag(TIM3, TIM_FLAG_CC2);
 			} 		
 		}
+#if 0
 		else
 		{
 		if (std_tim_get_flag(TIM3, TIM_FLAG_CC2))
@@ -695,5 +670,6 @@ void TIM3_IRQHandler(void)
 			std_tim_clear_flag(TIM3, TIM_FLAG_CC1);
 			}
 		}
+#endif
 }
 

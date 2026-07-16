@@ -2,8 +2,8 @@
 /**
 * @file               ciu32f003_std_exti.h
 * @author             MCU Ecosystem Development Team
-* @brief              EXTI STD¿âÇı¶¯Í·ÎÄ¼ş¡£
-*                     Ìá¹©EXTIÏà¹ØµÄSTD¿â²Ù×÷º¯ÊıÉùÃ÷¡¢Êı¾İÀàĞÍÒÔ¼°³£Á¿µÄ¶¨Òå¡£                         
+* @brief              EXTI STDåº“é©±åŠ¨å¤´æ–‡ä»¶ã€‚
+*                     æä¾›EXTIç›¸å…³çš„STDåº“æ“ä½œå‡½æ•°å£°æ˜ã€æ•°æ®ç±»å‹ä»¥åŠå¸¸é‡çš„å®šä¹‰ã€‚                         
 *                     
 *
 **************************************************************************************************
@@ -13,7 +13,7 @@
 **************************************************************************************************
 */
 
-/* ±ÜÃâÍ·ÎÄ¼şÖØ¸´ÒıÓÃ */
+/* é¿å…å¤´æ–‡ä»¶é‡å¤å¼•ç”¨ */
 #ifndef CIU32F003_STD_EXTI_H
 #define CIU32F003_STD_EXTI_H
 
@@ -25,7 +25,7 @@
 
 /**
 * @defgroup EXTI EXTI
-* @brief À©Õ¹ÖĞ¶ÏºÍÊÂ¼ş¿ØÖÆÆ÷µÄSTD¿âÇı¶¯
+* @brief æ‰©å±•ä¸­æ–­å’Œäº‹ä»¶æ§åˆ¶å™¨çš„STDåº“é©±åŠ¨
 * @{
 */
 /************************************************************************************************/
@@ -43,23 +43,23 @@
 /************************************************************************************************/
 /** 
 * @defgroup EXTI_Types EXTI Types
-* @brief EXTIÊı¾İÀàĞÍ¶¨Òå
+* @brief EXTIæ•°æ®ç±»å‹å®šä¹‰
 * @{
 */
 /************************************************************************************************/
 
 /**
-* @brief  EXTI²ÎÊıÅäÖÃ½á¹¹Ìå¶¨Òå
+* @brief  EXTIå‚æ•°é…ç½®ç»“æ„ä½“å®šä¹‰
 */
 typedef struct
 {
-    uint32_t line_id;                 /**< EXTIÍ¨µÀID
+    uint32_t line_id;                 /**< EXTIé€šé“ID
                                                @arg EXTI_LINE_GPIO_PIN0 ... */
-    uint32_t mode;                    /**< EXTIÍ¨µÀÄ£Ê½
+    uint32_t mode;                    /**< EXTIé€šé“æ¨¡å¼
                                                @arg EXTI_MODE_INTERRUPT ... */
-    uint32_t trigger;                 /**< EXTIÍ¨µÀ´¥·¢ÀàĞÍ
+    uint32_t trigger;                 /**< EXTIé€šé“è§¦å‘ç±»å‹
                                                @arg EXTI_TRIGGER_RISING ... */
-    uint32_t gpio_id;                 /**< GPIO¶Ë¿ÚID
+    uint32_t gpio_id;                 /**< GPIOç«¯å£ID
                                                @arg EXTI_GPIOA ... */
 } std_exti_init_t;
 
@@ -73,13 +73,13 @@ typedef struct
 /************************************************************************************************/
 /**
 * @defgroup EXTI_Constants EXTI Constants 
-* @brief  EXTI³£Á¿¶¨Òå¼°ºê¶¨Òå
+* @brief  EXTIå¸¸é‡å®šä¹‰åŠå®å®šä¹‰
 * @{
 *
 */
 /************************************************************************************************/
 
-/* EXTI LINE ID¶¨Òå */
+/* EXTI LINE IDå®šä¹‰ */
 #define EXTI_LINE_GPIO_PIN0                 (EXTI_GPIO     | 0x00U)                         /**< EXTI_LINE0  */
 #define EXTI_LINE_GPIO_PIN1                 (EXTI_GPIO     | 0x01U)                         /**< EXTI_LINE1  */
 #define EXTI_LINE_GPIO_PIN2                 (EXTI_GPIO     | 0x02U)                         /**< EXTI_LINE2  */
@@ -92,31 +92,31 @@ typedef struct
 #define EXTI_LINE_COMP2                     (EXTI_CONFIG   | 0x11U)                         /**< EXTI_LINE17 */ 
 #define EXTI_LINE_LPTIM1                    (EXTI_DIRECT   | 0x1EU)                         /**< EXTI_LINE30 */
 
-/* EXTI LINE ·Ö×é */
-#define EXTI_DIRECT                         (0x01000000)                                    /**< Ö±½ÓÍ¨µÀ                    */
-#define EXTI_CONFIG                         (0x02000000)                                    /**< ÆäËü¿ÉÅäÖÃÍ¨µÀ(COMP1/COMP2) */
-#define EXTI_GPIO                           (0x06000000)                                    /**< GPIO¿ÉÅäÖÃÍ¨µÀ              */
-#define EXTI_PROPERTY_MASK                  (EXTI_DIRECT | EXTI_CONFIG | EXTI_GPIO)         /**< Í¨µÀÆÁ±ÎÑÚÂë                */
+/* EXTI LINE åˆ†ç»„ */
+#define EXTI_DIRECT                         (0x01000000)                                    /**< ç›´æ¥é€šé“                    */
+#define EXTI_CONFIG                         (0x02000000)                                    /**< å…¶å®ƒå¯é…ç½®é€šé“(COMP1/COMP2) */
+#define EXTI_GPIO                           (0x06000000)                                    /**< GPIOå¯é…ç½®é€šé“              */
+#define EXTI_PROPERTY_MASK                  (EXTI_DIRECT | EXTI_CONFIG | EXTI_GPIO)         /**< é€šé“å±è”½æ©ç                 */
 
-/* EXTI LINEÆÁ±ÎÑÚÂë£¬ÓÃÓÚÉ¸Ñ¡EXTI LINE ID */ 
-#define EXTI_LINE_MASK                      (0x0000001FU)                                   /**< EXTI LINEÆÁ±ÎÑÚÂë */
+/* EXTI LINEå±è”½æ©ç ï¼Œç”¨äºç­›é€‰EXTI LINE ID */ 
+#define EXTI_LINE_MASK                      (0x0000001FU)                                   /**< EXTI LINEå±è”½æ©ç  */
 
-/* EXTI LINEÄ£Ê½£ºÖĞ¶Ï¡¢ÊÂ¼ş */ 
-#define EXTI_MODE_NONE                      (0x00000000U)                                   /**< ÎŞÖĞ¶Ï/ÊÂ¼ş»½ĞÑ */
-#define EXTI_MODE_INTERRUPT                 (0x00000001U)                                   /**< ÖĞ¶Ï»½ĞÑ        */
-#define EXTI_MODE_EVENT                     (0x00000002U)                                   /**< ÊÂ¼ş»½ĞÑ        */
-#define EXTI_MODE_INTERRUPT_EVENT           (EXTI_MODE_EVENT | EXTI_MODE_INTERRUPT)         /**< ÖĞ¶Ï/ÊÂ¼ş»½ĞÑ   */
+/* EXTI LINEæ¨¡å¼ï¼šä¸­æ–­ã€äº‹ä»¶ */ 
+#define EXTI_MODE_NONE                      (0x00000000U)                                   /**< æ— ä¸­æ–­/äº‹ä»¶å”¤é†’ */
+#define EXTI_MODE_INTERRUPT                 (0x00000001U)                                   /**< ä¸­æ–­å”¤é†’        */
+#define EXTI_MODE_EVENT                     (0x00000002U)                                   /**< äº‹ä»¶å”¤é†’        */
+#define EXTI_MODE_INTERRUPT_EVENT           (EXTI_MODE_EVENT | EXTI_MODE_INTERRUPT)         /**< ä¸­æ–­/äº‹ä»¶å”¤é†’   */
 
-/* EXTI LINE ´¥·¢ÀàĞÍ¶¨Òå£¬ÓÃÓÚ¿ÉÅäÖÃÍ¨µÀ£¬ĞÅºÅ´¥·¢ÀàĞÍÅäÖÃ */
-#define EXTI_TRIGGER_NONE                   (0x00000000U)                                   /**< ²»´¥·¢            */
-#define EXTI_TRIGGER_RISING                 (0x00000001U)                                   /**< ÉÏ½µÑØ´¥·¢        */
-#define EXTI_TRIGGER_FALLING                (0x00000002U)                                   /**< ÏÂ½µÑØ´¥·¢        */
-#define EXTI_TRIGGER_RISING_FALLING         (EXTI_TRIGGER_RISING | EXTI_TRIGGER_FALLING)    /**< ÉÏÉıÑØ/ÏÂ½µÑØ´¥·¢ */
+/* EXTI LINE è§¦å‘ç±»å‹å®šä¹‰ï¼Œç”¨äºå¯é…ç½®é€šé“ï¼Œä¿¡å·è§¦å‘ç±»å‹é…ç½® */
+#define EXTI_TRIGGER_NONE                   (0x00000000U)                                   /**< ä¸è§¦å‘            */
+#define EXTI_TRIGGER_RISING                 (0x00000001U)                                   /**< ä¸Šé™æ²¿è§¦å‘        */
+#define EXTI_TRIGGER_FALLING                (0x00000002U)                                   /**< ä¸‹é™æ²¿è§¦å‘        */
+#define EXTI_TRIGGER_RISING_FALLING         (EXTI_TRIGGER_RISING | EXTI_TRIGGER_FALLING)    /**< ä¸Šå‡æ²¿/ä¸‹é™æ²¿è§¦å‘ */
 
-/* EXTI LINE ´¥·¢ÀàĞÍÆÁ±ÎÑÚÂë£¬ÓÃÓÚÉ¸Ñ¡EXTI ¿ÉÅäÖÃÍ¨µÀ´¥·¢ÀàĞÍ */
-#define EXTI_TRIGGER_MASK                   (EXTI_TRIGGER_RISING | EXTI_TRIGGER_FALLING)     /**< ´¥·¢ÀàĞÍÆÁ±ÎÑÚÂë */
+/* EXTI LINE è§¦å‘ç±»å‹å±è”½æ©ç ï¼Œç”¨äºç­›é€‰EXTI å¯é…ç½®é€šé“è§¦å‘ç±»å‹ */
+#define EXTI_TRIGGER_MASK                   (EXTI_TRIGGER_RISING | EXTI_TRIGGER_FALLING)     /**< è§¦å‘ç±»å‹å±è”½æ©ç  */
 
-/* GPIO¶Ë¿ÚID¶¨Òå */
+/* GPIOç«¯å£IDå®šä¹‰ */
 #define EXTI_GPIOA                          (0x00000000UL)                                   /**< GPIOA ID */
 #define EXTI_GPIOB                          (0x00000001UL)                                   /**< GPIOB ID */
 #define EXTI_GPIOC                          (0x00000002UL)                                   /**< GPIOC ID */
@@ -130,23 +130,23 @@ typedef struct
 /************************************************************************************************/
 /**
 * @defgroup EXTI_External_Functions EXTI External Functions
-* @brief    EXTI¶ÔÍâº¯Êı
+* @brief    EXTIå¯¹å¤–å‡½æ•°
 * @{
 *
 */
 /************************************************************************************************/
 
 /**
-* @brief  ¶ÁÈ¡EXTIÍ¨µÀÖĞ¶Ï¹ÒÆğ×´Ì¬
-* @param  exti_line  EXTIÍ¨µÀID
+* @brief  è¯»å–EXTIé€šé“ä¸­æ–­æŒ‚èµ·çŠ¶æ€
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1
 *             @arg ...
 *             @arg EXTI_LINE_COMP1
 *             @arg EXTI_LINE_COMP2
-* @retval uint32_t ÉÏÉıÑØÖĞ¶Ï¹ÒÆğ×´Ì¬
-*             @arg ·Ç0  ±íÊ¾ÒÑ¹ÒÆğ
-*             @arg 0 ±íÊ¾Î´¹ÒÆğ
+* @retval uint32_t ä¸Šå‡æ²¿ä¸­æ–­æŒ‚èµ·çŠ¶æ€
+*             @arg é0  è¡¨ç¤ºå·²æŒ‚èµ·
+*             @arg 0 è¡¨ç¤ºæœªæŒ‚èµ·
 */
 __STATIC_INLINE uint32_t std_exti_get_pending_status(uint32_t exti_line)
 {
@@ -155,14 +155,14 @@ __STATIC_INLINE uint32_t std_exti_get_pending_status(uint32_t exti_line)
 
 
 /**
-* @brief  Çå³ıEXTIÍ¨µÀÖĞ¶Ï¹ÒÆğ×´Ì¬
-* @param  exti_line  EXTIÍ¨µÀID
+* @brief  æ¸…é™¤EXTIé€šé“ä¸­æ–­æŒ‚èµ·çŠ¶æ€
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1
 *             @arg ...
 *             @arg EXTI_LINE_COMP1
 *             @arg EXTI_LINE_COMP2
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_exti_clear_pending(uint32_t exti_line)
 {
@@ -170,14 +170,14 @@ __STATIC_INLINE void std_exti_clear_pending(uint32_t exti_line)
 }
 
 /**
-* @brief  Ê¹ÄÜEXTIÍ¨µÀÉÏÉıÑØ´¥·¢
-* @param  exti_line  EXTIÍ¨µÀID
+* @brief  ä½¿èƒ½EXTIé€šé“ä¸Šå‡æ²¿è§¦å‘
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1
 *             @arg ...
 *             @arg EXTI_LINE_COMP1
 *             @arg EXTI_LINE_COMP2
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_exti_rising_trigger_enable(uint32_t exti_line)
 {
@@ -185,14 +185,14 @@ __STATIC_INLINE void std_exti_rising_trigger_enable(uint32_t exti_line)
 }
 
 /**
-* @brief  ½ûÖ¹EXTIÍ¨µÀÉÏÉıÑØ´¥·¢
-* @param  exti_line  EXTIÍ¨µÀID
+* @brief  ç¦æ­¢EXTIé€šé“ä¸Šå‡æ²¿è§¦å‘
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1
 *             @arg ...
 *             @arg EXTI_LINE_COMP1
 *             @arg EXTI_LINE_COMP2
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_exti_rising_trigger_disable(uint32_t exti_line)
 {
@@ -200,14 +200,14 @@ __STATIC_INLINE void std_exti_rising_trigger_disable(uint32_t exti_line)
 }
 
 /**
-* @brief  Ê¹ÄÜEXTIÍ¨µÀÏÂ½µÑØ´¥·¢
-* @param  exti_line  EXTIÍ¨µÀID
+* @brief  ä½¿èƒ½EXTIé€šé“ä¸‹é™æ²¿è§¦å‘
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1
 *             @arg ...
 *             @arg EXTI_LINE_COMP1
 *             @arg EXTI_LINE_COMP2
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_exti_falling_trigger_enable(uint32_t exti_line)
 {
@@ -215,14 +215,14 @@ __STATIC_INLINE void std_exti_falling_trigger_enable(uint32_t exti_line)
 }
 
 /**
-* @brief  ½ûÖ¹EXTIÍ¨µÀÏÂ½µÑØ´¥·¢
-* @param  exti_line  EXTIÍ¨µÀID
+* @brief  ç¦æ­¢EXTIé€šé“ä¸‹é™æ²¿è§¦å‘
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1
 *             @arg ...
 *             @arg EXTI_LINE_COMP1
 *             @arg EXTI_LINE_COMP2
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_exti_falling_trigger_disable(uint32_t exti_line)
 {
@@ -230,16 +230,16 @@ __STATIC_INLINE void std_exti_falling_trigger_disable(uint32_t exti_line)
 }
 
 /**
-* @brief  ¶ÁÈ¡EXTIÍ¨µÀÉÏÉıÑØ´¥·¢×´Ì¬
-* @param  exti_line  EXTIÍ¨µÀID
+* @brief  è¯»å–EXTIé€šé“ä¸Šå‡æ²¿è§¦å‘çŠ¶æ€
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1 
 *             @arg ...
 *             @arg EXTI_LINE_COMP1
 *             @arg EXTI_LINE_COMP2
-* @retval uint32_t ÉÏÉıÑØ´¥·¢×´Ì¬
-*             @arg ·Ç0  ±íÊ¾ÒÑÊ¹ÄÜ
-*             @arg 0 ±íÊ¾ÒÑ½ûÖ¹
+* @retval uint32_t ä¸Šå‡æ²¿è§¦å‘çŠ¶æ€
+*             @arg é0  è¡¨ç¤ºå·²ä½¿èƒ½
+*             @arg 0 è¡¨ç¤ºå·²ç¦æ­¢
 */
 __STATIC_INLINE uint32_t std_exti_get_rising_trigger_enable(uint32_t exti_line)
 {
@@ -247,16 +247,16 @@ __STATIC_INLINE uint32_t std_exti_get_rising_trigger_enable(uint32_t exti_line)
 }
 
 /**
-* @brief  ¶ÁÈ¡EXTIÍ¨µÀÏÂ½µÑØ´¥·¢×´Ì¬
-* @param  exti_line  EXTIÍ¨µÀID
+* @brief  è¯»å–EXTIé€šé“ä¸‹é™æ²¿è§¦å‘çŠ¶æ€
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1
 *             @arg ...
 *             @arg EXTI_LINE_COMP1
 *             @arg EXTI_LINE_COMP2
-* @retval uint32_t ÏÂ½µÑØ´¥·¢×´Ì¬
-*             @arg ·Ç0  ±íÊ¾ÒÑÊ¹ÄÜ
-*             @arg 0 ±íÊ¾ÒÑ½ûÖ¹
+* @retval uint32_t ä¸‹é™æ²¿è§¦å‘çŠ¶æ€
+*             @arg é0  è¡¨ç¤ºå·²ä½¿èƒ½
+*             @arg 0 è¡¨ç¤ºå·²ç¦æ­¢
 */
 __STATIC_INLINE uint32_t std_exti_get_falling_trigger_enable(uint32_t exti_line)
 {
@@ -264,15 +264,15 @@ __STATIC_INLINE uint32_t std_exti_get_falling_trigger_enable(uint32_t exti_line)
 }
 
 /**
-* @brief  Ê¹ÄÜEXTIÍ¨µÀ»½ĞÑÖĞ¶Ï
-* @param  exti_line  EXTIÍ¨µÀID
+* @brief  ä½¿èƒ½EXTIé€šé“å”¤é†’ä¸­æ–­
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1
 *             @arg ...
 *             @arg EXTI_LINE_COMP1
 *             @arg EXTI_LINE_COMP2
 *             @arg EXTI_LINE_LPTIM1
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_exti_interrupt_enable(uint32_t exti_line)
 {
@@ -280,15 +280,15 @@ __STATIC_INLINE void std_exti_interrupt_enable(uint32_t exti_line)
 }
 
 /**
-* @brief  ½ûÖ¹EXTIÍ¨µÀ»½ĞÑÖĞ¶Ï
-* @param  exti_line  EXTIÍ¨µÀID
+* @brief  ç¦æ­¢EXTIé€šé“å”¤é†’ä¸­æ–­
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1
 *             @arg ...
 *             @arg EXTI_LINE_COMP1
 *             @arg EXTI_LINE_COMP2
 *             @arg EXTI_LINE_LPTIM1
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_exti_interrupt_disable(uint32_t exti_line)
 {
@@ -296,15 +296,15 @@ __STATIC_INLINE void std_exti_interrupt_disable(uint32_t exti_line)
 }
 
 /**
-* @brief  Ê¹ÄÜEXTIÍ¨µÀ»½ĞÑÊÂ¼ş
-* @param  exti_line  EXTIÍ¨µÀID
+* @brief  ä½¿èƒ½EXTIé€šé“å”¤é†’äº‹ä»¶
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1
 *             @arg ...
 *             @arg EXTI_LINE_COMP1
 *             @arg EXTI_LINE_COMP2
 *             @arg EXTI_LINE_LPTIM1
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_exti_event_enable(uint32_t exti_line)
 {
@@ -312,15 +312,15 @@ __STATIC_INLINE void std_exti_event_enable(uint32_t exti_line)
 }
 
 /**
-* @brief  ½ûÖ¹EXTIÍ¨µÀ»½ĞÑÊÂ¼ş
-* @param  exti_line  EXTIÍ¨µÀID
+* @brief  ç¦æ­¢EXTIé€šé“å”¤é†’äº‹ä»¶
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1
 *             @arg ...
 *             @arg EXTI_LINE_COMP1
 *             @arg EXTI_LINE_COMP2
 *             @arg EXTI_LINE_LPTIM1
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_exti_event_disable(uint32_t exti_line)
 {
@@ -328,17 +328,17 @@ __STATIC_INLINE void std_exti_event_disable(uint32_t exti_line)
 }
 
 /**
-* @brief  ÉèÖÃEXTIÍ¨µÀËù¶ÔÓ¦GPIO¶Ë¿Ú
-* @param  gpio_id  GPIO¶Ë¿ÚID
+* @brief  è®¾ç½®EXTIé€šé“æ‰€å¯¹åº”GPIOç«¯å£
+* @param  gpio_id  GPIOç«¯å£ID
 *             @arg EXTI_GPIOA
 *             @arg EXTI_GPIOB
 *             @arg EXTI_GPIOC
-* @param  exti_line  EXTIÍ¨µÀID
+* @param  exti_line  EXTIé€šé“ID
 *             @arg EXTI_LINE_GPIO_PIN0
 *             @arg EXTI_LINE_GPIO_PIN1
 *             @arg ...
 *             @arg EXTI_LINE_GPIO_PIN7
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_exti_set_gpio(uint32_t gpio_id, uint32_t exti_line)
 {

@@ -2,8 +2,8 @@
 /**
 * @file               ciu32f003_std_lptim.h
 * @author             MCU Ecosystem Development Team
-* @brief              LPTIM STD������ͷ�ļ���
-*                     �ṩLPTIM��ص�STD������������������������Լ������Ķ��塣
+* @brief              LPTIM STD库驱动头文件。
+*                     提供LPTIM相关的STD库操作函数声明、数据类型以及常量的定义。
 *
 *
 **************************************************************************************************
@@ -13,7 +13,7 @@
 **************************************************************************************************
 */
 
-/*����ͷ�ļ��ظ�����*/
+/*避免头文件重复引用*/
 #ifndef CIU32F003_STD_LPTIM_H
 #define CIU32F003_STD_LPTIM_H
 
@@ -25,7 +25,7 @@
 
 /**
 * @defgroup LPTIM LPTIM
-* @brief �͹��Ķ�ʱ����STD������
+* @brief 低功耗定时器的STD库驱动
 * @{
 */
 /************************************************************************************************/
@@ -44,36 +44,36 @@
 /************************************************************************************************/
 /**
 * @defgroup LPTIM_Constants LPTIM Constants
-* @brief    LPTIM�������弰�궨��
+* @brief    LPTIM常量定义及宏定义
 * @{
 *
 */
 /************************************************************************************************/
-/* ����������ģʽ */
-#define LPTIM_COUNT_CONTINUOUS          LPTIM_CR_CNTSTRT            /**< ��������ģʽ    */
-#define LPTIM_COUNT_SINGLE              LPTIM_CR_SNGSTRT            /**< ���μ���ģʽ    */
+/* 计数器计数模式 */
+#define LPTIM_COUNT_CONTINUOUS          LPTIM_CR_CNTSTRT            /**< 连续计数模式    */
+#define LPTIM_COUNT_SINGLE              LPTIM_CR_SNGSTRT            /**< 单次计数模式    */
 
-/* LPTIM PSCԤ��Ƶ����Ƶϵ��ѡ�� */
-#define LPTIM_PRESCALER_DIV1            LPTIM_CFG_PRESC_1           /**< PSCԤ��Ƶ��1��Ƶ   */
-#define LPTIM_PRESCALER_DIV2            LPTIM_CFG_PRESC_2           /**< PSCԤ��Ƶ��2��Ƶ   */
-#define LPTIM_PRESCALER_DIV4            LPTIM_CFG_PRESC_4           /**< PSCԤ��Ƶ��4��Ƶ   */
-#define LPTIM_PRESCALER_DIV8            LPTIM_CFG_PRESC_8           /**< PSCԤ��Ƶ��8��Ƶ   */
-#define LPTIM_PRESCALER_DIV16           LPTIM_CFG_PRESC_16          /**< PSCԤ��Ƶ��16��Ƶ  */
-#define LPTIM_PRESCALER_DIV32           LPTIM_CFG_PRESC_32          /**< PSCԤ��Ƶ��32��Ƶ  */
-#define LPTIM_PRESCALER_DIV64           LPTIM_CFG_PRESC_64          /**< PSCԤ��Ƶ��64��Ƶ  */
-#define LPTIM_PRESCALER_DIV128          LPTIM_CFG_PRESC_128         /**< PSCԤ��Ƶ��128��Ƶ */
+/* LPTIM PSC预分频器分频系数选择 */
+#define LPTIM_PRESCALER_DIV1            LPTIM_CFG_PRESC_1           /**< PSC预分频器1分频   */
+#define LPTIM_PRESCALER_DIV2            LPTIM_CFG_PRESC_2           /**< PSC预分频器2分频   */
+#define LPTIM_PRESCALER_DIV4            LPTIM_CFG_PRESC_4           /**< PSC预分频器4分频   */
+#define LPTIM_PRESCALER_DIV8            LPTIM_CFG_PRESC_8           /**< PSC预分频器8分频   */
+#define LPTIM_PRESCALER_DIV16           LPTIM_CFG_PRESC_16          /**< PSC预分频器16分频  */
+#define LPTIM_PRESCALER_DIV32           LPTIM_CFG_PRESC_32          /**< PSC预分频器32分频  */
+#define LPTIM_PRESCALER_DIV64           LPTIM_CFG_PRESC_64          /**< PSC预分频器64分频  */
+#define LPTIM_PRESCALER_DIV128          LPTIM_CFG_PRESC_128         /**< PSC预分频器128分频 */
 
-/* LPTIM�ж�Դ */
-#define LPTIM_INTERRUPT_ARRM            LPTIM_IER_ARRM_IE           /**< �Զ�����ƥ���ж�ʹ�� */
-#define LPTIM_INTERRUPT_ITRF            LPTIM_IER_ITRF_IE           /**< ���������ж�ʹ��     */
+/* LPTIM中断源 */
+#define LPTIM_INTERRUPT_ARRM            LPTIM_IER_ARRM_IE           /**< 自动重载匹配中断使能 */
+#define LPTIM_INTERRUPT_ITRF            LPTIM_IER_ITRF_IE           /**< 级联触发中断使能     */
 
-/* LPTIM�ж�״̬��־ */
-#define LPTIM_FLAG_ARRM                 LPTIM_ISR_ARRM              /**< �Զ�����ƥ���־     */
-#define LPTIM_FLAG_ITRF                 LPTIM_ISR_ITRF              /**< ����������־         */
+/* LPTIM中断状态标志 */
+#define LPTIM_FLAG_ARRM                 LPTIM_ISR_ARRM              /**< 自动重载匹配标志     */
+#define LPTIM_FLAG_ITRF                 LPTIM_ISR_ITRF              /**< 级联触发标志         */
 
-/* LPTIM�ж������־ */
-#define LPTIM_CLEAR_ARRM                LPTIM_ICR_ARRM_CF           /**< �Զ�����ƥ���־���� */
-#define LPTIM_CLEAR_ITRF                LPTIM_ICR_ITRF_CF           /**< ����������־����     */
+/* LPTIM中断清除标志 */
+#define LPTIM_CLEAR_ARRM                LPTIM_ICR_ARRM_CF           /**< 自动重载匹配标志清零 */
+#define LPTIM_CLEAR_ITRF                LPTIM_ICR_ITRF_CF           /**< 级联触发标志清零     */
 
 /** 
 * @} 
@@ -83,7 +83,7 @@
 /************************************************************************************************/
 /**
 * @defgroup LPTIM_External_Functions LPTIM External Functions
-* @brief    LPTIM���⺯��
+* @brief    LPTIM对外函数
 * @{
 *
 */
@@ -91,9 +91,9 @@
 
 
 /** 
-* @brief  ʹ��LPTIM
-* @note   ��LPTIMʹ��λ��λ����Ҫ�������������ں������Ч
-* @retval ��
+* @brief  使能LPTIM
+* @note   在LPTIM使能位置位后，需要两个计数器周期后才能生效
+* @retval 无
 */
 __STATIC_INLINE void std_lptim_enable(void)
 {
@@ -102,8 +102,8 @@ __STATIC_INLINE void std_lptim_enable(void)
 
 
 /** 
-* @brief  ��ֹLPTIM
-* @retval ��
+* @brief  禁止LPTIM
+* @retval 无
 */
 __STATIC_INLINE void std_lptim_disable(void)
 {
@@ -112,12 +112,12 @@ __STATIC_INLINE void std_lptim_disable(void)
 
 
 /** 
-* @brief  ����LPTIM����������Ԥ��ģʽ��ʼ����
-* @param  operate_mode ����ģʽѡ��
-*             @arg LPTIM_COUNT_CONTINUOUS:    ��������ģʽ
-*             @arg LPTIM_COUNT_SINGLE:        ���μ���ģʽ
-* @note   ����ʹ��LPTIM�������������������
-* @retval ��
+* @brief  配置LPTIM计数器按照预期模式开始计数
+* @param  operate_mode 计数模式选择
+*             @arg LPTIM_COUNT_CONTINUOUS:    连续计数模式
+*             @arg LPTIM_COUNT_SINGLE:        单次计数模式
+* @note   必须使能LPTIM后才能启动计数器计数
+* @retval 无
 */
 __STATIC_INLINE void std_lptim_start_counter(uint32_t operate_mode)
 {
@@ -126,9 +126,9 @@ __STATIC_INLINE void std_lptim_start_counter(uint32_t operate_mode)
 
 
 /** 
-* @brief  ����LPTIM�Զ���װ��ֵ
-* @param  auto_reload �Զ���װ��ֵ���ñ����ķ�ΧΪ0x0~0xFFFF��
-* @retval ��
+* @brief  设置LPTIM自动重装载值
+* @param  auto_reload 自动重装载值（该变量的范围为0x0~0xFFFF）
+* @retval 无
 */
 __STATIC_INLINE void std_lptim_set_auto_reload(uint32_t auto_reload)
 {
@@ -137,8 +137,8 @@ __STATIC_INLINE void std_lptim_set_auto_reload(uint32_t auto_reload)
 
 
 /** 
-* @brief  ��ȡLPTIM�Զ���װ��ֵ
-* @retval uint32_t �Զ���װ��ֵ���ñ����ķ�ΧΪ0x0~0xFFFF��
+* @brief  获取LPTIM自动重装载值
+* @retval uint32_t 自动重装载值（该变量的范围为0x0~0xFFFF）
 */
 __STATIC_INLINE uint32_t std_lptim_get_auto_reload(void)
 {
@@ -147,9 +147,9 @@ __STATIC_INLINE uint32_t std_lptim_get_auto_reload(void)
 
 
 /** 
-* @brief  ��ȡLPTIM����ֵ
-* @note   ��LPTIMΪ�첽ʱ�Ӽ���ʱ��Ϊȷ����ȡ��ȷ�ļ���ֵ����Ҫȷ�����ζ�ȡ�ļ���ֵһ�¡�
-* @retval uint32_t LPTIM����ֵ���ñ����ķ�ΧΪ0x0~0xFFFF��
+* @brief  获取LPTIM计数值
+* @note   当LPTIM为异步时钟计数时，为确保获取正确的计数值，需要确保两次读取的计数值一致。
+* @retval uint32_t LPTIM计数值（该变量的范围为0x0~0xFFFF）
 */
 __STATIC_INLINE uint32_t std_lptim_get_count(void)
 {
@@ -158,14 +158,14 @@ __STATIC_INLINE uint32_t std_lptim_get_count(void)
 
 
 /** 
-* @brief  ����LPTIMԤ��Ƶ����Ƶϵ��
-* @param  prescaler Ԥ��Ƶϵ��ѡ��
+* @brief  设置LPTIM预分频器分频系数
+* @param  prescaler 预分频系数选择
 *             @arg LPTIM_PRESCALER_DIV1
 *             @arg LPTIM_PRESCALER_DIV2
 *             @arg LPTIM_PRESCALER_DIV4
 *             @arg ...
 *             @arg LPTIM_PRESCALER_DIV128
-* @retval ��
+* @retval 无
 */
 __STATIC_INLINE void std_lptim_set_prescaler(uint32_t prescaler)
 {
@@ -174,8 +174,8 @@ __STATIC_INLINE void std_lptim_set_prescaler(uint32_t prescaler)
 
 
 /** 
-* @brief  ��ȡLPTIMԤ��Ƶ����Ƶϵ��
-* @retval uint32_t Ԥ��Ƶϵ��ѡ��
+* @brief  获取LPTIM预分频器分频系数
+* @retval uint32_t 预分频系数选择
 *             @arg LPTIM_PRESCALER_DIV1
 *             @arg LPTIM_PRESCALER_DIV2
 *             @arg LPTIM_PRESCALER_DIV4
@@ -189,8 +189,8 @@ __STATIC_INLINE uint32_t std_lptim_get_prescaler(void)
 
 
 /** 
-* @brief  ʹ��LPTIM��������
-* @retval ��
+* @brief  使能LPTIM级联触发
+* @retval 无
 */
 __STATIC_INLINE void std_lptim_internal_trigger_enable(void)
 {
@@ -199,8 +199,8 @@ __STATIC_INLINE void std_lptim_internal_trigger_enable(void)
 
 
 /** 
-* @brief  ��ֹLPTIM��������
-* @retval ��
+* @brief  禁止LPTIM级联触发
+* @retval 无
 */
 __STATIC_INLINE void std_lptim_internal_trigger_disable(void)
 {
@@ -209,11 +209,11 @@ __STATIC_INLINE void std_lptim_internal_trigger_disable(void)
 
 
 /** 
-* @brief  ʹ��LPTIM�ж�
-* @param  interrupt LPTIM�ж�Դ
-*             @arg LPTIM_INTERRUPT_ARRM:      �Զ�����ƥ���ж�
-*             @arg LPTIM_INTERRUPT_ITRF:      ���������ж�ʹ��
-* @retval ��
+* @brief  使能LPTIM中断
+* @param  interrupt LPTIM中断源
+*             @arg LPTIM_INTERRUPT_ARRM:      自动重载匹配中断
+*             @arg LPTIM_INTERRUPT_ITRF:      级联触发中断使能
+* @retval 无
 */
 __STATIC_INLINE void std_lptim_interrupt_enable(uint32_t interrupt)
 {
@@ -222,11 +222,11 @@ __STATIC_INLINE void std_lptim_interrupt_enable(uint32_t interrupt)
 
 
 /** 
-* @brief  ��ֹLPTIM�ж�
-* @param  interrupt LPTIM�ж�Դ
-*             @arg LPTIM_INTERRUPT_ARRM:      �Զ�����ƥ���ж�
-*             @arg LPTIM_INTERRUPT_ITRF:      ���������ж�ʹ��
-* @retval ��
+* @brief  禁止LPTIM中断
+* @param  interrupt LPTIM中断源
+*             @arg LPTIM_INTERRUPT_ARRM:      自动重载匹配中断
+*             @arg LPTIM_INTERRUPT_ITRF:      级联触发中断使能
+* @retval 无
 */
 __STATIC_INLINE void std_lptim_interrupt_disable(uint32_t interrupt)
 {
@@ -235,13 +235,13 @@ __STATIC_INLINE void std_lptim_interrupt_disable(uint32_t interrupt)
 
 
 /** 
-* @brief  ��ȡLPTIM�ж�״̬
-* @param  interrupt LPTIM�ж�Դ
-*             @arg LPTIM_INTERRUPT_ARRM:      �Զ�����ƥ���ж�
-*             @arg LPTIM_INTERRUPT_ITRF:      ���������ж�ʹ��
-* @retval uint32_t LPTIM�ж�Դʹ��״̬
-*             @arg ��0: ʹ��
-*             @arg 0:   ��ֹ
+* @brief  获取LPTIM中断状态
+* @param  interrupt LPTIM中断源
+*             @arg LPTIM_INTERRUPT_ARRM:      自动重载匹配中断
+*             @arg LPTIM_INTERRUPT_ITRF:      级联触发中断使能
+* @retval uint32_t LPTIM中断源使能状态
+*             @arg 非0: 使能
+*             @arg 0:   禁止
 */
 __STATIC_INLINE uint32_t std_lptim_get_interrupt_status(uint32_t interrupt)
 {
@@ -250,13 +250,13 @@ __STATIC_INLINE uint32_t std_lptim_get_interrupt_status(uint32_t interrupt)
 
 
 /** 
-* @brief  ��ȡLPTIM״̬��־λ
-* @param  flag LPTIM״̬��־λ
-*             @arg LPTIM_FLAG_ARRM:        �Զ�����ƥ���־
-*             @arg LPTIM_FLAG_ITRF:        ����������־
-* @retval uint32_t LPTIM��־λ��״̬
-*             @arg ��0: ��־λ��λ
-*             @arg 0:   ��־λ���
+* @brief  获取LPTIM状态标志位
+* @param  flag LPTIM状态标志位
+*             @arg LPTIM_FLAG_ARRM:        自动重载匹配标志
+*             @arg LPTIM_FLAG_ITRF:        级联触发标志
+* @retval uint32_t LPTIM标志位的状态
+*             @arg 非0: 标志位置位
+*             @arg 0:   标志位清除
 */
 __STATIC_INLINE uint32_t std_lptim_get_flag(uint32_t flag)
 {
@@ -265,11 +265,11 @@ __STATIC_INLINE uint32_t std_lptim_get_flag(uint32_t flag)
 
 
 /** 
-* @brief  ���LPTIM״̬��־λ
-* @param  flag LPTIM״̬��־λ
-*             @arg LPTIM_CLEAR_ARRM:        �Զ�����ƥ���־
-*             @arg LPTIM_CLEAR_ITRF:        ����������־����
-* @retval ��
+* @brief  清除LPTIM状态标志位
+* @param  flag LPTIM状态标志位
+*             @arg LPTIM_CLEAR_ARRM:        自动重载匹配标志
+*             @arg LPTIM_CLEAR_ITRF:        级联触发标志清零
+* @retval 无
 */
 __STATIC_INLINE void std_lptim_clear_flag(uint32_t flag)
 {
@@ -277,7 +277,7 @@ __STATIC_INLINE void std_lptim_clear_flag(uint32_t flag)
 }
 
 
-/* LPTIMȥ��ʼ������ */
+/* LPTIM去初始化函数 */
 void std_lptim_deinit(void);
 
 /** 

@@ -138,6 +138,7 @@ int main(void)
 
 	uc_sel_ch=1U;
 	tim3_input_init();
+	tim3_nvic_init();
 	bsp_tim3_capture_start();
 	
 	tim1_gpio_init();

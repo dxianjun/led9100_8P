@@ -2,8 +2,8 @@
 /**
 * @file               ciu32f003_std_comp.h
 * @author             MCU Ecosystem Development Team
-* @brief              COMP STD¿âÇý¶¯Í·ÎÄ¼þ¡£
-*                     Ìá¹©COMPÏà¹ØµÄSTD¿â²Ù×÷º¯ÊýÉùÃ÷¡¢Êý¾ÝÀàÐÍÒÔ¼°³£Á¿µÄ¶¨Òå¡£                         
+* @brief              COMP STDåº“é©±åŠ¨å¤´æ–‡ä»¶ã€‚
+*                     æä¾›COMPç›¸å…³çš„STDåº“æ“ä½œå‡½æ•°å£°æ˜Žã€æ•°æ®ç±»åž‹ä»¥åŠå¸¸é‡çš„å®šä¹‰ã€‚                         
 *                     
 *
 **************************************************************************************************
@@ -13,7 +13,7 @@
 **************************************************************************************************
 */
 
-/* ±ÜÃâÍ·ÎÄ¼þÖØ¸´ÒýÓÃ */
+/* é¿å…å¤´æ–‡ä»¶é‡å¤å¼•ç”¨ */
 #ifndef CIU32F003_STD_COMP_H
 #define CIU32F003_STD_COMP_H
 
@@ -25,7 +25,7 @@
 
 /**
 * @defgroup COMP COMP
-* @brief ±È½ÏÆ÷µÄSTD¿âÇý¶¯
+* @brief æ¯”è¾ƒå™¨çš„STDåº“é©±åŠ¨
 * @{
 */
 /************************************************************************************************/
@@ -42,67 +42,67 @@
 /************************************************************************************************/
 /**
 * @defgroup COMP_Constants COMP Constants 
-* @brief  COMP³£Á¿¶¨Òå¼°ºê¶¨Òå
+* @brief  COMPå¸¸é‡å®šä¹‰åŠå®å®šä¹‰
 * @{
 *
 */
 /************************************************************************************************/
      
-/* ±È½ÏÆ÷ÄÚ²¿²Î¿¼µçÑ¹VDDA ·ÖÑ¹ */     
-#define COMP_VDDA_DIV_1DIV16             COMP_CR_VCDIV_1DIV16         /**< VDDA ·ÖÑ¹Ñ¡Ôñ1/16    */
-#define COMP_VDDA_DIV_2DIV16             COMP_CR_VCDIV_2DIV16         /**< VDDA ·ÖÑ¹Ñ¡Ôñ2/16    */     
-#define COMP_VDDA_DIV_3DIV16             COMP_CR_VCDIV_3DIV16         /**< VDDA ·ÖÑ¹Ñ¡Ôñ3/16    */     
-#define COMP_VDDA_DIV_4DIV16             COMP_CR_VCDIV_4DIV16         /**< VDDA ·ÖÑ¹Ñ¡Ôñ4/16    */     
-#define COMP_VDDA_DIV_5DIV16             COMP_CR_VCDIV_5DIV16         /**< VDDA ·ÖÑ¹Ñ¡Ôñ5/16    */
-#define COMP_VDDA_DIV_6DIV16             COMP_CR_VCDIV_6DIV16         /**< VDDA ·ÖÑ¹Ñ¡Ôñ6/16    */
-#define COMP_VDDA_DIV_7DIV16             COMP_CR_VCDIV_7DIV16         /**< VDDA ·ÖÑ¹Ñ¡Ôñ7/16    */
-#define COMP_VDDA_DIV_8DIV16             COMP_CR_VCDIV_8DIV16         /**< VDDA ·ÖÑ¹Ñ¡Ôñ8/16    */
-#define COMP_VDDA_DIV_9DIV16             COMP_CR_VCDIV_9DIV16         /**< VDDA ·ÖÑ¹Ñ¡Ôñ9/16    */     
-#define COMP_VDDA_DIV_10DIV16            COMP_CR_VCDIV_10DIV16        /**< VDDA ·ÖÑ¹Ñ¡Ôñ10/16   */     
-#define COMP_VDDA_DIV_11DIV16            COMP_CR_VCDIV_11DIV16        /**< VDDA ·ÖÑ¹Ñ¡Ôñ11/16   */     
-#define COMP_VDDA_DIV_12DIV16            COMP_CR_VCDIV_12DIV16        /**< VDDA ·ÖÑ¹Ñ¡Ôñ12/16   */
-#define COMP_VDDA_DIV_13DIV16            COMP_CR_VCDIV_13DIV16        /**< VDDA ·ÖÑ¹Ñ¡Ôñ13/16   */
+/* æ¯”è¾ƒå™¨å†…éƒ¨å‚è€ƒç”µåŽ‹VDDA åˆ†åŽ‹ */     
+#define COMP_VDDA_DIV_1DIV16             COMP_CR_VCDIV_1DIV16         /**< VDDA åˆ†åŽ‹é€‰æ‹©1/16    */
+#define COMP_VDDA_DIV_2DIV16             COMP_CR_VCDIV_2DIV16         /**< VDDA åˆ†åŽ‹é€‰æ‹©2/16    */     
+#define COMP_VDDA_DIV_3DIV16             COMP_CR_VCDIV_3DIV16         /**< VDDA åˆ†åŽ‹é€‰æ‹©3/16    */     
+#define COMP_VDDA_DIV_4DIV16             COMP_CR_VCDIV_4DIV16         /**< VDDA åˆ†åŽ‹é€‰æ‹©4/16    */     
+#define COMP_VDDA_DIV_5DIV16             COMP_CR_VCDIV_5DIV16         /**< VDDA åˆ†åŽ‹é€‰æ‹©5/16    */
+#define COMP_VDDA_DIV_6DIV16             COMP_CR_VCDIV_6DIV16         /**< VDDA åˆ†åŽ‹é€‰æ‹©6/16    */
+#define COMP_VDDA_DIV_7DIV16             COMP_CR_VCDIV_7DIV16         /**< VDDA åˆ†åŽ‹é€‰æ‹©7/16    */
+#define COMP_VDDA_DIV_8DIV16             COMP_CR_VCDIV_8DIV16         /**< VDDA åˆ†åŽ‹é€‰æ‹©8/16    */
+#define COMP_VDDA_DIV_9DIV16             COMP_CR_VCDIV_9DIV16         /**< VDDA åˆ†åŽ‹é€‰æ‹©9/16    */     
+#define COMP_VDDA_DIV_10DIV16            COMP_CR_VCDIV_10DIV16        /**< VDDA åˆ†åŽ‹é€‰æ‹©10/16   */     
+#define COMP_VDDA_DIV_11DIV16            COMP_CR_VCDIV_11DIV16        /**< VDDA åˆ†åŽ‹é€‰æ‹©11/16   */     
+#define COMP_VDDA_DIV_12DIV16            COMP_CR_VCDIV_12DIV16        /**< VDDA åˆ†åŽ‹é€‰æ‹©12/16   */
+#define COMP_VDDA_DIV_13DIV16            COMP_CR_VCDIV_13DIV16        /**< VDDA åˆ†åŽ‹é€‰æ‹©13/16   */
 
-/* ±È½ÏÆ÷ÕýÏàÊäÈë */
-#define COMP_INPSEL_IO1                   COMP_CSR_INP_IO1            /**< ÕýÏàÊäÈë COMP1 = PB0, COMP2 = PA3 */
-#define COMP_INPSEL_IO2                   COMP_CSR_INP_IO2            /**< ÕýÏàÊäÈë COMP1 = PB1, COMP2 = PA4 */
+/* æ¯”è¾ƒå™¨æ­£ç›¸è¾“å…¥ */
+#define COMP_INPSEL_IO1                   COMP_CSR_INP_IO1            /**< æ­£ç›¸è¾“å…¥ COMP1 = PB0, COMP2 = PA3 */
+#define COMP_INPSEL_IO2                   COMP_CSR_INP_IO2            /**< æ­£ç›¸è¾“å…¥ COMP1 = PB1, COMP2 = PA4 */
 
-/* ±È½ÏÆ÷·´ÏàÊäÈë */
-#define COMP_INMSEL_INVREF                COMP_CSR_INM_INT_VREF       /**< ·´ÏàÊäÈë ÄÚ²¿²Î¿¼µçÑ¹ */
-#define COMP_INMSEL_IO                    COMP_CSR_INM_IO             /**< ·´ÏàÊäÈë COMP1 = PB1, COMP2 = PA4 */                      
+/* æ¯”è¾ƒå™¨åç›¸è¾“å…¥ */
+#define COMP_INMSEL_INVREF                COMP_CSR_INM_INT_VREF       /**< åç›¸è¾“å…¥ å†…éƒ¨å‚è€ƒç”µåŽ‹ */
+#define COMP_INMSEL_IO                    COMP_CSR_INM_IO             /**< åç›¸è¾“å…¥ COMP1 = PB1, COMP2 = PA4 */                      
 
-/* ±È½ÏÆ÷ÕýÏàÊäÈëÄ£Ê½Ñ¡Ôñ£¬¿ÉÓÃÓÚÑ¡Ôñ´°¿Ú±È½ÏÆ÷¹¦ÄÜ */
-#define COMP_INPMODE_EACH_INPUT           (0x00000000U)               /**< ÕýÏàÊäÈë¸÷×Ô¶ÀÁ¢£¬ÓÉ¸÷×Ôinpsel¾ö¶¨ */
-#define COMP_INPMODE_COMMON_INPUT         COMP_CSR_INPMOD             /**< ÕýÏàÊäÈëÏà»¥Á¬½Ó£¬¼´´°¿Ú±È½ÏÆ÷Ä£Ê½ */
+/* æ¯”è¾ƒå™¨æ­£ç›¸è¾“å…¥æ¨¡å¼é€‰æ‹©ï¼Œå¯ç”¨äºŽé€‰æ‹©çª—å£æ¯”è¾ƒå™¨åŠŸèƒ½ */
+#define COMP_INPMODE_EACH_INPUT           (0x00000000U)               /**< æ­£ç›¸è¾“å…¥å„è‡ªç‹¬ç«‹ï¼Œç”±å„è‡ªinpselå†³å®š */
+#define COMP_INPMODE_COMMON_INPUT         COMP_CSR_INPMOD             /**< æ­£ç›¸è¾“å…¥ç›¸äº’è¿žæŽ¥ï¼Œå³çª—å£æ¯”è¾ƒå™¨æ¨¡å¼ */
 
-/* ±È½ÏÆ÷ÂË²¨Ê±¼ä */
-#define COMP_FLTIME_1CYCLE                COMP_CSR_FLTIME_1CYCLE      /**< ÂË²¨Ê±¼ä 1¸öCYCLE    */
-#define COMP_FLTIME_3CYCLE                COMP_CSR_FLTIME_3CYCLE      /**< ÂË²¨Ê±¼ä 3¸öCYCLE    */
-#define COMP_FLTIME_7CYCLE                COMP_CSR_FLTIME_7CYCLE      /**< ÂË²¨Ê±¼ä 7¸öCYCLE    */
-#define COMP_FLTIME_15CYCLE               COMP_CSR_FLTIME_15CYCLE     /**< ÂË²¨Ê±¼ä 15¸öCYCLE   */
-#define COMP_FLTIME_31CYCLE               COMP_CSR_FLTIME_31CYCLE     /**< ÂË²¨Ê±¼ä 31¸öCYCLE   */
-#define COMP_FLTIME_63CYCLE               COMP_CSR_FLTIME_63CYCLE     /**< ÂË²¨Ê±¼ä 63¸öCYCLE   */
-#define COMP_FLTIME_255CYCLE              COMP_CSR_FLTIME_255CYCLE    /**< ÂË²¨Ê±¼ä 255¸öCYCLE  */
-#define COMP_FLTIME_1023CYCLE             COMP_CSR_FLTIME_1023CYCLE   /**< ÂË²¨Ê±¼ä 1023¸öCYCLE */
+/* æ¯”è¾ƒå™¨æ»¤æ³¢æ—¶é—´ */
+#define COMP_FLTIME_1CYCLE                COMP_CSR_FLTIME_1CYCLE      /**< æ»¤æ³¢æ—¶é—´ 1ä¸ªCYCLE    */
+#define COMP_FLTIME_3CYCLE                COMP_CSR_FLTIME_3CYCLE      /**< æ»¤æ³¢æ—¶é—´ 3ä¸ªCYCLE    */
+#define COMP_FLTIME_7CYCLE                COMP_CSR_FLTIME_7CYCLE      /**< æ»¤æ³¢æ—¶é—´ 7ä¸ªCYCLE    */
+#define COMP_FLTIME_15CYCLE               COMP_CSR_FLTIME_15CYCLE     /**< æ»¤æ³¢æ—¶é—´ 15ä¸ªCYCLE   */
+#define COMP_FLTIME_31CYCLE               COMP_CSR_FLTIME_31CYCLE     /**< æ»¤æ³¢æ—¶é—´ 31ä¸ªCYCLE   */
+#define COMP_FLTIME_63CYCLE               COMP_CSR_FLTIME_63CYCLE     /**< æ»¤æ³¢æ—¶é—´ 63ä¸ªCYCLE   */
+#define COMP_FLTIME_255CYCLE              COMP_CSR_FLTIME_255CYCLE    /**< æ»¤æ³¢æ—¶é—´ 255ä¸ªCYCLE  */
+#define COMP_FLTIME_1023CYCLE             COMP_CSR_FLTIME_1023CYCLE   /**< æ»¤æ³¢æ—¶é—´ 1023ä¸ªCYCLE */
 
-/* ±È½ÏÆ÷Êä³ö¼«ÐÔ */
-#define COMP_OUTPOL_NON_INVERTED          (0x00000000U)               /**< Êä³ö×´Ì¬²»·´Ïà */
-#define COMP_OUTPOL_INVERTED              COMP_CSR_POL                /**< Êä³ö×´Ì¬·´Ïà   */
+/* æ¯”è¾ƒå™¨è¾“å‡ºæžæ€§ */
+#define COMP_OUTPOL_NON_INVERTED          (0x00000000U)               /**< è¾“å‡ºçŠ¶æ€ä¸åç›¸ */
+#define COMP_OUTPOL_INVERTED              COMP_CSR_POL                /**< è¾“å‡ºçŠ¶æ€åç›¸   */
 
-/* ±È½ÏÆ÷Êä³öÑ¡Ôñ */
-#define COMP_OUTMODE_EACH_OUT             (0x00000000U)               /**< Êä³öÎªÆäÔ­Ê¼µçÑ¹±È½Ï½á¹û         */
-#define COMP_OUTMODE_COMMON_XOR_OUT       COMP_CSR_OUTMOD             /**< Êä³öÎª±È½ÏÆ÷1¡¢2µçÑ¹±È½Ï½á¹ûÒì»ò */
+/* æ¯”è¾ƒå™¨è¾“å‡ºé€‰æ‹© */
+#define COMP_OUTMODE_EACH_OUT             (0x00000000U)               /**< è¾“å‡ºä¸ºå…¶åŽŸå§‹ç”µåŽ‹æ¯”è¾ƒç»“æžœ         */
+#define COMP_OUTMODE_COMMON_XOR_OUT       COMP_CSR_OUTMOD             /**< è¾“å‡ºä¸ºæ¯”è¾ƒå™¨1ã€2ç”µåŽ‹æ¯”è¾ƒç»“æžœå¼‚æˆ– */
 
-/* ±È½ÏÆ÷Êä³ö½á¹û */
-#define COMP_OUTPUT_LEVEL_LOW             (0x00000000UL)              /**< ±È½ÏÆ÷Êä³öµçÆ½µÍ */
-#define COMP_OUTPUT_LEVEL_HIGH            (0x00000001UL)              /**< ±È½ÏÆ÷Êä³öµçÆ½¸ß */
+/* æ¯”è¾ƒå™¨è¾“å‡ºç»“æžœ */
+#define COMP_OUTPUT_LEVEL_LOW             (0x00000000UL)              /**< æ¯”è¾ƒå™¨è¾“å‡ºç”µå¹³ä½Ž */
+#define COMP_OUTPUT_LEVEL_HIGH            (0x00000001UL)              /**< æ¯”è¾ƒå™¨è¾“å‡ºç”µå¹³é«˜ */
 
-/* ±È½ÏÆ÷ÄÚ²¿²Î¿¼µçÑ¹Ô´ */
-#define COMP_REFERENCE_VBGR               (0x00000000UL)              /**< ±È½ÏÆ÷ÄÚ²¿²Î¿¼µçÑ¹Ô´Ñ¡ÔñVBGR         */
-#define COMP_REFERENCE_VDDA_DIV           COMP_CR_VCSEL               /**< ±È½ÏÆ÷ÄÚ²¿²Î¿¼µçÑ¹Ô´Ñ¡ÔñVDDA 16¼¶·ÖÑ¹ */
+/* æ¯”è¾ƒå™¨å†…éƒ¨å‚è€ƒç”µåŽ‹æº */
+#define COMP_REFERENCE_VBGR               (0x00000000UL)              /**< æ¯”è¾ƒå™¨å†…éƒ¨å‚è€ƒç”µåŽ‹æºé€‰æ‹©VBGR         */
+#define COMP_REFERENCE_VDDA_DIV           COMP_CR_VCSEL               /**< æ¯”è¾ƒå™¨å†…éƒ¨å‚è€ƒç”µåŽ‹æºé€‰æ‹©VDDA 16çº§åˆ†åŽ‹ */
 
-/* COMPÆô¶¯ÎÈ¶¨Ê±¼ä */
-#define COMP_EN_DELAY                     (1U)                        /**< COMPÊ¹ÄÜÆô¶¯Ê±¼ä */
+/* COMPå¯åŠ¨ç¨³å®šæ—¶é—´ */
+#define COMP_EN_DELAY                     (1U)                        /**< COMPä½¿èƒ½å¯åŠ¨æ—¶é—´ */
 
 /** 
 * @} 
@@ -113,15 +113,15 @@
 /************************************************************************************************/
 /**
 * @defgroup COMP_External_Functions COMP External Functions
-* @brief    COMP¶ÔÍâº¯Êý
+* @brief    COMPå¯¹å¤–å‡½æ•°
 * @{
 *
 */
 /************************************************************************************************/
 /** 
-* @brief  Ê¹ÄÜCOMP
-* @param  compx COMPÍâÉè
-* @retval ÎÞ
+* @brief  ä½¿èƒ½COMP
+* @param  compx COMPå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_enable(COMP_t *compx)
 {
@@ -129,9 +129,9 @@ __STATIC_INLINE void std_comp_enable(COMP_t *compx)
 }
 
 /** 
-* @brief  ½ûÖ¹COMP
-* @param  compx COMPÍâÉè
-* @retval ÎÞ
+* @brief  ç¦æ­¢COMP
+* @param  compx COMPå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_disable(COMP_t *compx)
 {
@@ -139,12 +139,12 @@ __STATIC_INLINE void std_comp_disable(COMP_t *compx)
 }
 
 /** 
-* @brief  ÉèÖÃCOMP·´ÏàÊäÈë
-* @param  compx COMPÍâÉè
-* @param  input_minus ·´ÏàÊäÈëÑ¡Ôñ
+* @brief  è®¾ç½®COMPåç›¸è¾“å…¥
+* @param  compx COMPå¤–è®¾
+* @param  input_minus åç›¸è¾“å…¥é€‰æ‹©
 *             @arg COMP_INMSEL_INVREF
 *             @arg COMP_INMSEL_IO
-* @retval ÎÞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_set_input_minus(COMP_t *compx, uint32_t input_minus)
 {
@@ -152,9 +152,9 @@ __STATIC_INLINE void std_comp_set_input_minus(COMP_t *compx, uint32_t input_minu
 }
 
 /** 
-* @brief  »ñÈ¡COMP·´ÏàÊäÈë
-* @param  compx COMPÍâÉè
-* @retval uint32_t ·µ»Ø·´ÏàÊäÈë
+* @brief  èŽ·å–COMPåç›¸è¾“å…¥
+* @param  compx COMPå¤–è®¾
+* @retval uint32_t è¿”å›žåç›¸è¾“å…¥
 *             @arg COMP_INMSEL_INVREF
 *             @arg COMP_INMSEL_IO
 */
@@ -164,12 +164,12 @@ __STATIC_INLINE uint32_t std_comp_get_input_minus(COMP_t *compx)
 }
 
 /** 
-* @brief  ÉèÖÃCOMPÕýÏàÊäÈë
-* @param  compx COMPÍâÉè
-* @param  input_plus ÕýÏàÊäÈëÑ¡Ôñ
+* @brief  è®¾ç½®COMPæ­£ç›¸è¾“å…¥
+* @param  compx COMPå¤–è®¾
+* @param  input_plus æ­£ç›¸è¾“å…¥é€‰æ‹©
 *             @arg COMP_INPSEL_IO1
 *             @arg COMP_INPSEL_IO2
-* @retval ÎÞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_set_input_plus(COMP_t *compx, uint32_t input_plus)
 {
@@ -177,9 +177,9 @@ __STATIC_INLINE void std_comp_set_input_plus(COMP_t *compx, uint32_t input_plus)
 }
 
 /** 
-* @brief  »ñÈ¡COMPÕýÏàÊäÈë
-* @param  compx COMPÍâÉè
-* @retval uint32_t ·µ»ØÕýÏàÊäÈë
+* @brief  èŽ·å–COMPæ­£ç›¸è¾“å…¥
+* @param  compx COMPå¤–è®¾
+* @retval uint32_t è¿”å›žæ­£ç›¸è¾“å…¥
 *             @arg COMP_INPSEL_IO1
 *             @arg COMP_INPSEL_IO2
 */
@@ -189,12 +189,12 @@ __STATIC_INLINE uint32_t std_comp_get_input_plus(COMP_t *compx)
 }
 
 /** 
-* @brief  ÉèÖÃCOMPÕýÏàÊäÈëÄ£Ê½
-* @param  compx COMPÍâÉè
-* @param  input_mode ÕýÏàÊäÈëÄ£Ê½Ñ¡Ôñ
+* @brief  è®¾ç½®COMPæ­£ç›¸è¾“å…¥æ¨¡å¼
+* @param  compx COMPå¤–è®¾
+* @param  input_mode æ­£ç›¸è¾“å…¥æ¨¡å¼é€‰æ‹©
 *             @arg COMP_INPMODE_EACH_INPUT
 *             @arg COMP_INPMODE_COMMON_INPUT
-* @retval ÎÞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_set_input_plus_mode(COMP_t *compx, uint32_t input_mode)
 {
@@ -202,12 +202,12 @@ __STATIC_INLINE void std_comp_set_input_plus_mode(COMP_t *compx, uint32_t input_
 }
 
 /** 
-* @brief  ÉèÖÃCOMPÊä³öÄ£Ê½
-* @param  compx COMPÍâÉè
-* @param  output_mode Êä³öÄ£Ê½Ñ¡Ôñ
+* @brief  è®¾ç½®COMPè¾“å‡ºæ¨¡å¼
+* @param  compx COMPå¤–è®¾
+* @param  output_mode è¾“å‡ºæ¨¡å¼é€‰æ‹©
 *             @arg COMP_OUTMODE_EACH_OUT
 *             @arg COMP_OUTMODE_COMMON_XOR_OUT
-* @retval ÎÞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_set_output_mode(COMP_t *compx, uint32_t output_mode)
 {
@@ -215,12 +215,12 @@ __STATIC_INLINE void std_comp_set_output_mode(COMP_t *compx, uint32_t output_mod
 }
 
 /** 
-* @brief  ÉèÖÃCOMPÊä³ö¼«ÐÔ
-* @param  compx COMPÍâÉè
-* @param  output_polarity Êä³ö¼«ÐÔÑ¡Ôñ
+* @brief  è®¾ç½®COMPè¾“å‡ºæžæ€§
+* @param  compx COMPå¤–è®¾
+* @param  output_polarity è¾“å‡ºæžæ€§é€‰æ‹©
 *             @arg COMP_OUTPOL_NON_INVERTED
 *             @arg COMP_OUTPOL_INVERTED
-* @retval ÎÞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_set_output_polarity(COMP_t *compx, uint32_t output_polarity)
 {
@@ -228,9 +228,9 @@ __STATIC_INLINE void std_comp_set_output_polarity(COMP_t *compx, uint32_t output
 }
 
 /** 
-* @brief  »ñÈ¡COMPÊä³ö¼«ÐÔ
-* @param  compx COMPÍâÉè
-* @retval uint32_t ·µ»ØÊä³ö¼«ÐÔ
+* @brief  èŽ·å–COMPè¾“å‡ºæžæ€§
+* @param  compx COMPå¤–è®¾
+* @retval uint32_t è¿”å›žè¾“å‡ºæžæ€§
 *             @arg COMP_OUTPOL_NON_INVERTED
 *             @arg COMP_OUTPOL_INVERTED
 */
@@ -240,8 +240,8 @@ __STATIC_INLINE uint32_t std_comp_get_output_polarity(COMP_t *compx)
 }
 
 /** 
-* @brief  Ê¹ÄÜCOMPµÄÊäÈë³ÙÖÍ
-* @retval ÎÞ
+* @brief  ä½¿èƒ½COMPçš„è¾“å…¥è¿Ÿæ»ž
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_input_hysteresis_enable(void)
 {
@@ -249,8 +249,8 @@ __STATIC_INLINE void std_comp_input_hysteresis_enable(void)
 }
 
 /** 
-* @brief  ½ûÖ¹COMPµÄÊäÈë³ÙÖÍ
-* @retval ÎÞ
+* @brief  ç¦æ­¢COMPçš„è¾“å…¥è¿Ÿæ»ž
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_input_hysteresis_disable(void)
 {
@@ -258,14 +258,14 @@ __STATIC_INLINE void std_comp_input_hysteresis_disable(void)
 }
 
 /** 
-* @brief  ÉèÖÃCOMPÊä³öÂË²¨Ê±¼ä
-* @param  compx COMPÍâÉè
-* @param  filter_time ÂË²¨Ê±¼äÑ¡Ôñ
+* @brief  è®¾ç½®COMPè¾“å‡ºæ»¤æ³¢æ—¶é—´
+* @param  compx COMPå¤–è®¾
+* @param  filter_time æ»¤æ³¢æ—¶é—´é€‰æ‹©
 *             @arg COMP_FLTIME_1CYCLE
 *             @arg COMP_FLTIME_3CYCLE
 *             @arg ...
 *             @arg COMP_FLTIME_1023CYCLE
-* @retval ÎÞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_set_output_filter_time(COMP_t *compx, uint32_t filter_time)
 {
@@ -273,9 +273,9 @@ __STATIC_INLINE void std_comp_set_output_filter_time(COMP_t *compx, uint32_t fil
 }
 
 /** 
-* @brief  COMPÊä³öÂË²¨Ê¹ÄÜ
-* @param  compx COMPÍâÉè
-* @retval ÎÞ
+* @brief  COMPè¾“å‡ºæ»¤æ³¢ä½¿èƒ½
+* @param  compx COMPå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_output_filter_enable(COMP_t *compx)
 {
@@ -283,9 +283,9 @@ __STATIC_INLINE void std_comp_output_filter_enable(COMP_t *compx)
 }
 
 /** 
-* @brief  COMPÊä³öÂË²¨½ûÖ¹
-* @param  compx COMPÍâÉè
-* @retval ÎÞ
+* @brief  COMPè¾“å‡ºæ»¤æ³¢ç¦æ­¢
+* @param  compx COMPå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_output_filter_disable(COMP_t *compx)
 {
@@ -293,11 +293,11 @@ __STATIC_INLINE void std_comp_output_filter_disable(COMP_t *compx)
 }
 
 /** 
-* @brief  »ñÈ¡COMPÊ¹ÄÜ×´Ì¬
-* @param  compx COMPÍâÉè
-* @retval uint32_t ·µ»ØÅÐ¶Ï½á¹û
-*             @arg ·Ç0£º ±íÊ¾COMPÒÑÊ¹ÄÜ
-*             @arg 0£º   ±íÊ¾COMPÎ´Ê¹ÄÜ
+* @brief  èŽ·å–COMPä½¿èƒ½çŠ¶æ€
+* @param  compx COMPå¤–è®¾
+* @retval uint32_t è¿”å›žåˆ¤æ–­ç»“æžœ
+*             @arg éž0ï¼š è¡¨ç¤ºCOMPå·²ä½¿èƒ½
+*             @arg 0ï¼š   è¡¨ç¤ºCOMPæœªä½¿èƒ½
 */
 __STATIC_INLINE uint32_t std_comp_get_enable_status(COMP_t *compx)
 {
@@ -305,9 +305,9 @@ __STATIC_INLINE uint32_t std_comp_get_enable_status(COMP_t *compx)
 }
 
 /** 
-* @brief  »ñÈ¡COMPÊä³ö½á¹û
-* @param  compx COMPÍâÉè
-* @retval uint32_t ·µ»ØCOMPÊä³ö½á¹û
+* @brief  èŽ·å–COMPè¾“å‡ºç»“æžœ
+* @param  compx COMPå¤–è®¾
+* @retval uint32_t è¿”å›žCOMPè¾“å‡ºç»“æžœ
 *             @arg COMP_OUTPUT_LEVEL_LOW
 *             @arg COMP_OUTPUT_LEVEL_HIGH
 */
@@ -317,11 +317,11 @@ __STATIC_INLINE uint32_t std_comp_get_output_result(COMP_t *compx)
 }
 
 /** 
-* @brief  COMP²Î¿¼µçÑ¹Ô´ÉèÖÃ
+* @brief  COMPå‚è€ƒç”µåŽ‹æºè®¾ç½®
 *             @arg COMP_REFERENCE_VBGR
 *             @arg COMP_REFERENCE_VDDA_DIV
-* @note   VDDA·ÖÑ¹×÷Îª²Î¿¼µçÑ¹Ô´£¬ÐèÅäÖÃVDDA·ÖÑ¹²ÎÊý;
-* @retval ÎÞ
+* @note   VDDAåˆ†åŽ‹ä½œä¸ºå‚è€ƒç”µåŽ‹æºï¼Œéœ€é…ç½®VDDAåˆ†åŽ‹å‚æ•°;
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_set_reference_source(uint32_t reference_voltage)
 {
@@ -329,8 +329,8 @@ __STATIC_INLINE void std_comp_set_reference_source(uint32_t reference_voltage)
 }
 
 /** 
-* @brief  »ñÈ¡COMP²Î¿¼µçÑ¹Ô´
-* @retval uint32_t  ·µ»Ø²Î¿¼µçÔ´Ô´
+* @brief  èŽ·å–COMPå‚è€ƒç”µåŽ‹æº
+* @retval uint32_t  è¿”å›žå‚è€ƒç”µæºæº
 *             @arg COMP_REFERENCE_VBGR
 *             @arg COMP_REFERENCE_VDDA_DIV
 */
@@ -340,13 +340,13 @@ __STATIC_INLINE uint32_t std_comp_get_reference_source(void)
 }
 
 /** 
-* @brief  ÉèÖÃVDDA 16¼¶·ÖÑ¹
-* @param  vdda_div VDDA 16¼¶·ÖÑ¹
+* @brief  è®¾ç½®VDDA 16çº§åˆ†åŽ‹
+* @param  vdda_div VDDA 16çº§åˆ†åŽ‹
 *             @arg COMP_VDDA_DIV_1DIV16
 *             @arg COMP_VDDA_DIV_2DIV16
 *             @arg ...
 *             @arg COMP_VDDA_DIV_13DIV16
-* @retval ÎÞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_set_ref_vdda_div(uint32_t vdda_div)
 {
@@ -354,8 +354,8 @@ __STATIC_INLINE void std_comp_set_ref_vdda_div(uint32_t vdda_div)
 }
 
 /** 
-* @brief  »ñÈ¡VDDA 16¼¶·ÖÑ¹
-* @retval uint32_t ·µ»Ø VDDA 16¼¶·ÖÑ¹
+* @brief  èŽ·å–VDDA 16çº§åˆ†åŽ‹
+* @retval uint32_t è¿”å›ž VDDA 16çº§åˆ†åŽ‹
 *             @arg COMP_VDDA_DIV_1DIV16
 *             @arg COMP_VDDA_DIV_2DIV16
 *             @arg ...
@@ -367,16 +367,16 @@ __STATIC_INLINE uint32_t std_comp_get_ref_vdda_div(void)
 }
 
 /** 
-* @brief  ÅäÖÃCOMPµÄÕýÏàÊäÈëºÍ·´ÏòÊäÈë
-* @param  compx COMPÍâÉè
-* @param  input_plus ÕýÏàÊäÈëÑ¡Ôñ
+* @brief  é…ç½®COMPçš„æ­£ç›¸è¾“å…¥å’Œåå‘è¾“å…¥
+* @param  compx COMPå¤–è®¾
+* @param  input_plus æ­£ç›¸è¾“å…¥é€‰æ‹©
 *             @arg COMP_INPSEL_IO1
 *             @arg COMP_INPSEL_IO2
-* @param  input_minis ·´ÏòÏàÊäÈëÑ¡Ôñ
+* @param  input_minis åå‘ç›¸è¾“å…¥é€‰æ‹©
 *             @arg COMP_INMSEL_INVREF
 *             @arg COMP_INMSEL_IO
 *
-* @retval ÎÞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_comp_input_config(COMP_t *compx, uint32_t input_plus, uint32_t input_minis)
 {
@@ -385,7 +385,7 @@ __STATIC_INLINE void std_comp_input_config(COMP_t *compx, uint32_t input_plus, u
                (input_plus | input_minis));
 }
 
-/* COMPÈ¥³õÊ¼»¯º¯Êý */
+/* COMPåŽ»åˆå§‹åŒ–å‡½æ•° */
 void std_comp_deinit(COMP_t *compx);
 
 /**

@@ -2,8 +2,8 @@
 /**
 * @file               ciu32f003_std_tim.h          
 * @author             MCU Ecosystem Development Team
-* @brief              TIM STD¿âÇı¶¯Í·ÎÄ¼ş¡£
-*                     Ìá¹©TIMÏà¹ØµÄSTD¿â²Ù×÷º¯ÊıÉùÃ÷¡¢Êı¾İÀàĞÍÒÔ¼°³£Á¿µÄ¶¨Òå¡£ 
+* @brief              TIM STDåº“é©±åŠ¨å¤´æ–‡ä»¶ã€‚
+*                     æä¾›TIMç›¸å…³çš„STDåº“æ“ä½œå‡½æ•°å£°æ˜ã€æ•°æ®ç±»å‹ä»¥åŠå¸¸é‡çš„å®šä¹‰ã€‚ 
 * 
 *
 **************************************************************************************************
@@ -13,7 +13,7 @@
 **************************************************************************************************
 */
 
-/*±ÜÃâÍ·ÎÄ¼şÖØ¸´ÒıÓÃ*/
+/*é¿å…å¤´æ–‡ä»¶é‡å¤å¼•ç”¨*/
 #ifndef CIU32F003_STD_TIM_H
 #define CIU32F003_STD_TIM_H
 
@@ -25,7 +25,7 @@
 
 /**
 * @defgroup TIM TIM
-* @brief    ¸ß¼¶¿ØÖÆ¶¨Ê±Æ÷/Í¨ÓÃ¶¨Ê±Æ÷µÄSTD¿âÇı¶¯
+* @brief    é«˜çº§æ§åˆ¶å®šæ—¶å™¨/é€šç”¨å®šæ—¶å™¨çš„STDåº“é©±åŠ¨
 * @{
 *
 */
@@ -44,104 +44,104 @@ extern "C" {
 /************************************************************************************************/
 /** 
 * @defgroup TIM_Types TIM Types
-* @brief    TIMÊı¾İÀàĞÍ¶¨Òå
+* @brief    TIMæ•°æ®ç±»å‹å®šä¹‰
 * @{
 */
 /************************************************************************************************/
 
 /**
-* @brief  TIM»ù±¾²ÎÊıÅäÖÃ½á¹¹Ìå¶¨Òå
+* @brief  TIMåŸºæœ¬å‚æ•°é…ç½®ç»“æ„ä½“å®šä¹‰
 */
 typedef struct
 {    
-    uint32_t prescaler;              /**< TIMÊ±ÖÓµÄÔ¤·ÖÆµ²ÎÊı                               
-                                              @note TIM1Ô¤·ÖÆµ²ÎÊı·¶Î§Îª£º0x0000~0xFFFF    
-                                                    TIM3Ô¤·ÖÆµ²ÎÊı·¶Î§Îª£º0x0000~0x000F                    */
+    uint32_t prescaler;              /**< TIMæ—¶é’Ÿçš„é¢„åˆ†é¢‘å‚æ•°                               
+                                              @note TIM1é¢„åˆ†é¢‘å‚æ•°èŒƒå›´ä¸ºï¼š0x0000~0xFFFF    
+                                                    TIM3é¢„åˆ†é¢‘å‚æ•°èŒƒå›´ä¸ºï¼š0x0000~0x000F                    */
                                    
-    uint32_t counter_mode;           /**< ¼ÆÊıÆ÷Ä£Ê½Ñ¡Ôñ
+    uint32_t counter_mode;           /**< è®¡æ•°å™¨æ¨¡å¼é€‰æ‹©
                                               @arg TIM_COUNTER_MODE_UP ...                                 */
                                    
-    uint32_t period;                 /**< ÔÚÏÂ´Î¸üĞÂÊÂ¼şÊ±¼ÓÔØµ½×Ô¶¯ÖØĞÂ¼ÓÔØ¼Ä´æÆ÷ÖĞµÄÒç³öÖµ
-                                          ÆäÖµ±ØĞëÔÚ0x0000~0xFFFFÖ®¼ä                                      */
+    uint32_t period;                 /**< åœ¨ä¸‹æ¬¡æ›´æ–°äº‹ä»¶æ—¶åŠ è½½åˆ°è‡ªåŠ¨é‡æ–°åŠ è½½å¯„å­˜å™¨ä¸­çš„æº¢å‡ºå€¼
+                                          å…¶å€¼å¿…é¡»åœ¨0x0000~0xFFFFä¹‹é—´                                      */
                                    
-    uint32_t clock_div;              /**< TIMÊ±ÖÓ·ÖÆµ²ÎÊı
+    uint32_t clock_div;              /**< TIMæ—¶é’Ÿåˆ†é¢‘å‚æ•°
                                               @arg TIM_CLOCK_DTS_DIV1 ...                                  */
                                    
-    uint8_t repeat_counter;         /**< ÖØ¸´¼ÆÊıÆ÷²ÎÊı¶¨Òå£¬Ã¿µ±RCRÏòÏÂ¼ÆÊı´ïµ½0Ê±£¬»á²ú³öÒ»¸ö¸üĞÂÊÂ¼ş£¬
-                                         ²¢´ÓRCRµÄÖµ(N)¿ªÊ¼ÖØĞÂ¼ÆÊı£¬¸Ã²ÎÊı±ØĞëÔÚ0x0000~0x00FFÖ®¼ä¡£       */
+    uint8_t repeat_counter;         /**< é‡å¤è®¡æ•°å™¨å‚æ•°å®šä¹‰ï¼Œæ¯å½“RCRå‘ä¸‹è®¡æ•°è¾¾åˆ°0æ—¶ï¼Œä¼šäº§å‡ºä¸€ä¸ªæ›´æ–°äº‹ä»¶ï¼Œ
+                                         å¹¶ä»RCRçš„å€¼(N)å¼€å§‹é‡æ–°è®¡æ•°ï¼Œè¯¥å‚æ•°å¿…é¡»åœ¨0x0000~0x00FFä¹‹é—´ã€‚       */
                                    
 }std_tim_basic_init_t;
 
 
 /**
-* @brief  TIMÊäÈë²¶»ñ²ÎÊıÅäÖÃ½á¹¹Ìå¶¨Òå
+* @brief  TIMè¾“å…¥æ•è·å‚æ•°é…ç½®ç»“æ„ä½“å®šä¹‰
 */
 typedef struct
 {
-    uint32_t  input_capture_pol;         /**< ÊäÈëĞÅºÅµÄÓĞĞ§±ßÑØÑ¡Ôñ                           
+    uint32_t  input_capture_pol;         /**< è¾“å…¥ä¿¡å·çš„æœ‰æ•ˆè¾¹æ²¿é€‰æ‹©                           
                                                   @arg TIM_INPUT_POL_RISING ...                */
                                 
-    uint32_t input_capture_sel;          /**< ÊäÈëÄ£Ê½¶¨Òå
+    uint32_t input_capture_sel;          /**< è¾“å…¥æ¨¡å¼å®šä¹‰
                                                   @arg TIM_INPUT_CAPTURE_SEL_DIRECTTI ...      */
                                 
-    uint32_t input_capture_prescaler;    /**< ÊäÈë²¶»ñÔ¤·ÖÆµ¶¨Òå
+    uint32_t input_capture_prescaler;    /**< è¾“å…¥æ•è·é¢„åˆ†é¢‘å®šä¹‰
                                                   @arg TIM_INPUT_CAPTURE_PSC_DIV1 ...          */
                                 
-    uint32_t input_capture_filter;       /**< ÊäÈë²¶»ñÂË²¨Æ÷¶¨Òå£¬ÆäÖµ±ØĞëÔÚ0x0~0x7Ö®¼ä        */
+    uint32_t input_capture_filter;       /**< è¾“å…¥æ•è·æ»¤æ³¢å™¨å®šä¹‰ï¼Œå…¶å€¼å¿…é¡»åœ¨0x0~0x7ä¹‹é—´        */
     
 }std_tim_input_capture_init_t;      
 
 
 /**
-* @brief  TIMÊä³ö±È½Ï²ÎÊıÅäÖÃ½á¹¹Ìå¶¨Òå
+* @brief  TIMè¾“å‡ºæ¯”è¾ƒå‚æ•°é…ç½®ç»“æ„ä½“å®šä¹‰
 */
 typedef struct
 {
-    uint32_t output_compare_mode;        /**< TIMÊä³ö±È½ÏÄ£Ê½¶¨Òå
+    uint32_t output_compare_mode;        /**< TIMè¾“å‡ºæ¯”è¾ƒæ¨¡å¼å®šä¹‰
                                                   @arg TIM_OUTPUT_MODE_ACTIVE ...                           */
     
-    uint32_t output_state;               /**< Êä³öÊ¹ÄÜ¶¨Òå                                               
+    uint32_t output_state;               /**< è¾“å‡ºä½¿èƒ½å®šä¹‰                                               
                                                   @arg TIM_OUTPUT_DISABLE ...                               */
  
-    uint32_t output_negtive_state;       /**< »¥²¹Êä³öÊ¹ÄÜ¶¨Òå                                               
+    uint32_t output_negtive_state;       /**< äº’è¡¥è¾“å‡ºä½¿èƒ½å®šä¹‰                                               
                                                   @arg TIM_OUTPUT_NEGTIVE_DISABLE ...                       */
                                    
-    uint32_t pulse;                      /**< TIMÔØÈë²¶»ñ±È½Ï¼Ä´æÆ÷µÄÂö³åÖµ£¬ÆäÖµ±ØĞëÔÚ0x0000~0xFFFFÖ®¼ä    */    
+    uint32_t pulse;                      /**< TIMè½½å…¥æ•è·æ¯”è¾ƒå¯„å­˜å™¨çš„è„‰å†²å€¼ï¼Œå…¶å€¼å¿…é¡»åœ¨0x0000~0xFFFFä¹‹é—´    */    
                                    
-    uint32_t output_pol;                 /**< Êä³ö¼«ĞÔ¶¨Òå
+    uint32_t output_pol;                 /**< è¾“å‡ºææ€§å®šä¹‰
                                                   @arg TIM_OUTPUT_POL_HIGH ...                              */
                                    
-    uint32_t output_negtive_pol;         /**< »¥²¹Êä³ö¼«ĞÔ¶¨Òå
+    uint32_t output_negtive_pol;         /**< äº’è¡¥è¾“å‡ºææ€§å®šä¹‰
                                                   @arg TIM_OUTPUT_NEGTIVE_POL_HIGH ...                      */                                                                     
                                    
-    uint32_t output_idle_state;          /**< TIM¿ÕÏĞ×´Ì¬ÏÂÊä³ö×´Ì¬¶¨Òå
+    uint32_t output_idle_state;          /**< TIMç©ºé—²çŠ¶æ€ä¸‹è¾“å‡ºçŠ¶æ€å®šä¹‰
                                                   @arg  TIM_OUTPUT_IDLE_SET ...
-                                                  @note ¸Ã²ÎÊı½ö¶ÔÖ§³ÖBreak¹¦ÄÜµÄ¶¨Ê±Æ÷ÊµÀıÓĞĞ§             */
+                                                  @note è¯¥å‚æ•°ä»…å¯¹æ”¯æŒBreakåŠŸèƒ½çš„å®šæ—¶å™¨å®ä¾‹æœ‰æ•ˆ             */
                                    
-    uint32_t output_negtive_idle_state;  /**< TIM¿ÕÏĞ×´Ì¬ÏÂ»¥²¹Êä³ö×´Ì¬¶¨Òå
+    uint32_t output_negtive_idle_state;  /**< TIMç©ºé—²çŠ¶æ€ä¸‹äº’è¡¥è¾“å‡ºçŠ¶æ€å®šä¹‰
                                                   @arg  TIM_OUTPUT_NEGTIVE_IDLE_SET ...
-                                                  @note ¸Ã²ÎÊı½ö¶ÔÖ§³ÖBreak¹¦ÄÜµÄ¶¨Ê±Æ÷ÊµÀıÓĞĞ§             */
+                                                  @note è¯¥å‚æ•°ä»…å¯¹æ”¯æŒBreakåŠŸèƒ½çš„å®šæ—¶å™¨å®ä¾‹æœ‰æ•ˆ             */
     
 }std_tim_output_compare_init_t;
 
 
 /**
-* @brief  TIM¶ÏÂ·ÊäÈëºÍËÀÇø²ÎÊıÅäÖÃ½á¹¹Ìå¶¨Òå
+* @brief  TIMæ–­è·¯è¾“å…¥å’Œæ­»åŒºå‚æ•°é…ç½®ç»“æ„ä½“å®šä¹‰
 */
 typedef struct
 {
-    uint32_t off_state_run_mode;                        /**< ÔËĞĞÄ£Ê½ÏÂµÄ¹Ø±Õ×´Ì¬
+    uint32_t off_state_run_mode;                        /**< è¿è¡Œæ¨¡å¼ä¸‹çš„å…³é—­çŠ¶æ€
                                                                  @arg TIM_OSSR_ENABLE ...            */
     
-    uint32_t off_state_idle_mode;                       /**< ¿ÕÏĞÄ£Ê½ÏÂµÄ¹Ø±Õ×´Ì¬
+    uint32_t off_state_idle_mode;                       /**< ç©ºé—²æ¨¡å¼ä¸‹çš„å…³é—­çŠ¶æ€
                                                                  @arg TIM_OSSI_ENABLE ...            */
     
-    uint32_t lock_level;                                /**< LOCK¼¶±ğ
+    uint32_t lock_level;                                /**< LOCKçº§åˆ«
                                                                  @arg TIM_LOCK_LEVEL1 ...            */  
     
-    uint32_t dead_time;                                 /**< ËÀÇø²ÎÊı¶¨Òå£¬ÆäÖµ±ØĞëÔÚ0x00~0xFFÖ®¼ä   */
+    uint32_t dead_time;                                 /**< æ­»åŒºå‚æ•°å®šä¹‰ï¼Œå…¶å€¼å¿…é¡»åœ¨0x00~0xFFä¹‹é—´   */
        
-    uint32_t break_state;                              /**< ¶ÏÂ·¹¦ÄÜÊ¹ÄÜ¿ØÖÆ
+    uint32_t break_state;                              /**< æ–­è·¯åŠŸèƒ½ä½¿èƒ½æ§åˆ¶
                                                                   @arg TIM_BREAK_ENABLE
                                                                   @arg TIM_BREAK_DISABLE             */ 
     
@@ -158,195 +158,195 @@ typedef struct
 /************************************************************************************************/
 /**
 * @defgroup TIM_Constants TIM Constants 
-* @brief    TIM³£Á¿¶¨Òå¼°ºê¶¨Òå
+* @brief    TIMå¸¸é‡å®šä¹‰åŠå®å®šä¹‰
 * @{
 *
 */
 /************************************************************************************************/
-/* TIM¼ÆÊıÄ£Ê½¶¨Òå */
-#define TIM_COUNTER_MODE_UP                (0x00000000U)                      /**< ÏòÉÏ¼ÆÊı                      */
-#define TIM_COUNTER_MODE_DOWN              TIM_CR1_DIR                        /**< ÏòÏÂ¼ÆÊı                      */
-#define TIM_COUNTER_MODE_CENT_MODE1        TIM_CR1_CMS_CENTER_UP              /**< ÖĞĞÄ¶ÔÆëÄ£Ê½1                 */
-#define TIM_COUNTER_MODE_CENT_MODE2        TIM_CR1_CMS_CENTER_DOWN            /**< ÖĞĞÄ¶ÔÆëÄ£Ê½2                 */
-#define TIM_COUNTER_MODE_CENT_MODE3        TIM_CR1_CMS_CENTER_UP_DOWN         /**< ÖĞĞÄ¶ÔÆëÄ£Ê½3                 */
+/* TIMè®¡æ•°æ¨¡å¼å®šä¹‰ */
+#define TIM_COUNTER_MODE_UP                (0x00000000U)                      /**< å‘ä¸Šè®¡æ•°                      */
+#define TIM_COUNTER_MODE_DOWN              TIM_CR1_DIR                        /**< å‘ä¸‹è®¡æ•°                      */
+#define TIM_COUNTER_MODE_CENT_MODE1        TIM_CR1_CMS_CENTER_UP              /**< ä¸­å¿ƒå¯¹é½æ¨¡å¼1                 */
+#define TIM_COUNTER_MODE_CENT_MODE2        TIM_CR1_CMS_CENTER_DOWN            /**< ä¸­å¿ƒå¯¹é½æ¨¡å¼2                 */
+#define TIM_COUNTER_MODE_CENT_MODE3        TIM_CR1_CMS_CENTER_UP_DOWN         /**< ä¸­å¿ƒå¯¹é½æ¨¡å¼3                 */
 
-/* TIM¸üĞÂÊÂ¼şÔ´Ñ¡Ôñ */
-#define TIM_UPDATE_SOURCE_REGULAR          (0x00000000U)                      /**< ¼ÆÊıÉÏÒç»òÏÂÒç´¥·¢                       */
-#define TIM_UPDATE_SOURCE_COUNTER          TIM_CR1_URS                        /**< ¼ÆÊıÉÏÒç»òÏÂÒç¡¢UGÖÃÎ»¡¢´ÓÄ£Ê½¿ØÖÆÆ÷´¥·¢  */
+/* TIMæ›´æ–°äº‹ä»¶æºé€‰æ‹© */
+#define TIM_UPDATE_SOURCE_REGULAR          (0x00000000U)                      /**< è®¡æ•°ä¸Šæº¢æˆ–ä¸‹æº¢è§¦å‘                       */
+#define TIM_UPDATE_SOURCE_COUNTER          TIM_CR1_URS                        /**< è®¡æ•°ä¸Šæº¢æˆ–ä¸‹æº¢ã€UGç½®ä½ã€ä»æ¨¡å¼æ§åˆ¶å™¨è§¦å‘  */
 
-/* TIMÊ±ÖÓ·ÖÆµ */
+/* TIMæ—¶é’Ÿåˆ†é¢‘ */
 #define TIM_CLOCK_DTS_DIV1                 (0x00000000U)                      /**< tDTS=tTIMx_KCLK          */
 #define TIM_CLOCK_DTS_DIV2                 TIM_CR1_CLK_DIV2                   /**< tDTS=2*tTIMx_KCLK        */
 #define TIM_CLOCK_DTS_DIV4                 TIM_CR1_CLK_DIV4                   /**< tDTS=4*tTIMx_KCLK        */
 
-/* TIMÍ¨µÀ¶¨Òå */
-#define TIM_CHANNEL_1                      (0x00U)                            /**< Í¨µÀ1¶¨Òå            */
-#define TIM_CHANNEL_2                      (0x01U)                            /**< Í¨µÀ2¶¨Òå            */
-#define TIM_CHANNEL_3                      (0x02U)                            /**< Í¨µÀ3¶¨Òå            */
-#define TIM_CHANNEL_4                      (0x03U)                            /**< Í¨µÀ4¶¨Òå            */
+/* TIMé€šé“å®šä¹‰ */
+#define TIM_CHANNEL_1                      (0x00U)                            /**< é€šé“1å®šä¹‰            */
+#define TIM_CHANNEL_2                      (0x01U)                            /**< é€šé“2å®šä¹‰            */
+#define TIM_CHANNEL_3                      (0x02U)                            /**< é€šé“3å®šä¹‰            */
+#define TIM_CHANNEL_4                      (0x03U)                            /**< é€šé“4å®šä¹‰            */
 
-/* TIMÊäÈëÍ¨µÀ¼«ĞÔ¶¨Òå */
-#define TIM_INPUT_POL_RISING               (0x00000000U)                        /**< Î´·´Ïò/ÉÏÉıÑØ´¥·¢             */
-#define TIM_INPUT_POL_FALLING              TIM_CCEN_CC1P                        /**< ·´Ïò/ÏÂ½µÑØ´¥·¢               */
-#define TIM_INPUT_POL_BOTH                 (TIM_CCEN_CC1P | TIM_CCEN_CC1NP)     /**< Î´·´Ïò/ÉÏÉıÏÂ½µ¾ù´¥·¢         */
+/* TIMè¾“å…¥é€šé“ææ€§å®šä¹‰ */
+#define TIM_INPUT_POL_RISING               (0x00000000U)                        /**< æœªåå‘/ä¸Šå‡æ²¿è§¦å‘             */
+#define TIM_INPUT_POL_FALLING              TIM_CCEN_CC1P                        /**< åå‘/ä¸‹é™æ²¿è§¦å‘               */
+#define TIM_INPUT_POL_BOTH                 (TIM_CCEN_CC1P | TIM_CCEN_CC1NP)     /**< æœªåå‘/ä¸Šå‡ä¸‹é™å‡è§¦å‘         */
 
-/* TIMÊäÈë²¶»ñÑ¡Ôñ */
-#define TIM_INPUT_CAPTURE_SEL_DIRECTTI         TIM_CCM1_CC1S_DIRECTTI             /**< TIMÊäÈë1, 2, 3 or 4£¬ÇÒ±»Ó³Éäµ½IC1, IC2, IC3 or IC4£¨Ò»Ò»¶ÔÓ¦£© */
-#define TIM_INPUT_CAPTURE_SEL_INDIRECTTI       TIM_CCM1_CC1S_INDIRECTTI           /**< TIMÊäÈë1, 2, 3 or 4£¬ÇÒ±»Ó³Éäµ½IC2, IC1, IC4 or IC3£¨Ò»Ò»¶ÔÓ¦£© */
-#define TIM_INPUT_CAPTURE_SEL_TRC              TIM_CCM1_CC1S_TRC                  /**< TIMÊäÈë1, 2, 3 or 4£¬ÇÒ±»Ó³Éäµ½TRC                              */
+/* TIMè¾“å…¥æ•è·é€‰æ‹© */
+#define TIM_INPUT_CAPTURE_SEL_DIRECTTI         TIM_CCM1_CC1S_DIRECTTI             /**< TIMè¾“å…¥1, 2, 3 or 4ï¼Œä¸”è¢«æ˜ å°„åˆ°IC1, IC2, IC3 or IC4ï¼ˆä¸€ä¸€å¯¹åº”ï¼‰ */
+#define TIM_INPUT_CAPTURE_SEL_INDIRECTTI       TIM_CCM1_CC1S_INDIRECTTI           /**< TIMè¾“å…¥1, 2, 3 or 4ï¼Œä¸”è¢«æ˜ å°„åˆ°IC2, IC1, IC4 or IC3ï¼ˆä¸€ä¸€å¯¹åº”ï¼‰ */
+#define TIM_INPUT_CAPTURE_SEL_TRC              TIM_CCM1_CC1S_TRC                  /**< TIMè¾“å…¥1, 2, 3 or 4ï¼Œä¸”è¢«æ˜ å°„åˆ°TRC                              */
 
-/* TIMÊäÈë²¶»ñÔ¤·ÖÆµ²ÎÊı¶¨Òå */
-#define TIM_INPUT_CAPTURE_PSC_DIV1             (0x00000000U)                      /**< ÎŞÔ¤·ÖÆµÆ÷£¬²¶»ñÊäÈëÉÏÃ¿¼ì²âµ½Ò»¸ö±ßÑØ±ãÖ´ĞĞ²¶»ñ */
-#define TIM_INPUT_CAPTURE_PSC_DIV2             TIM_CCM1_IC1PSC_DIV2               /**< Ã¿·¢Éú2¸öÊÂ¼şÖ´ĞĞÒ»´Î²¶»ñ        */
-#define TIM_INPUT_CAPTURE_PSC_DIV4             TIM_CCM1_IC1PSC_DIV4               /**< Ã¿·¢Éú4¸öÊÂ¼şÖ´ĞĞÒ»´Î²¶»ñ        */
-#define TIM_INPUT_CAPTURE_PSC_DIV8             TIM_CCM1_IC1PSC_DIV8               /**< Ã¿·¢Éú8¸öÊÂ¼şÖ´ĞĞÒ»´Î²¶»ñ        */
+/* TIMè¾“å…¥æ•è·é¢„åˆ†é¢‘å‚æ•°å®šä¹‰ */
+#define TIM_INPUT_CAPTURE_PSC_DIV1             (0x00000000U)                      /**< æ— é¢„åˆ†é¢‘å™¨ï¼Œæ•è·è¾“å…¥ä¸Šæ¯æ£€æµ‹åˆ°ä¸€ä¸ªè¾¹æ²¿ä¾¿æ‰§è¡Œæ•è· */
+#define TIM_INPUT_CAPTURE_PSC_DIV2             TIM_CCM1_IC1PSC_DIV2               /**< æ¯å‘ç”Ÿ2ä¸ªäº‹ä»¶æ‰§è¡Œä¸€æ¬¡æ•è·        */
+#define TIM_INPUT_CAPTURE_PSC_DIV4             TIM_CCM1_IC1PSC_DIV4               /**< æ¯å‘ç”Ÿ4ä¸ªäº‹ä»¶æ‰§è¡Œä¸€æ¬¡æ•è·        */
+#define TIM_INPUT_CAPTURE_PSC_DIV8             TIM_CCM1_IC1PSC_DIV8               /**< æ¯å‘ç”Ÿ8ä¸ªäº‹ä»¶æ‰§è¡Œä¸€æ¬¡æ•è·        */
 
-/* TIMÊä³ö±È½Ï¼«ĞÔ¶¨Òå */
-#define TIM_OUTPUT_POL_HIGH                (0x00000000U)                      /**< ±È½ÏÊä³ö¼«ĞÔ£º¸ßµçÆ½ÎªÓĞĞ§µçÆ½      */
-#define TIM_OUTPUT_POL_LOW                 TIM_CCEN_CC1P                      /**< ±È½ÏÊä³ö¼«ĞÔ£ºµÍµçÆ½ÎªÓĞĞ§µçÆ½      */
+/* TIMè¾“å‡ºæ¯”è¾ƒææ€§å®šä¹‰ */
+#define TIM_OUTPUT_POL_HIGH                (0x00000000U)                      /**< æ¯”è¾ƒè¾“å‡ºææ€§ï¼šé«˜ç”µå¹³ä¸ºæœ‰æ•ˆç”µå¹³      */
+#define TIM_OUTPUT_POL_LOW                 TIM_CCEN_CC1P                      /**< æ¯”è¾ƒè¾“å‡ºææ€§ï¼šä½ç”µå¹³ä¸ºæœ‰æ•ˆç”µå¹³      */
 
-/* TIMÊä³ö±È½ÏÊä³öÊ¹ÄÜ¶¨Òå */
-#define TIM_OUTPUT_DISABLE                 (0x00000000U)                      /**< ±È½ÏÍ¨µÀÊä³ö½ûÖ¹                    */
-#define TIM_OUTPUT_ENABLE                  TIM_CCEN_CC1E                      /**< ±È½ÏÍ¨µÀÊä³öÊ¹ÄÜ                    */
+/* TIMè¾“å‡ºæ¯”è¾ƒè¾“å‡ºä½¿èƒ½å®šä¹‰ */
+#define TIM_OUTPUT_DISABLE                 (0x00000000U)                      /**< æ¯”è¾ƒé€šé“è¾“å‡ºç¦æ­¢                    */
+#define TIM_OUTPUT_ENABLE                  TIM_CCEN_CC1E                      /**< æ¯”è¾ƒé€šé“è¾“å‡ºä½¿èƒ½                    */
 
-/* TIMÊä³ö±È½Ï²ÎÊı¶¨Òå*/   
-#define TIM_OUTPUT_MODE_FROZEN                  (0x00000000U)                                /**< ¶³½á                          */
-#define TIM_OUTPUT_MODE_ACTIVE                  TIM_CCM1_OC1M_ACTIVE                         /**< Í¨µÀ1ÉèÖÃÎªÆ¥ÅäÊ±Êä³öÓĞĞ§µçÆ½ */
-#define TIM_OUTPUT_MODE_INACTIVE                TIM_CCM1_OC1M_INACTIVE                       /**< Í¨µÀ1ÉèÖÃÎªÆ¥ÅäÊ±Êä³öÎŞĞ§µçÆ½ */
-#define TIM_OUTPUT_MODE_TOGGLE                  TIM_CCM1_OC1M_TOGGLE                         /**< ·­×ª                          */
-#define TIM_OUTPUT_MODE_FORCED_INACTIVE         TIM_CCM1_OC1M_FORCED_INACTIVE                /**< Ç¿ÖÆ±äÎªÎŞĞ§µçÆ½              */
-#define TIM_OUTPUT_MODE_FORCED_ACTIVE           TIM_CCM1_OC1M_FORCED_ACTIVE                  /**< Ç¿ÖÆ±äÎªÓĞĞ§µçÆ½              */
-#define TIM_OUTPUT_MODE_PWM1                    TIM_CCM1_OC1M_PWM1                           /**< PWMÄ£Ê½1                      */
-#define TIM_OUTPUT_MODE_PWM2                    TIM_CCM1_OC1M_PWM2                           /**< PWMÄ£Ê½2                      */
+/* TIMè¾“å‡ºæ¯”è¾ƒå‚æ•°å®šä¹‰*/   
+#define TIM_OUTPUT_MODE_FROZEN                  (0x00000000U)                                /**< å†»ç»“                          */
+#define TIM_OUTPUT_MODE_ACTIVE                  TIM_CCM1_OC1M_ACTIVE                         /**< é€šé“1è®¾ç½®ä¸ºåŒ¹é…æ—¶è¾“å‡ºæœ‰æ•ˆç”µå¹³ */
+#define TIM_OUTPUT_MODE_INACTIVE                TIM_CCM1_OC1M_INACTIVE                       /**< é€šé“1è®¾ç½®ä¸ºåŒ¹é…æ—¶è¾“å‡ºæ— æ•ˆç”µå¹³ */
+#define TIM_OUTPUT_MODE_TOGGLE                  TIM_CCM1_OC1M_TOGGLE                         /**< ç¿»è½¬                          */
+#define TIM_OUTPUT_MODE_FORCED_INACTIVE         TIM_CCM1_OC1M_FORCED_INACTIVE                /**< å¼ºåˆ¶å˜ä¸ºæ— æ•ˆç”µå¹³              */
+#define TIM_OUTPUT_MODE_FORCED_ACTIVE           TIM_CCM1_OC1M_FORCED_ACTIVE                  /**< å¼ºåˆ¶å˜ä¸ºæœ‰æ•ˆç”µå¹³              */
+#define TIM_OUTPUT_MODE_PWM1                    TIM_CCM1_OC1M_PWM1                           /**< PWMæ¨¡å¼1                      */
+#define TIM_OUTPUT_MODE_PWM2                    TIM_CCM1_OC1M_PWM2                           /**< PWMæ¨¡å¼2                      */
 
-/*  TIMÊ±ÖÓÔ´Ñ¡Ôñ */ 
-#define TIM_CLKSRC_INT                     (0x00000000U)                      /**< TIMÊ±ÖÓÔ´£ºÄÚ²¿Ê±ÖÓ           */
-#define TIM_CLKSRC_MODE1                   TIM_SMC_SM_SEL_EXT_MODE1           /**< TIMÊ±ÖÓÔ´£ºÍâ²¿Ê±ÖÓÔ´Ä£Ê½1    */
+/*  TIMæ—¶é’Ÿæºé€‰æ‹© */ 
+#define TIM_CLKSRC_INT                     (0x00000000U)                      /**< TIMæ—¶é’Ÿæºï¼šå†…éƒ¨æ—¶é’Ÿ           */
+#define TIM_CLKSRC_MODE1                   TIM_SMC_SM_SEL_EXT_MODE1           /**< TIMæ—¶é’Ÿæºï¼šå¤–éƒ¨æ—¶é’Ÿæºæ¨¡å¼1    */
 
-/* TIMÊ±ÖÓ¼«ĞÔ¶¨Òå */
-#define TIM_CLK_TIX_POL_RISING             (0x00000000U)                      /**< TIxÊ±ÖÓÔ´µÄ¼«ĞÔ£ºÉÏÉıÑØÓĞĞ§   */
-#define TIM_CLK_TIX_POL_FALLING            TIM_CCEN_CC1P                      /**< TIxÊ±ÖÓÔ´µÄ¼«ĞÔ£ºÏÂ½µÑØÓĞĞ§   */
-#define TIM_CLK_TIX_POL_BOTH               (TIM_CCEN_CC1P | TIM_CCEN_CC1NP)   /**< TIxÊ±ÖÓÔ´µÄ¼«ĞÔ£ºË«ÑØÓĞĞ§     */
+/* TIMæ—¶é’Ÿææ€§å®šä¹‰ */
+#define TIM_CLK_TIX_POL_RISING             (0x00000000U)                      /**< TIxæ—¶é’Ÿæºçš„ææ€§ï¼šä¸Šå‡æ²¿æœ‰æ•ˆ   */
+#define TIM_CLK_TIX_POL_FALLING            TIM_CCEN_CC1P                      /**< TIxæ—¶é’Ÿæºçš„ææ€§ï¼šä¸‹é™æ²¿æœ‰æ•ˆ   */
+#define TIM_CLK_TIX_POL_BOTH               (TIM_CCEN_CC1P | TIM_CCEN_CC1NP)   /**< TIxæ—¶é’Ÿæºçš„ææ€§ï¼šåŒæ²¿æœ‰æ•ˆ     */
 
-/* TIMÊÂ¼şÔ´ */
-#define TIM_EVENT_SRC_UPDATE               TIM_EVTG_UG                       /**< ÖØĞÂ³õÊ¼»¯¼ÆÊıÆ÷²¢Éú³ÉÒ»¸ö¸üĞÂÊÂ¼ş      */
-#define TIM_EVENT_SRC_CC1                  TIM_EVTG_CC1G                     /**< ÔÚÍ¨µÀ1ÉÏÉú³ÉÒ»¸ö²¶»ñ/±È½ÏÊÂ¼ş          */
-#define TIM_EVENT_SRC_CC2                  TIM_EVTG_CC2G                     /**< ÔÚÍ¨µÀ2ÉÏÉú³ÉÒ»¸ö²¶»ñ/±È½ÏÊÂ¼ş          */ 
-#define TIM_EVENT_SRC_CC3                  TIM_EVTG_CC3G                     /**< ÔÚÍ¨µÀ3ÉÏÉú³ÉÒ»¸ö²¶»ñ/±È½ÏÊÂ¼ş          */ 
-#define TIM_EVENT_SRC_CC4                  TIM_EVTG_CC4G                     /**< ÔÚÍ¨µÀ4ÉÏÉú³ÉÒ»¸ö²¶»ñ/±È½ÏÊÂ¼ş          */ 
-#define TIM_EVENT_SRC_COM                  TIM_EVTG_COMG                     /**< Éú³ÉÒ»¸ö»»ÏàÊÂ¼ş                        */
-#define TIM_EVENT_SRC_TRIG                 TIM_EVTG_TG                       /**< Éú³ÉÒ»¸ö´¥·¢ÊÂ¼ş                        */
-#define TIM_EVENT_SRC_BREAK                TIM_EVTG_BG                       /**< Éú³ÉÒ»¸ö¶ÏÂ·ÊÂ¼ş                        */
+/* TIMäº‹ä»¶æº */
+#define TIM_EVENT_SRC_UPDATE               TIM_EVTG_UG                       /**< é‡æ–°åˆå§‹åŒ–è®¡æ•°å™¨å¹¶ç”Ÿæˆä¸€ä¸ªæ›´æ–°äº‹ä»¶      */
+#define TIM_EVENT_SRC_CC1                  TIM_EVTG_CC1G                     /**< åœ¨é€šé“1ä¸Šç”Ÿæˆä¸€ä¸ªæ•è·/æ¯”è¾ƒäº‹ä»¶          */
+#define TIM_EVENT_SRC_CC2                  TIM_EVTG_CC2G                     /**< åœ¨é€šé“2ä¸Šç”Ÿæˆä¸€ä¸ªæ•è·/æ¯”è¾ƒäº‹ä»¶          */ 
+#define TIM_EVENT_SRC_CC3                  TIM_EVTG_CC3G                     /**< åœ¨é€šé“3ä¸Šç”Ÿæˆä¸€ä¸ªæ•è·/æ¯”è¾ƒäº‹ä»¶          */ 
+#define TIM_EVENT_SRC_CC4                  TIM_EVTG_CC4G                     /**< åœ¨é€šé“4ä¸Šç”Ÿæˆä¸€ä¸ªæ•è·/æ¯”è¾ƒäº‹ä»¶          */ 
+#define TIM_EVENT_SRC_COM                  TIM_EVTG_COMG                     /**< ç”Ÿæˆä¸€ä¸ªæ¢ç›¸äº‹ä»¶                        */
+#define TIM_EVENT_SRC_TRIG                 TIM_EVTG_TG                       /**< ç”Ÿæˆä¸€ä¸ªè§¦å‘äº‹ä»¶                        */
+#define TIM_EVENT_SRC_BREAK                TIM_EVTG_BG                       /**< ç”Ÿæˆä¸€ä¸ªæ–­è·¯äº‹ä»¶                        */
 
-/* TIMÖĞ¶Ï¶¨Òå */
-#define TIM_INTERRUPT_UPDATE               TIM_DIER_UIE                       /**< ¸üĞÂÖĞ¶Ï                */
-#define TIM_INTERRUPT_CC1                  TIM_DIER_CC1IE                     /**< ²¶»ñ/±È½Ï1ÖĞ¶Ï          */
-#define TIM_INTERRUPT_CC2                  TIM_DIER_CC2IE                     /**< ²¶»ñ/±È½Ï1ÖĞ¶Ï2         */
-#define TIM_INTERRUPT_CC3                  TIM_DIER_CC3IE                     /**< ²¶»ñ/±È½Ï1ÖĞ¶Ï3         */
-#define TIM_INTERRUPT_CC4                  TIM_DIER_CC4IE                     /**< ²¶»ñ/±È½Ï1ÖĞ¶Ï4         */
-#define TIM_INTERRUPT_COM                  TIM_DIER_COMIE                     /**< »»ÏàÖĞ¶Ï                */
-#define TIM_INTERRUPT_TRIG                 TIM_DIER_TIE                       /**< ´¥·¢ÖĞ¶Ï                */
-#define TIM_INTERRUPT_BREAK                TIM_DIER_BIE                       /**< ¶ÏÂ·ÖĞ¶Ï                */
+/* TIMä¸­æ–­å®šä¹‰ */
+#define TIM_INTERRUPT_UPDATE               TIM_DIER_UIE                       /**< æ›´æ–°ä¸­æ–­                */
+#define TIM_INTERRUPT_CC1                  TIM_DIER_CC1IE                     /**< æ•è·/æ¯”è¾ƒ1ä¸­æ–­          */
+#define TIM_INTERRUPT_CC2                  TIM_DIER_CC2IE                     /**< æ•è·/æ¯”è¾ƒ1ä¸­æ–­2         */
+#define TIM_INTERRUPT_CC3                  TIM_DIER_CC3IE                     /**< æ•è·/æ¯”è¾ƒ1ä¸­æ–­3         */
+#define TIM_INTERRUPT_CC4                  TIM_DIER_CC4IE                     /**< æ•è·/æ¯”è¾ƒ1ä¸­æ–­4         */
+#define TIM_INTERRUPT_COM                  TIM_DIER_COMIE                     /**< æ¢ç›¸ä¸­æ–­                */
+#define TIM_INTERRUPT_TRIG                 TIM_DIER_TIE                       /**< è§¦å‘ä¸­æ–­                */
+#define TIM_INTERRUPT_BREAK                TIM_DIER_BIE                       /**< æ–­è·¯ä¸­æ–­                */
 
-/* TIM±êÖ¾¶¨Òå */
-#define TIM_FLAG_UPDATE                    TIM_SR_UIF                         /**< ¸üĞÂÖĞ¶Ï±êÖ¾              */
-#define TIM_FLAG_CC1                       TIM_SR_CC1IF                       /**< ²¶»ñ/±È½Ï1ÊÂ¼ş±êÖ¾        */
-#define TIM_FLAG_CC2                       TIM_SR_CC2IF                       /**< ²¶»ñ/±È½Ï2ÊÂ¼ş±êÖ¾        */
-#define TIM_FLAG_CC3                       TIM_SR_CC3IF                       /**< ²¶»ñ/±È½Ï3ÊÂ¼ş±êÖ¾        */
-#define TIM_FLAG_CC4                       TIM_SR_CC4IF                       /**< ²¶»ñ/±È½Ï4ÊÂ¼ş±êÖ¾        */
-#define TIM_FLAG_COM                       TIM_SR_COMIF                       /**< »»ÏàÊÂ¼ş±êÖ¾              */
-#define TIM_FLAG_TRIG                      TIM_SR_TIF                         /**< ´¥·¢ÊÂ¼ş±êÖ¾              */
-#define TIM_FLAG_BREAK                     TIM_SR_BIF                         /**< ¶ÏÂ·ÊÂ¼ş±êÖ¾              */
-#define TIM_FLAG_CC1OF                     TIM_SR_CC1OF                       /**< ²¶»ñ/±È½Ï1ÖØ¸´²¶»ñ±êÖ¾    */
-#define TIM_FLAG_CC2OF                     TIM_SR_CC2OF                       /**< ²¶»ñ/±È½Ï2ÖØ¸´²¶»ñ±êÖ¾    */
+/* TIMæ ‡å¿—å®šä¹‰ */
+#define TIM_FLAG_UPDATE                    TIM_SR_UIF                         /**< æ›´æ–°ä¸­æ–­æ ‡å¿—              */
+#define TIM_FLAG_CC1                       TIM_SR_CC1IF                       /**< æ•è·/æ¯”è¾ƒ1äº‹ä»¶æ ‡å¿—        */
+#define TIM_FLAG_CC2                       TIM_SR_CC2IF                       /**< æ•è·/æ¯”è¾ƒ2äº‹ä»¶æ ‡å¿—        */
+#define TIM_FLAG_CC3                       TIM_SR_CC3IF                       /**< æ•è·/æ¯”è¾ƒ3äº‹ä»¶æ ‡å¿—        */
+#define TIM_FLAG_CC4                       TIM_SR_CC4IF                       /**< æ•è·/æ¯”è¾ƒ4äº‹ä»¶æ ‡å¿—        */
+#define TIM_FLAG_COM                       TIM_SR_COMIF                       /**< æ¢ç›¸äº‹ä»¶æ ‡å¿—              */
+#define TIM_FLAG_TRIG                      TIM_SR_TIF                         /**< è§¦å‘äº‹ä»¶æ ‡å¿—              */
+#define TIM_FLAG_BREAK                     TIM_SR_BIF                         /**< æ–­è·¯äº‹ä»¶æ ‡å¿—              */
+#define TIM_FLAG_CC1OF                     TIM_SR_CC1OF                       /**< æ•è·/æ¯”è¾ƒ1é‡å¤æ•è·æ ‡å¿—    */
+#define TIM_FLAG_CC2OF                     TIM_SR_CC2OF                       /**< æ•è·/æ¯”è¾ƒ2é‡å¤æ•è·æ ‡å¿—    */
 
-#define TIM_FLAG_ALL                       (0xFFFF)                           /**< TIMÊÂ¼ş±êÖ¾               */
-#define TIM_FLAG_CCX_ALL                   (0x001E)                           /**< È«Í¨µÀ²¶»ñ/±È½ÏÊÂ¼ş±êÖ¾   */
+#define TIM_FLAG_ALL                       (0xFFFF)                           /**< TIMäº‹ä»¶æ ‡å¿—               */
+#define TIM_FLAG_CCX_ALL                   (0x001E)                           /**< å…¨é€šé“æ•è·/æ¯”è¾ƒäº‹ä»¶æ ‡å¿—   */
 
-/* TIMÇå³ıOCxREFÊä³öµÄÊäÈëÔ´ */                               
-#define TIM_CLEAR_INPUT_SRC_COMP1          (0x00000000U)                    /**< OCREF_CLR_INPUTÁ¬½Óµ½COMP1µÄÊä³ö  */
-#define TIM_CLEAR_INPUT_SRC_COMP2          TIM_CFG_OCREF_CLR                /**< OCREF_CLR_INPUTÁ¬½Óµ½COMP2µÄÊä³ö  */
+/* TIMæ¸…é™¤OCxREFè¾“å‡ºçš„è¾“å…¥æº */                               
+#define TIM_CLEAR_INPUT_SRC_COMP1          (0x00000000U)                    /**< OCREF_CLR_INPUTè¿æ¥åˆ°COMP1çš„è¾“å‡º  */
+#define TIM_CLEAR_INPUT_SRC_COMP2          TIM_CFG_OCREF_CLR                /**< OCREF_CLR_INPUTè¿æ¥åˆ°COMP2çš„è¾“å‡º  */
 
-/* TIM»»ÏàÊÂ¼şÔ´ */
-#define TIM_COM_SOFTWARE                  (0x00000000U)                      /**< Èç¹û²¶»ñ/±È½Ï¿ØÖÆÎ»½øĞĞÔ¤×°ÔØ£¨CCPC=1£©£¬½öÍ¨¹ı½«COMGÎ»ÖÃ1´¥·¢»»ÏàÊÂ¼ş               */
-#define TIM_COM_TRGI                      TIM_CR2_CCU_SEL                    /**< Èç¹û²¶»ñ/±È½Ï¿ØÖÆÎ»½øĞĞÔ¤×°ÔØ£¨CCPC=1£©£¬¿ÉÍ¨¹ı½«COMGÎ»ÖÃ1»òTRIGµÄÉÏÉıÑØ´¥·¢»»ÏàÊÂ¼ş */
+/* TIMæ¢ç›¸äº‹ä»¶æº */
+#define TIM_COM_SOFTWARE                  (0x00000000U)                      /**< å¦‚æœæ•è·/æ¯”è¾ƒæ§åˆ¶ä½è¿›è¡Œé¢„è£…è½½ï¼ˆCCPC=1ï¼‰ï¼Œä»…é€šè¿‡å°†COMGä½ç½®1è§¦å‘æ¢ç›¸äº‹ä»¶               */
+#define TIM_COM_TRGI                      TIM_CR2_CCU_SEL                    /**< å¦‚æœæ•è·/æ¯”è¾ƒæ§åˆ¶ä½è¿›è¡Œé¢„è£…è½½ï¼ˆCCPC=1ï¼‰ï¼Œå¯é€šè¿‡å°†COMGä½ç½®1æˆ–TRIGçš„ä¸Šå‡æ²¿è§¦å‘æ¢ç›¸äº‹ä»¶ */
 
-/* TIMÖ÷Ä£Ê½Ñ¡Ôñ(TRIG_OUT)²ÎÊı¶¨Òå*/
-#define TIM_TRIG_OUT_RESET                 (0x00000000U)                         /**< TIM1_EVTG¼Ä´æÆ÷ÖĞµÄUGÎ»ÓÃ×÷´¥·¢Êä³ö£¨TRIG_OUT£©  */
-#define TIM_TRIG_OUT_ENABLE                TIM_CR2_MM_SEL_ENABLE                 /**< ¼ÆÊıÆ÷Ê¹ÄÜĞÅºÅCENÓÃ×÷´¥·¢Êä³ö£¨TRIG_OUT£©        */
-#define TIM_TRIG_OUT_UPDATE                TIM_CR2_MM_SEL_UPDATE                 /**< Ñ¡Ôñ¸üĞÂÊÂ¼ş×÷Îª´¥·¢Êä³ö£¨TRIG_OUT£©             */
-#define TIM_TRIG_OUT_CC1                   TIM_CR2_MM_SEL_CC1IF                  /**< ²¶»ñ»ò±È½ÏÆ¥Åä£¬´¥·¢Êä³ö£¨TRIG_OUT£©             */
-#define TIM_TRIG_OUT_OC1REF                TIM_CR2_MM_SEL_OC1REF                 /**< OC1REFĞÅºÅÓÃ×÷´¥·¢Êä³ö(TRIG_OUT)                 */
-#define TIM_TRIG_OUT_OC2REF                TIM_CR2_MM_SEL_OC2REF                 /**< OC2REFĞÅºÅÓÃ×÷´¥·¢Êä³ö(TRIG_OUT)                 */
-#define TIM_TRIG_OUT_OC3REF                TIM_CR2_MM_SEL_OC3REF                 /**< OC3REFĞÅºÅÓÃ×÷´¥·¢Êä³ö(TRIG_OUT)                 */
-#define TIM_TRIG_OUT_OC4REF                TIM_CR2_MM_SEL_OC4REF                 /**< OC4REFĞÅºÅÓÃ×÷´¥·¢Êä³ö(TRIG_OUT)                 */
+/* TIMä¸»æ¨¡å¼é€‰æ‹©(TRIG_OUT)å‚æ•°å®šä¹‰*/
+#define TIM_TRIG_OUT_RESET                 (0x00000000U)                         /**< TIM1_EVTGå¯„å­˜å™¨ä¸­çš„UGä½ç”¨ä½œè§¦å‘è¾“å‡ºï¼ˆTRIG_OUTï¼‰  */
+#define TIM_TRIG_OUT_ENABLE                TIM_CR2_MM_SEL_ENABLE                 /**< è®¡æ•°å™¨ä½¿èƒ½ä¿¡å·CENç”¨ä½œè§¦å‘è¾“å‡ºï¼ˆTRIG_OUTï¼‰        */
+#define TIM_TRIG_OUT_UPDATE                TIM_CR2_MM_SEL_UPDATE                 /**< é€‰æ‹©æ›´æ–°äº‹ä»¶ä½œä¸ºè§¦å‘è¾“å‡ºï¼ˆTRIG_OUTï¼‰             */
+#define TIM_TRIG_OUT_CC1                   TIM_CR2_MM_SEL_CC1IF                  /**< æ•è·æˆ–æ¯”è¾ƒåŒ¹é…ï¼Œè§¦å‘è¾“å‡ºï¼ˆTRIG_OUTï¼‰             */
+#define TIM_TRIG_OUT_OC1REF                TIM_CR2_MM_SEL_OC1REF                 /**< OC1REFä¿¡å·ç”¨ä½œè§¦å‘è¾“å‡º(TRIG_OUT)                 */
+#define TIM_TRIG_OUT_OC2REF                TIM_CR2_MM_SEL_OC2REF                 /**< OC2REFä¿¡å·ç”¨ä½œè§¦å‘è¾“å‡º(TRIG_OUT)                 */
+#define TIM_TRIG_OUT_OC3REF                TIM_CR2_MM_SEL_OC3REF                 /**< OC3REFä¿¡å·ç”¨ä½œè§¦å‘è¾“å‡º(TRIG_OUT)                 */
+#define TIM_TRIG_OUT_OC4REF                TIM_CR2_MM_SEL_OC4REF                 /**< OC4REFä¿¡å·ç”¨ä½œè§¦å‘è¾“å‡º(TRIG_OUT)                 */
 
-/* TIM´ÓÄ£Ê½²ÎÊı¶¨Òå*/
-#define TIM_SLAVE_MODE_DISABLE             (0x00000000U)                              /**< ½ûÖ¹´ÓÄ£Ê½          */
-#define TIM_SLAVE_MODE_RESET               TIM_SMC_SM_SEL_RESET                       /**< ¸´Î»Ä£Ê½            */
-#define TIM_SLAVE_MODE_GATED               TIM_SMC_SM_SEL_GATED                       /**< ÃÅ¿ØÄ£Ê½            */
-#define TIM_SLAVE_MODE_TRIG                TIM_SMC_SM_SEL_TRIG                        /**< ´¥·¢Ä£Ê½            */
+/* TIMä»æ¨¡å¼å‚æ•°å®šä¹‰*/
+#define TIM_SLAVE_MODE_DISABLE             (0x00000000U)                              /**< ç¦æ­¢ä»æ¨¡å¼          */
+#define TIM_SLAVE_MODE_RESET               TIM_SMC_SM_SEL_RESET                       /**< å¤ä½æ¨¡å¼            */
+#define TIM_SLAVE_MODE_GATED               TIM_SMC_SM_SEL_GATED                       /**< é—¨æ§æ¨¡å¼            */
+#define TIM_SLAVE_MODE_TRIG                TIM_SMC_SM_SEL_TRIG                        /**< è§¦å‘æ¨¡å¼            */
 
-/* TIM´¥·¢Ñ¡Ôñ²ÎÊı¶¨Òå*/
-#define TIM_TRIG_SOURCE_ITR0               TIM_SMC_TS_ITR0                              /**< ÄÚ²¿´¥·¢0£¨ITR0£©               */
-#define TIM_TRIG_SOURCE_TI1F_ED            TIM_SMC_TS_TI1F_ED                           /**< TI1±ßÑØ¼ì²âÆ÷£¨TI1F_ED£©        */
-#define TIM_TRIG_SOURCE_TI1FP1             TIM_SMC_TS_TI1FP1                            /**< ÂË²¨ºóµÄ¶¨Ê±Æ÷ÊäÈë1£¨TI1FP1£©   */
-#define TIM_TRIG_SOURCE_TI2FP2             TIM_SMC_TS_TI2FP2                            /**< ÂË²¨ºóµÄ¶¨Ê±Æ÷ÊäÈë2£¨TI1FP2£©   */
+/* TIMè§¦å‘é€‰æ‹©å‚æ•°å®šä¹‰*/
+#define TIM_TRIG_SOURCE_ITR0               TIM_SMC_TS_ITR0                              /**< å†…éƒ¨è§¦å‘0ï¼ˆITR0ï¼‰               */
+#define TIM_TRIG_SOURCE_TI1F_ED            TIM_SMC_TS_TI1F_ED                           /**< TI1è¾¹æ²¿æ£€æµ‹å™¨ï¼ˆTI1F_EDï¼‰        */
+#define TIM_TRIG_SOURCE_TI1FP1             TIM_SMC_TS_TI1FP1                            /**< æ»¤æ³¢åçš„å®šæ—¶å™¨è¾“å…¥1ï¼ˆTI1FP1ï¼‰   */
+#define TIM_TRIG_SOURCE_TI2FP2             TIM_SMC_TS_TI2FP2                            /**< æ»¤æ³¢åçš„å®šæ—¶å™¨è¾“å…¥2ï¼ˆTI1FP2ï¼‰   */
 
-/* TIM´¥·¢¼«ĞÔ²ÎÊı¶¨Òå*/
-#define TIM_TRIG_TIX_POL_RISING            (0x00000000U)                        /**< TIxFPx»òTI1F_ED´¥·¢¼«ĞÔ£º¸ßµçÆ½»òÉÏÉıÑØÓĞĞ§   */
-#define TIM_TRIG_TIX_POL_FALLING           TIM_CCEN_CC1P                        /**< TIxFPx»òTI1F_ED´¥·¢¼«ĞÔ£ºµÍµçÆ½»òÏÂ½µÑØÓĞĞ§   */
-#define TIM_TRIG_TIX_POL_BOTH              (TIM_CCEN_CC1P | TIM_CCEN_CC1NP)     /**< TIxFPx»òTI1F_ED´¥·¢¼«ĞÔ£ºÉÏÉıÏÂ½µ¾ù´¥·¢       */
+/* TIMè§¦å‘ææ€§å‚æ•°å®šä¹‰*/
+#define TIM_TRIG_TIX_POL_RISING            (0x00000000U)                        /**< TIxFPxæˆ–TI1F_EDè§¦å‘ææ€§ï¼šé«˜ç”µå¹³æˆ–ä¸Šå‡æ²¿æœ‰æ•ˆ   */
+#define TIM_TRIG_TIX_POL_FALLING           TIM_CCEN_CC1P                        /**< TIxFPxæˆ–TI1F_EDè§¦å‘ææ€§ï¼šä½ç”µå¹³æˆ–ä¸‹é™æ²¿æœ‰æ•ˆ   */
+#define TIM_TRIG_TIX_POL_BOTH              (TIM_CCEN_CC1P | TIM_CCEN_CC1NP)     /**< TIxFPxæˆ–TI1F_EDè§¦å‘ææ€§ï¼šä¸Šå‡ä¸‹é™å‡è§¦å‘       */
                                                                                        
-/* TIMÊä³ö±È½Ï»¥²¹Êä³ö¼«ĞÔ¶¨Òå */
-#define TIM_OUTPUT_NEGTIVE_POL_HIGH        (0x00000000U)                      /**< »¥²¹Êä³ö¼«ĞÔÎª¸ßµçÆ½ÓĞĞ§      */
-#define TIM_OUTPUT_NEGTIVE_POL_LOW         TIM_CCEN_CC1NP                     /**< »¥²¹Êä³ö¼«ĞÔÎªµÍµçÆ½ÓĞĞ§      */
+/* TIMè¾“å‡ºæ¯”è¾ƒäº’è¡¥è¾“å‡ºææ€§å®šä¹‰ */
+#define TIM_OUTPUT_NEGTIVE_POL_HIGH        (0x00000000U)                      /**< äº’è¡¥è¾“å‡ºææ€§ä¸ºé«˜ç”µå¹³æœ‰æ•ˆ      */
+#define TIM_OUTPUT_NEGTIVE_POL_LOW         TIM_CCEN_CC1NP                     /**< äº’è¡¥è¾“å‡ºææ€§ä¸ºä½ç”µå¹³æœ‰æ•ˆ      */
 
-/* TIMÊä³ö±È½Ï»¥²¹Êä³öÊ¹ÄÜ¶¨Òå */
-#define TIM_OUTPUT_NEGTIVE_DISABLE         (0x00000000U)                      /**< »¥²¹Êä³öÍ¨µÀÊä³ö½ûÖ¹          */
-#define TIM_OUTPUT_NEGTIVE_ENABLE          TIM_CCEN_CC1NE                     /**< »¥²¹Êä³öÍ¨µÀÊä³öÊ¹ÄÜ          */
+/* TIMè¾“å‡ºæ¯”è¾ƒäº’è¡¥è¾“å‡ºä½¿èƒ½å®šä¹‰ */
+#define TIM_OUTPUT_NEGTIVE_DISABLE         (0x00000000U)                      /**< äº’è¡¥è¾“å‡ºé€šé“è¾“å‡ºç¦æ­¢          */
+#define TIM_OUTPUT_NEGTIVE_ENABLE          TIM_CCEN_CC1NE                     /**< äº’è¡¥è¾“å‡ºé€šé“è¾“å‡ºä½¿èƒ½          */
 
-/* TIM¿ÕÏĞ×´Ì¬ÏÂÊä³ö×´Ì¬¶¨Òå */
-#define TIM_OUTPUT_IDLE_RESET              (0x00000000U)                      /**< ¿ÕÏĞ×´Ì¬Îª: µ±MOEN=0Ê±OCxÊä³öµÍµçÆ½   */
-#define TIM_OUTPUT_IDLE_SET                TIM_CR2_OIS1                       /**< ¿ÕÏĞ×´Ì¬Îª: µ±MOEN=0Ê±OCxÊä³ö¸ßµçÆ½   */
+/* TIMç©ºé—²çŠ¶æ€ä¸‹è¾“å‡ºçŠ¶æ€å®šä¹‰ */
+#define TIM_OUTPUT_IDLE_RESET              (0x00000000U)                      /**< ç©ºé—²çŠ¶æ€ä¸º: å½“MOEN=0æ—¶OCxè¾“å‡ºä½ç”µå¹³   */
+#define TIM_OUTPUT_IDLE_SET                TIM_CR2_OIS1                       /**< ç©ºé—²çŠ¶æ€ä¸º: å½“MOEN=0æ—¶OCxè¾“å‡ºé«˜ç”µå¹³   */
 
-/* TIM¿ÕÏĞ×´Ì¬ÏÂ»¥²¹Êä³ö×´Ì¬¶¨Òå */
-#define TIM_OUTPUT_NEGTIVE_IDLE_RESET      (0x00000000U)                      /**< »¥²¹Êä³ö¿ÕÏĞ×´Ì¬Îª: µ±MOEN=0Ê±OCxNÊä³öµÍµçÆ½  */
-#define TIM_OUTPUT_NEGTIVE_IDLE_SET        TIM_CR2_OIS1N                      /**< »¥²¹Êä³ö¿ÕÏĞ×´Ì¬Îª: µ±MOEN=0Ê±OCxNÊä³ö¸ßµçÆ½  */
+/* TIMç©ºé—²çŠ¶æ€ä¸‹äº’è¡¥è¾“å‡ºçŠ¶æ€å®šä¹‰ */
+#define TIM_OUTPUT_NEGTIVE_IDLE_RESET      (0x00000000U)                      /**< äº’è¡¥è¾“å‡ºç©ºé—²çŠ¶æ€ä¸º: å½“MOEN=0æ—¶OCxNè¾“å‡ºä½ç”µå¹³  */
+#define TIM_OUTPUT_NEGTIVE_IDLE_SET        TIM_CR2_OIS1N                      /**< äº’è¡¥è¾“å‡ºç©ºé—²çŠ¶æ€ä¸º: å½“MOEN=0æ—¶OCxNè¾“å‡ºé«˜ç”µå¹³  */
 
-/* TIMÔËĞĞÄ£Ê½ÏÂ¹Ø±Õ×´Ì¬Ñ¡Ôñ²ÎÊı¶¨Òå */                                         
-#define TIM_OSSR_DISABLE                   (0x00000000U)               /**< ´¦ÓÚÎŞĞ§×´Ì¬Ê±£¬OC/OCNÊä³ö½ûÖ¹(²»ÔÙÊÜ¶¨Ê±Æ÷¿ØÖÆ)     */
-#define TIM_OSSR_ENABLE                    TIM_BDT_OSSR                /**< ´¦ÓÚÎŞĞ§×´Ì¬Ê±£¬OC/OCNÊä³öÊ¹ÄÜ(ÈÔÈ»ÊÜ¶¨Ê±Æ÷¿ØÖÆ)     */
+/* TIMè¿è¡Œæ¨¡å¼ä¸‹å…³é—­çŠ¶æ€é€‰æ‹©å‚æ•°å®šä¹‰ */                                         
+#define TIM_OSSR_DISABLE                   (0x00000000U)               /**< å¤„äºæ— æ•ˆçŠ¶æ€æ—¶ï¼ŒOC/OCNè¾“å‡ºç¦æ­¢(ä¸å†å—å®šæ—¶å™¨æ§åˆ¶)     */
+#define TIM_OSSR_ENABLE                    TIM_BDT_OSSR                /**< å¤„äºæ— æ•ˆçŠ¶æ€æ—¶ï¼ŒOC/OCNè¾“å‡ºä½¿èƒ½(ä»ç„¶å—å®šæ—¶å™¨æ§åˆ¶)     */
                                                                                
-/* TIM¿ÕÏĞÄ£Ê½ÏÂ¹Ø±Õ×´Ì¬Ñ¡Ôñ²ÎÊı¶¨Òå */                                         
-#define TIM_OSSI_DISABLE                   (0x00000000U)               /**< ´¦ÓÚÎŞĞ§×´Ì¬Ê±£¬OC/OCNÊä³ö½ûÖ¹(²»ÔÙÊÜ¶¨Ê±Æ÷¿ØÖÆ)     */
-#define TIM_OSSI_ENABLE                    TIM_BDT_OSSI                /**< ´¦ÓÚÎŞĞ§×´Ì¬Ê±£¬OC/OCNÊä³öÊ¹ÄÜ(ÈÔÈ»ÊÜ¶¨Ê±Æ÷¿ØÖÆ)     */
+/* TIMç©ºé—²æ¨¡å¼ä¸‹å…³é—­çŠ¶æ€é€‰æ‹©å‚æ•°å®šä¹‰ */                                         
+#define TIM_OSSI_DISABLE                   (0x00000000U)               /**< å¤„äºæ— æ•ˆçŠ¶æ€æ—¶ï¼ŒOC/OCNè¾“å‡ºç¦æ­¢(ä¸å†å—å®šæ—¶å™¨æ§åˆ¶)     */
+#define TIM_OSSI_ENABLE                    TIM_BDT_OSSI                /**< å¤„äºæ— æ•ˆçŠ¶æ€æ—¶ï¼ŒOC/OCNè¾“å‡ºä½¿èƒ½(ä»ç„¶å—å®šæ—¶å™¨æ§åˆ¶)     */
 
-/* TIMËø¼¶±ğ¶¨Òå*/
-#define TIM_LOCK_LEVEL_OFF                 (0x00000000U)                      /**< Ëø¼¶±ğ0         */
-#define TIM_LOCK_LEVEL1                    TIM_BDT_LOCK_LEVEL1                /**< Ëø¼¶±ğ1         */
-#define TIM_LOCK_LEVEL2                    TIM_BDT_LOCK_LEVEL2                /**< Ëø¼¶±ğ2         */
-#define TIM_LOCK_LEVEL3                    TIM_BDT_LOCK_LEVEL3                /**< Ëø¼¶±ğ3         */
+/* TIMé”çº§åˆ«å®šä¹‰*/
+#define TIM_LOCK_LEVEL_OFF                 (0x00000000U)                      /**< é”çº§åˆ«0         */
+#define TIM_LOCK_LEVEL1                    TIM_BDT_LOCK_LEVEL1                /**< é”çº§åˆ«1         */
+#define TIM_LOCK_LEVEL2                    TIM_BDT_LOCK_LEVEL2                /**< é”çº§åˆ«2         */
+#define TIM_LOCK_LEVEL3                    TIM_BDT_LOCK_LEVEL3                /**< é”çº§åˆ«3         */
 
-/* TIM¶ÏÂ·ÊäÈëÊ¹ÄÜ*/                                                            
-#define TIM_BREAK_DISABLE                  (0x00000000U)                      /**< ½ûÖ¹¶ÏÂ·ÊäÈë    */
-#define TIM_BREAK_ENABLE                   TIM_BDT_BKEN                       /**< Ê¹ÄÜ¶ÏÂ·ÊäÈë    */                                                                              
+/* TIMæ–­è·¯è¾“å…¥ä½¿èƒ½*/                                                            
+#define TIM_BREAK_DISABLE                  (0x00000000U)                      /**< ç¦æ­¢æ–­è·¯è¾“å…¥    */
+#define TIM_BREAK_ENABLE                   TIM_BDT_BKEN                       /**< ä½¿èƒ½æ–­è·¯è¾“å…¥    */                                                                              
                                                                               
-/* TIM¶ÏÂ·ÊäÈëÔ´¶¨Òå */                                                       
-#define TIM_BREAK_INPUT_SRC_GPIO           TIM1_AF1_BKINE                      /**< GPIO½Óµ½BKINÒı½ÅÉÏ          */    
-#define TIM_BREAK_INPUT_SRC_COMP1          TIM1_AF1_BKCMP1E                    /**< COMP1Êä³ö½Óµ½¶ÏÂ·ÊäÈë       */
-#define TIM_BREAK_INPUT_SRC_COMP2          TIM1_AF1_BKCMP2E                    /**< COMP2Êä³ö½Óµ½¶ÏÂ·ÊäÈë       */       
+/* TIMæ–­è·¯è¾“å…¥æºå®šä¹‰ */                                                       
+#define TIM_BREAK_INPUT_SRC_GPIO           TIM1_AF1_BKINE                      /**< GPIOæ¥åˆ°BKINå¼•è„šä¸Š          */    
+#define TIM_BREAK_INPUT_SRC_COMP1          TIM1_AF1_BKCMP1E                    /**< COMP1è¾“å‡ºæ¥åˆ°æ–­è·¯è¾“å…¥       */
+#define TIM_BREAK_INPUT_SRC_COMP2          TIM1_AF1_BKCMP2E                    /**< COMP2è¾“å‡ºæ¥åˆ°æ–­è·¯è¾“å…¥       */       
   
-/* TIM¶ÏÂ·ÊäÈë¼«ĞÔ¶¨Òå */                                                                                                    
-#define TIM_BREAK_INPUT_POL_HIGH           TIM1_AF1_BKINP                      /**< ¶ÏÂ·ÊäÈëÔ´Îª¸ßµçÆ½      */
-#define TIM_BREAK_INPUT_POL_LOW            (0x00000000U)                       /**< ¶ÏÂ·ÊäÈëÔ´ÎªµÍµçÆ½      */ 
+/* TIMæ–­è·¯è¾“å…¥ææ€§å®šä¹‰ */                                                                                                    
+#define TIM_BREAK_INPUT_POL_HIGH           TIM1_AF1_BKINP                      /**< æ–­è·¯è¾“å…¥æºä¸ºé«˜ç”µå¹³      */
+#define TIM_BREAK_INPUT_POL_LOW            (0x00000000U)                       /**< æ–­è·¯è¾“å…¥æºä¸ºä½ç”µå¹³      */ 
                                                                                                                                                                               
-/* TIMÍâ²¿Ê±ÖÓÊäÈëÑ¡Ôñ  */                                                                                                                                                    
-#define TIM_TIM3_TI1_GPIO                  TIM_TISEL_TI1_SEL_CH1                      /**< TIM3_TI1Á¬½Óµ½GPIO       */
-#define TIM_TIM3_TI1_COMP1                 TIM_TISEL_TI1_SEL_COMP1                    /**< TIM3_TI1Á¬½Óµ½COMP1Êä³ö  */    
+/* TIMå¤–éƒ¨æ—¶é’Ÿè¾“å…¥é€‰æ‹©  */                                                                                                                                                    
+#define TIM_TIM3_TI1_GPIO                  TIM_TISEL_TI1_SEL_CH1                      /**< TIM3_TI1è¿æ¥åˆ°GPIO       */
+#define TIM_TIM3_TI1_COMP1                 TIM_TISEL_TI1_SEL_COMP1                    /**< TIM3_TI1è¿æ¥åˆ°COMP1è¾“å‡º  */    
                                                                                        
-#define TIM_TIM3_TI2_GPIO                  TIM_TISEL_TI2_SEL_CH2                      /**< TIM3_TI2Á¬½Óµ½GPIO       */  
-#define TIM_TIM3_TI2_COMP2                 TIM_TISEL_TI2_SEL_COMP2                    /**< TIM3_TI2Á¬½Óµ½COMP2Êä³ö  */                                                                                                                                                 
+#define TIM_TIM3_TI2_GPIO                  TIM_TISEL_TI2_SEL_CH2                      /**< TIM3_TI2è¿æ¥åˆ°GPIO       */  
+#define TIM_TIM3_TI2_COMP2                 TIM_TISEL_TI2_SEL_COMP2                    /**< TIM3_TI2è¿æ¥åˆ°COMP2è¾“å‡º  */                                                                                                                                                 
 
 
 /**
@@ -359,15 +359,15 @@ typedef struct
 /************************************************************************************************/
 /**
 * @defgroup TIM_External_Functions TIM External Functions
-* @brief    TIM¶ÔÍâº¯Êı
+* @brief    TIMå¯¹å¤–å‡½æ•°
 * @{
 *
 */
 /************************************************************************************************/
 /**
-* @brief  TIMÆô¶¯¼ÆÊı
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  TIMå¯åŠ¨è®¡æ•°
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_enable(TIM_t *timx)
 {
@@ -375,9 +375,9 @@ __STATIC_INLINE void std_tim_enable(TIM_t *timx)
 }
 
 /**
-* @brief  TIMÍ£Ö¹¼ÆÊı
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  TIMåœæ­¢è®¡æ•°
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_disable(TIM_t *timx)
 {
@@ -386,12 +386,12 @@ __STATIC_INLINE void std_tim_disable(TIM_t *timx)
 
 
 /**
-* @brief  ÉèÖÃTIMÔ¤·ÖÆµ²ÎÊı
-* @param  timx TIMÍâÉè
-* @param  presc Ô¤·ÖÆµĞÂÖµ
-* @note   TIM1Ô¤·ÖÆµ²ÎÊı·¶Î§Îª£º0x0000~0xFFFF    
-*         TIM3Ô¤·ÖÆµ²ÎÊı·¶Î§Îª£º0x0000~0x000F
-* @retval ÎŞ
+* @brief  è®¾ç½®TIMé¢„åˆ†é¢‘å‚æ•°
+* @param  timx TIMå¤–è®¾
+* @param  presc é¢„åˆ†é¢‘æ–°å€¼
+* @note   TIM1é¢„åˆ†é¢‘å‚æ•°èŒƒå›´ä¸ºï¼š0x0000~0xFFFF    
+*         TIM3é¢„åˆ†é¢‘å‚æ•°èŒƒå›´ä¸ºï¼š0x0000~0x000F
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_psc(TIM_t *timx, uint32_t presc)          
 {
@@ -400,9 +400,9 @@ __STATIC_INLINE void std_tim_set_psc(TIM_t *timx, uint32_t presc)
 
 
 /**
-* @brief  »ñÈ¡TIMÔ¤·ÖÆµ²ÎÊı
-* @param  timx TIMÍâÉè
-* @retval uint32_t TIMÔ¤·ÖÆµÖµ
+* @brief  è·å–TIMé¢„åˆ†é¢‘å‚æ•°
+* @param  timx TIMå¤–è®¾
+* @retval uint32_t TIMé¢„åˆ†é¢‘å€¼
 */
 __STATIC_INLINE uint32_t std_tim_get_psc(TIM_t *timx)          
 {
@@ -411,10 +411,10 @@ __STATIC_INLINE uint32_t std_tim_get_psc(TIM_t *timx)
 
 
 /**
-* @brief  ÉèÖÃTIM¼ÆÊıÖµ
-* @param  timx TIMÍâÉè 
-* @param  counter ¼ÆÊıĞÂÖµ
-* @retval ÎŞ
+* @brief  è®¾ç½®TIMè®¡æ•°å€¼
+* @param  timx TIMå¤–è®¾ 
+* @param  counter è®¡æ•°æ–°å€¼
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_counter(TIM_t *timx, uint32_t counter)     
 {
@@ -422,9 +422,9 @@ __STATIC_INLINE void std_tim_set_counter(TIM_t *timx, uint32_t counter)
 }
 
 /**
-* @brief  »ñÈ¡TIM¼ÆÊıÖµ
-* @param  timx TIMÍâÉè
-* @retval uint32_t TIM¼ÆÊıÖµ
+* @brief  è·å–TIMè®¡æ•°å€¼
+* @param  timx TIMå¤–è®¾
+* @retval uint32_t TIMè®¡æ•°å€¼
 */
 __STATIC_INLINE uint32_t std_tim_get_counter(TIM_t *timx)   
 {
@@ -432,10 +432,10 @@ __STATIC_INLINE uint32_t std_tim_get_counter(TIM_t *timx)
 }
 
 /**
-* @brief  ÉèÖÃTIM ARRÖµ
-* @param  timx TIMÍâÉè
-* @param  autoreload ARRÖµ
-* @retval ÎŞ
+* @brief  è®¾ç½®TIM ARRå€¼
+* @param  timx TIMå¤–è®¾
+* @param  autoreload ARRå€¼
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_autoreload(TIM_t *timx, uint32_t autoreload)
 {
@@ -443,9 +443,9 @@ __STATIC_INLINE void std_tim_set_autoreload(TIM_t *timx, uint32_t autoreload)
 }
                                                             
 /**
-* @brief  »ñÈ¡TIM ARRÖµ
-* @param  timx TIMÍâÉè
-* @retval uint32_t TIM ARRÖµ
+* @brief  è·å–TIM ARRå€¼
+* @param  timx TIMå¤–è®¾
+* @retval uint32_t TIM ARRå€¼
 */
 __STATIC_INLINE uint32_t std_tim_get_autoreload(TIM_t *timx)
 {
@@ -454,10 +454,10 @@ __STATIC_INLINE uint32_t std_tim_get_autoreload(TIM_t *timx)
 
 
 /**
-* @brief  ÉèÖÃTIM RCRÖµ
-* @param  timx TIMÍâÉè
-* @param  rcr TIM RCRÖµ
-* @retval ÎŞ
+* @brief  è®¾ç½®TIM RCRå€¼
+* @param  timx TIMå¤–è®¾
+* @param  rcr TIM RCRå€¼
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_repcounter(TIM_t *timx, uint32_t rcr)
 {
@@ -466,9 +466,9 @@ __STATIC_INLINE void std_tim_set_repcounter(TIM_t *timx, uint32_t rcr)
 
 
 /**
-* @brief  »ñÈ¡TIM RCRÖµ
-* @param  timx TIMÍâÉè
-* @retval uint32_t TIM RCRÖµ
+* @brief  è·å–TIM RCRå€¼
+* @param  timx TIMå¤–è®¾
+* @retval uint32_t TIM RCRå€¼
 */
 __STATIC_INLINE uint32_t std_tim_get_repcounter(TIM_t *timx)
 {
@@ -477,13 +477,13 @@ __STATIC_INLINE uint32_t std_tim_get_repcounter(TIM_t *timx)
 
 
 /**
-* @brief  ÉèÖÃTIMÊ±ÖÓ·ÖÆµÖµ
-* @param  timx TIMÍâÉè
-* @param  clk_div Ê±ÖÓ·ÖÆµÖµ
+* @brief  è®¾ç½®TIMæ—¶é’Ÿåˆ†é¢‘å€¼
+* @param  timx TIMå¤–è®¾
+* @param  clk_div æ—¶é’Ÿåˆ†é¢‘å€¼
 *             @arg TIM_CLOCK_DTS_DIV1:  tDTS=tTIM_KCLK
 *             @arg TIM_CLOCK_DTS_DIV2:  tDTS=2*tTIM_KCLK
 *             @arg TIM_CLOCK_DTS_DIV4:  tDTS=4*tTIM_KCLK
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_clock_div(TIM_t *timx, uint32_t clk_div) 
 {
@@ -491,9 +491,9 @@ __STATIC_INLINE void std_tim_set_clock_div(TIM_t *timx, uint32_t clk_div)
 }
 
 /**
-* @brief  »ñÈ¡TIMÊ±ÖÓ·ÖÆµÖµ
-* @param  timx TIMÍâÉè
-* @retval uint32_t Ê±ÖÓ·ÖÆµÖµ
+* @brief  è·å–TIMæ—¶é’Ÿåˆ†é¢‘å€¼
+* @param  timx TIMå¤–è®¾
+* @retval uint32_t æ—¶é’Ÿåˆ†é¢‘å€¼
 *             @arg TIM_CLOCK_DIV1: tDTS=tTIM_KCLK
 *             @arg TIM_CLOCK_DIV2: tDTS=2*tTIM_KCLK
 *             @arg TIM_CLOCK_DIV4: tDTS=4*tTIM_KCLK
@@ -504,9 +504,9 @@ __STATIC_INLINE uint32_t std_tim_get_clock_div(TIM_t *timx)
 }
 
 /**
-* @brief  Ê¹ÄÜ×Ô¶¯ÖØÔØ¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ä½¿èƒ½è‡ªåŠ¨é‡è½½åŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_arrpreload_enable(TIM_t *timx)           
 {
@@ -514,9 +514,9 @@ __STATIC_INLINE void std_tim_arrpreload_enable(TIM_t *timx)
 }
 
 /**
-* @brief  ½ûÖ¹×Ô¶¯ÖØÔØ¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ç¦æ­¢è‡ªåŠ¨é‡è½½åŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_arrpreload_disable(TIM_t *timx)           
 {
@@ -524,9 +524,9 @@ __STATIC_INLINE void std_tim_arrpreload_disable(TIM_t *timx)
 }
 
 /**
-* @brief  Ê¹ÄÜ¸üĞÂÊÂ¼ş
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ä½¿èƒ½æ›´æ–°äº‹ä»¶
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_updateevent_enable(TIM_t *timx)
 {
@@ -534,9 +534,9 @@ __STATIC_INLINE void std_tim_updateevent_enable(TIM_t *timx)
 }
 
 /**
-* @brief  ½ûÖ¹¸üĞÂÊÂ¼ş
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ç¦æ­¢æ›´æ–°äº‹ä»¶
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_updateevent_disable(TIM_t *timx)
 {
@@ -544,12 +544,12 @@ __STATIC_INLINE void std_tim_updateevent_disable(TIM_t *timx)
 }
 
 /**
-* @brief  ÉèÖÃ¸üĞÂÊÂ¼şÔ´
-* @param  timx TIMÍâÉè
-* @param  update_source ¸üĞÂÊÂ¼şÔ´Ñ¡Ôñ
+* @brief  è®¾ç½®æ›´æ–°äº‹ä»¶æº
+* @param  timx TIMå¤–è®¾
+* @param  update_source æ›´æ–°äº‹ä»¶æºé€‰æ‹©
 *             @arg TIM_UPDATE_SOURCE_REGULAR
 *             @arg TIM_UPDATE_SOURCE_COUNTER
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_update_source(TIM_t *timx, uint32_t update_source)
 {
@@ -558,9 +558,9 @@ __STATIC_INLINE void std_tim_set_update_source(TIM_t *timx, uint32_t update_sour
 
 
 /**
-* @brief  »ñÈ¡¸üĞÂÊÂ¼şÔ´
-* @param  timx TIMÍâÉè
-* @retval uint32_t ¸üĞÂÊÂ¼şÔ´Ñ¡Ôñ
+* @brief  è·å–æ›´æ–°äº‹ä»¶æº
+* @param  timx TIMå¤–è®¾
+* @retval uint32_t æ›´æ–°äº‹ä»¶æºé€‰æ‹©
 *             @arg TIM_UPDATE_SOURCE_REGULAR
 *             @arg TIM_UPDATE_SOURCE_COUNTER
 */
@@ -571,9 +571,9 @@ __STATIC_INLINE uint32_t std_tim_get_update_source(TIM_t *timx)
 
 
 /**
-* @brief  Ê¹ÄÜ¹¤×÷Ä£Ê½1
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ä½¿èƒ½å·¥ä½œæ¨¡å¼1
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_work_mode1_enable(TIM_t *timx)
 {
@@ -581,9 +581,9 @@ __STATIC_INLINE void std_tim_work_mode1_enable(TIM_t *timx)
 }
 
 /**
-* @brief  ½ûÖ¹¹¤×÷Ä£Ê½1
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ç¦æ­¢å·¥ä½œæ¨¡å¼1
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_work_mode1_disable(TIM_t *timx)
 {
@@ -592,16 +592,16 @@ __STATIC_INLINE void std_tim_work_mode1_disable(TIM_t *timx)
 
 
 /**
-* @brief  ÉèÖÃ¼ÆÊıÄ£Ê½
-* @param  timx TIMÍâÉè
-* @param  counter_mode ¼ÆÊı·½Ê½
+* @brief  è®¾ç½®è®¡æ•°æ¨¡å¼
+* @param  timx TIMå¤–è®¾
+* @param  counter_mode è®¡æ•°æ–¹å¼
 *             @arg TIM_COUNTER_MODE_UP
 *             @arg TIM_COUNTER_MODE_DOWN
 *             @arg TIM_COUNTER_MODE_CENT_MODE1
 *             @arg TIM_COUNTER_MODE_CENT_MODE2
 *             @arg TIM_COUNTER_MODE_CENT_MODE3
-* @note   ÓÉÓÚDIR¿ØÖÆÎ»ÔÚÖĞĞÄ¶ÔÆëÄ£Ê½ÏÂÎªÖ»¶ÁÈ¨ÏŞ£¬µ±´ÓÖĞĞÄ¶ÔÆëÄ£Ê½ÇĞ»»µ½±ßÑØÄ£Ê½Ê±£¬±ÜÃâ¼ÆÊı·½ÏòĞŞ¸ÄÒì³££¬Ó¦ÏÈ¸´Î»Ò»´ÎTIM
-* @retval ÎŞ
+* @note   ç”±äºDIRæ§åˆ¶ä½åœ¨ä¸­å¿ƒå¯¹é½æ¨¡å¼ä¸‹ä¸ºåªè¯»æƒé™ï¼Œå½“ä»ä¸­å¿ƒå¯¹é½æ¨¡å¼åˆ‡æ¢åˆ°è¾¹æ²¿æ¨¡å¼æ—¶ï¼Œé¿å…è®¡æ•°æ–¹å‘ä¿®æ”¹å¼‚å¸¸ï¼Œåº”å…ˆå¤ä½ä¸€æ¬¡TIM
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_counter_mode(TIM_t *timx, uint32_t counter_mode)
 {
@@ -609,9 +609,9 @@ __STATIC_INLINE void std_tim_set_counter_mode(TIM_t *timx, uint32_t counter_mode
 }
 
 /**
-* @brief  »ñÈ¡¼ÆÊıÄ£Ê½
-* @param  timx TIMÍâÉè
-* @retval uint32_t ¼ÆÊı·½Ê½
+* @brief  è·å–è®¡æ•°æ¨¡å¼
+* @param  timx TIMå¤–è®¾
+* @retval uint32_t è®¡æ•°æ–¹å¼
 *             @arg TIM_COUNTER_MODE_UP
 *             @arg TIM_COUNTER_MODE_DOWN
 *             @arg TIM_COUNTER_MODE_CENT_MODE1
@@ -631,11 +631,11 @@ __STATIC_INLINE uint32_t std_tim_get_counter_mode(TIM_t *timx)
 }
 
 /**
-* @brief  »ñÈ¡TIM¼ÆÊı·½Ïò
-* @param  timx TIMÍâÉè
-* @retval uint32_t ·µ»ØTIM¼ÆÊı·½Ïò±êÖ¾
-*             @arg ·Ç0: µ±Ç°¼ÆÊı·½ÏòÎªÏòÏÂ¼ÆÊı
-*             @arg 0:µ±Ç°¼ÆÊı·½ÏòÎªÏòÉÏ¼ÆÊı
+* @brief  è·å–TIMè®¡æ•°æ–¹å‘
+* @param  timx TIMå¤–è®¾
+* @retval uint32_t è¿”å›TIMè®¡æ•°æ–¹å‘æ ‡å¿—
+*             @arg é0: å½“å‰è®¡æ•°æ–¹å‘ä¸ºå‘ä¸‹è®¡æ•°
+*             @arg 0:å½“å‰è®¡æ•°æ–¹å‘ä¸ºå‘ä¸Šè®¡æ•°
 */
 __STATIC_INLINE uint32_t std_tim_get_count_dir(TIM_t *timx)  
 {
@@ -644,9 +644,9 @@ __STATIC_INLINE uint32_t std_tim_get_count_dir(TIM_t *timx)
 
 
 /**
-* @brief  Ê¹ÄÜµ¥Âö³åÄ£Ê½
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ä½¿èƒ½å•è„‰å†²æ¨¡å¼
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_onepulse_enable(TIM_t *timx)
 {
@@ -654,9 +654,9 @@ __STATIC_INLINE void std_tim_onepulse_enable(TIM_t *timx)
 }
 
 /**
-* @brief  ½ûÖ¹µ¥Âö³åÄ£Ê½
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ç¦æ­¢å•è„‰å†²æ¨¡å¼
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_onepulse_disable(TIM_t *timx)
 {
@@ -664,11 +664,11 @@ __STATIC_INLINE void std_tim_onepulse_disable(TIM_t *timx)
 }
 
 /**
-* @brief  »ñÈ¡µ¥Âö³åÄ£Ê½
-* @param  timx TIMÍâÉè
-* @retval uint32_t ·µ»Øµ¥Âö³å¼ÆÊıÄ£Ê½
-*             @arg ·Ç0: µ±Ç°ÅäÖÃÎªµ¥Âö³åÄ£Ê½
-*             @arg 0:µ±Ç°ÅäÖÃÎªÁ¬Ğø¼ÆÊıÄ£Ê½
+* @brief  è·å–å•è„‰å†²æ¨¡å¼
+* @param  timx TIMå¤–è®¾
+* @retval uint32_t è¿”å›å•è„‰å†²è®¡æ•°æ¨¡å¼
+*             @arg é0: å½“å‰é…ç½®ä¸ºå•è„‰å†²æ¨¡å¼
+*             @arg 0:å½“å‰é…ç½®ä¸ºè¿ç»­è®¡æ•°æ¨¡å¼
 */
 __STATIC_INLINE uint32_t std_tim_get_onepulse_mode(TIM_t *timx)
 {
@@ -677,12 +677,12 @@ __STATIC_INLINE uint32_t std_tim_get_onepulse_mode(TIM_t *timx)
 
 
 /**
-* @brief  ÉèÖÃ¼ÆÊıÊ±ÖÓÔ´²ÎÊı
-* @param  timx TIMÍâÉè
-* @param  clock_source Ê±ÖÓÔ´Ñ¡Ôñ
-*             @arg TIM_CLKSRC_INT:   ÄÚ²¿Ê±ÖÓÔ´
-*             @arg TIM_CLKSRC_MODE1: Íâ²¿Ê±ÖÓÄ£Ê½1
-* @retval ÎŞ
+* @brief  è®¾ç½®è®¡æ•°æ—¶é’Ÿæºå‚æ•°
+* @param  timx TIMå¤–è®¾
+* @param  clock_source æ—¶é’Ÿæºé€‰æ‹©
+*             @arg TIM_CLKSRC_INT:   å†…éƒ¨æ—¶é’Ÿæº
+*             @arg TIM_CLKSRC_MODE1: å¤–éƒ¨æ—¶é’Ÿæ¨¡å¼1
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_clock_source_config(TIM_t *timx, uint32_t clock_source)
 {
@@ -691,18 +691,18 @@ __STATIC_INLINE void std_tim_clock_source_config(TIM_t *timx, uint32_t clock_sou
 
 
 /**
-* @brief  Éú³ÉÒ»¸öÈí¼şÊÂ¼ş
-* @param  timx TIMÍâÉè
-* @param  event_src ÊÂ¼şÔ´
-*             @arg TIM_EVENT_SRC_UPDATE:¸üĞÂÊÂ¼şÔ´
-*             @arg TIM_EVENT_SRC_CC1:   ²¶»ñ±È½Ï1ÊÂ¼şÔ´
-*             @arg TIM_EVENT_SRC_CC2:   ²¶»ñ±È½Ï2ÊÂ¼şÔ´
-*             @arg TIM_EVENT_SRC_CC3:   ²¶»ñ±È½Ï3ÊÂ¼şÔ´
-*             @arg TIM_EVENT_SRC_CC4:   ²¶»ñ±È½Ï4ÊÂ¼şÔ´
-*             @arg TIM_EVENT_SRC_COM:   »»ÏàÊÂ¼şÔ´
-*             @arg TIM_EVENT_SRC_TRIG:  ´¥·¢ÊÂ¼şÔ´
-*             @arg TIM_EVENT_SRC_BREAK: ¶ÏÂ·ÊÂ¼şÔ´
-* @retval ÎŞ
+* @brief  ç”Ÿæˆä¸€ä¸ªè½¯ä»¶äº‹ä»¶
+* @param  timx TIMå¤–è®¾
+* @param  event_src äº‹ä»¶æº
+*             @arg TIM_EVENT_SRC_UPDATE:æ›´æ–°äº‹ä»¶æº
+*             @arg TIM_EVENT_SRC_CC1:   æ•è·æ¯”è¾ƒ1äº‹ä»¶æº
+*             @arg TIM_EVENT_SRC_CC2:   æ•è·æ¯”è¾ƒ2äº‹ä»¶æº
+*             @arg TIM_EVENT_SRC_CC3:   æ•è·æ¯”è¾ƒ3äº‹ä»¶æº
+*             @arg TIM_EVENT_SRC_CC4:   æ•è·æ¯”è¾ƒ4äº‹ä»¶æº
+*             @arg TIM_EVENT_SRC_COM:   æ¢ç›¸äº‹ä»¶æº
+*             @arg TIM_EVENT_SRC_TRIG:  è§¦å‘äº‹ä»¶æº
+*             @arg TIM_EVENT_SRC_BREAK: æ–­è·¯äº‹ä»¶æº
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_sw_trig_event(TIM_t *timx, uint32_t event_src)
 {
@@ -711,18 +711,18 @@ __STATIC_INLINE void std_tim_set_sw_trig_event(TIM_t *timx, uint32_t event_src)
 
 
 /** 
-* @brief  TIMÖĞ¶ÏÊ¹ÄÜ
-* @param  timx TIMÍâÉè
-* @param  interrupt TIMÖĞ¶ÏÔ´
-*             @arg TIM_INTERRUPT_UPDATE:  ¸üĞÂÖĞ¶Ï
-*             @arg TIM_INTERRUPT_CC1:     ²¶»ñ/±È½Ï1ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_CC2:     ²¶»ñ/±È½Ï2ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_CC3:     ²¶»ñ/±È½Ï3ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_CC4:     ²¶»ñ/±È½Ï4ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_COM:     »»ÏàÖĞ¶Ï
-*             @arg TIM_INTERRUPT_TRIG:    ´¥·¢ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_BREAK:   ¶ÏÂ·ÖĞ¶Ï
-* @retval ÎŞ
+* @brief  TIMä¸­æ–­ä½¿èƒ½
+* @param  timx TIMå¤–è®¾
+* @param  interrupt TIMä¸­æ–­æº
+*             @arg TIM_INTERRUPT_UPDATE:  æ›´æ–°ä¸­æ–­
+*             @arg TIM_INTERRUPT_CC1:     æ•è·/æ¯”è¾ƒ1ä¸­æ–­
+*             @arg TIM_INTERRUPT_CC2:     æ•è·/æ¯”è¾ƒ2ä¸­æ–­
+*             @arg TIM_INTERRUPT_CC3:     æ•è·/æ¯”è¾ƒ3ä¸­æ–­
+*             @arg TIM_INTERRUPT_CC4:     æ•è·/æ¯”è¾ƒ4ä¸­æ–­
+*             @arg TIM_INTERRUPT_COM:     æ¢ç›¸ä¸­æ–­
+*             @arg TIM_INTERRUPT_TRIG:    è§¦å‘ä¸­æ–­
+*             @arg TIM_INTERRUPT_BREAK:   æ–­è·¯ä¸­æ–­
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_interrupt_enable(TIM_t *timx, uint32_t interrupt)    
 {
@@ -730,18 +730,18 @@ __STATIC_INLINE void std_tim_interrupt_enable(TIM_t *timx, uint32_t interrupt)
 }
 
 /** 
-* @brief  TIMÖĞ¶Ï½ûÖ¹
-* @param  timx TIMÍâÉè
-* @param  interrupt TIMÖĞ¶ÏÔ´
-*             @arg TIM_INTERRUPT_UPDATE:  ¸üĞÂÖĞ¶Ï
-*             @arg TIM_INTERRUPT_CC1:     ²¶»ñ/±È½Ï1ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_CC2:     ²¶»ñ/±È½Ï2ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_CC3:     ²¶»ñ/±È½Ï3ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_CC4:     ²¶»ñ/±È½Ï4ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_COM:     »»ÏàÖĞ¶Ï
-*             @arg TIM_INTERRUPT_TRIG:    ´¥·¢ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_BREAK:   ¶ÏÂ·ÖĞ¶Ï
-* @retval ÎŞ
+* @brief  TIMä¸­æ–­ç¦æ­¢
+* @param  timx TIMå¤–è®¾
+* @param  interrupt TIMä¸­æ–­æº
+*             @arg TIM_INTERRUPT_UPDATE:  æ›´æ–°ä¸­æ–­
+*             @arg TIM_INTERRUPT_CC1:     æ•è·/æ¯”è¾ƒ1ä¸­æ–­
+*             @arg TIM_INTERRUPT_CC2:     æ•è·/æ¯”è¾ƒ2ä¸­æ–­
+*             @arg TIM_INTERRUPT_CC3:     æ•è·/æ¯”è¾ƒ3ä¸­æ–­
+*             @arg TIM_INTERRUPT_CC4:     æ•è·/æ¯”è¾ƒ4ä¸­æ–­
+*             @arg TIM_INTERRUPT_COM:     æ¢ç›¸ä¸­æ–­
+*             @arg TIM_INTERRUPT_TRIG:    è§¦å‘ä¸­æ–­
+*             @arg TIM_INTERRUPT_BREAK:   æ–­è·¯ä¸­æ–­
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_interrupt_disable(TIM_t *timx, uint32_t interrupt)   
 {
@@ -750,18 +750,18 @@ __STATIC_INLINE void std_tim_interrupt_disable(TIM_t *timx, uint32_t interrupt)
 
 
 /**
-* @brief  »ñÈ¡TIMÖĞ¶ÏÔ´µÄ×´Ì¬
-* @param  timx TIMÍâÉè
-* @param  interrupt TIMÖĞ¶ÏÔ´ĞÅÏ¢
-*             @arg TIM_INTERRUPT_UPDATE:  ¸üĞÂÖĞ¶Ï
-*             @arg TIM_INTERRUPT_CC1:     ²¶»ñ/±È½Ï1ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_CC2:     ²¶»ñ/±È½Ï2ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_CC3:     ²¶»ñ/±È½Ï3ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_CC4:     ²¶»ñ/±È½Ï4ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_COM:     »»ÏàÖĞ¶Ï
-*             @arg TIM_INTERRUPT_TRIG:    ´¥·¢ÖĞ¶Ï
-*             @arg TIM_INTERRUPT_BREAK:   ¶ÏÂ·ÖĞ¶Ï
-* @retval uint32_t ·µ»ØÖĞ¶ÏÇëÇóÔ´µÄ×´Ì¬ 
+* @brief  è·å–TIMä¸­æ–­æºçš„çŠ¶æ€
+* @param  timx TIMå¤–è®¾
+* @param  interrupt TIMä¸­æ–­æºä¿¡æ¯
+*             @arg TIM_INTERRUPT_UPDATE:  æ›´æ–°ä¸­æ–­
+*             @arg TIM_INTERRUPT_CC1:     æ•è·/æ¯”è¾ƒ1ä¸­æ–­
+*             @arg TIM_INTERRUPT_CC2:     æ•è·/æ¯”è¾ƒ2ä¸­æ–­
+*             @arg TIM_INTERRUPT_CC3:     æ•è·/æ¯”è¾ƒ3ä¸­æ–­
+*             @arg TIM_INTERRUPT_CC4:     æ•è·/æ¯”è¾ƒ4ä¸­æ–­
+*             @arg TIM_INTERRUPT_COM:     æ¢ç›¸ä¸­æ–­
+*             @arg TIM_INTERRUPT_TRIG:    è§¦å‘ä¸­æ–­
+*             @arg TIM_INTERRUPT_BREAK:   æ–­è·¯ä¸­æ–­
+* @retval uint32_t è¿”å›ä¸­æ–­è¯·æ±‚æºçš„çŠ¶æ€ 
 */  
 __STATIC_INLINE uint32_t std_tim_get_interrupt_enable(TIM_t *timx, uint32_t interrupt)   
 {
@@ -770,24 +770,24 @@ __STATIC_INLINE uint32_t std_tim_get_interrupt_enable(TIM_t *timx, uint32_t inte
 
 
 /** 
-* @brief  »ñÈ¡TIM±êÖ¾×´Ì¬
-* @param  timx TIMÍâÉè
-* @param  flag TIM±êÖ¾ĞÅÏ¢
-*             @arg TIM_FLAG_UPDATE:       ¸üĞÂÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_CC1:          ²¶»ñ/±È½Ï1ÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_CC2:          ²¶»ñ/±È½Ï2ÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_CC3:          ²¶»ñ/±È½Ï3ÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_CC4:          ²¶»ñ/±È½Ï4ÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_COM:          »»ÏàÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_TRIG:         ´¥·¢ÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_BREAK:        ¶ÏÂ·ÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_CC1OF:        ²¶»ñ/±È½Ï1ÖØ¸´²¶»ñ±êÖ¾
-*             @arg TIM_FLAG_CC2OF:        ²¶»ñ/±È½Ï2ÖØ¸´²¶»ñ±êÖ¾
-*             @arg TIM_FLAG_CCX_ALL:      È«Í¨µÀ²¶»ñ/±È½ÏÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_ALL:          TIMÊÂ¼ş±êÖ¾
-* @retval uint32_t ·µ»Ø±êÖ¾µÄ×´Ì¬ 
-*             @arg ·Ç0: µ±Ç°±êÖ¾ÎªÖÃÆğ×´Ì¬ 
-*             @arg 0:µ±Ç°±êÖ¾ÎªÇå³ı×´Ì¬
+* @brief  è·å–TIMæ ‡å¿—çŠ¶æ€
+* @param  timx TIMå¤–è®¾
+* @param  flag TIMæ ‡å¿—ä¿¡æ¯
+*             @arg TIM_FLAG_UPDATE:       æ›´æ–°äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_CC1:          æ•è·/æ¯”è¾ƒ1äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_CC2:          æ•è·/æ¯”è¾ƒ2äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_CC3:          æ•è·/æ¯”è¾ƒ3äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_CC4:          æ•è·/æ¯”è¾ƒ4äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_COM:          æ¢ç›¸äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_TRIG:         è§¦å‘äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_BREAK:        æ–­è·¯äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_CC1OF:        æ•è·/æ¯”è¾ƒ1é‡å¤æ•è·æ ‡å¿—
+*             @arg TIM_FLAG_CC2OF:        æ•è·/æ¯”è¾ƒ2é‡å¤æ•è·æ ‡å¿—
+*             @arg TIM_FLAG_CCX_ALL:      å…¨é€šé“æ•è·/æ¯”è¾ƒäº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_ALL:          TIMäº‹ä»¶æ ‡å¿—
+* @retval uint32_t è¿”å›æ ‡å¿—çš„çŠ¶æ€ 
+*             @arg é0: å½“å‰æ ‡å¿—ä¸ºç½®èµ·çŠ¶æ€ 
+*             @arg 0:å½“å‰æ ‡å¿—ä¸ºæ¸…é™¤çŠ¶æ€
 */
 __STATIC_INLINE uint32_t std_tim_get_flag(TIM_t *timx, uint32_t flag)          
 {
@@ -796,22 +796,22 @@ __STATIC_INLINE uint32_t std_tim_get_flag(TIM_t *timx, uint32_t flag)
 
 
 /** 
-* @brief  Çå³ıTIM±êÖ¾
-* @param  timx TIMÍâÉè
-* @param  flag Çå³ıTIM±êÖ¾
-*             @arg TIM_FLAG_UPDATE:       ¸üĞÂÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_CC1:          ²¶»ñ/±È½Ï1ÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_CC2:          ²¶»ñ/±È½Ï2ÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_CC3:          ²¶»ñ/±È½Ï3ÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_CC4:          ²¶»ñ/±È½Ï4ÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_COM:          »»ÏàÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_TRIG:         ´¥·¢ÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_BREAK:        ¶ÏÂ·ÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_CC1OF:        ²¶»ñ/±È½Ï1ÖØ¸´²¶»ñ±êÖ¾
-*             @arg TIM_FLAG_CC2OF:        ²¶»ñ/±È½Ï2ÖØ¸´´¥·¢±êÖ¾
-*             @arg TIM_FLAG_CCX_ALL:      È«Í¨µÀ²¶»ñ/±È½ÏÊÂ¼ş±êÖ¾
-*             @arg TIM_FLAG_ALL:          TIMÊÂ¼ş±êÖ¾
-* @retval ÎŞ
+* @brief  æ¸…é™¤TIMæ ‡å¿—
+* @param  timx TIMå¤–è®¾
+* @param  flag æ¸…é™¤TIMæ ‡å¿—
+*             @arg TIM_FLAG_UPDATE:       æ›´æ–°äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_CC1:          æ•è·/æ¯”è¾ƒ1äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_CC2:          æ•è·/æ¯”è¾ƒ2äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_CC3:          æ•è·/æ¯”è¾ƒ3äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_CC4:          æ•è·/æ¯”è¾ƒ4äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_COM:          æ¢ç›¸äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_TRIG:         è§¦å‘äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_BREAK:        æ–­è·¯äº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_CC1OF:        æ•è·/æ¯”è¾ƒ1é‡å¤æ•è·æ ‡å¿—
+*             @arg TIM_FLAG_CC2OF:        æ•è·/æ¯”è¾ƒ2é‡å¤è§¦å‘æ ‡å¿—
+*             @arg TIM_FLAG_CCX_ALL:      å…¨é€šé“æ•è·/æ¯”è¾ƒäº‹ä»¶æ ‡å¿—
+*             @arg TIM_FLAG_ALL:          TIMäº‹ä»¶æ ‡å¿—
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_clear_flag(TIM_t *timx, uint32_t flag)
 {
@@ -820,14 +820,14 @@ __STATIC_INLINE void std_tim_clear_flag(TIM_t *timx, uint32_t flag)
 
 
 /**
-* @brief  Ê¹ÄÜTIM±È½Ï/Æ¥ÅäÍ¨µÀ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  ä½¿èƒ½TIMæ¯”è¾ƒ/åŒ¹é…é€šé“
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ccx_channel_enable(TIM_t *timx, uint32_t channel_id)
 {  
@@ -836,14 +836,14 @@ __STATIC_INLINE void std_tim_ccx_channel_enable(TIM_t *timx, uint32_t channel_id
 
 
 /**
-* @brief  ½ûÖ¹TIM±È½Ï/Æ¥ÅäÍ¨µÀ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  ç¦æ­¢TIMæ¯”è¾ƒ/åŒ¹é…é€šé“
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ccx_channel_disable(TIM_t *timx, uint32_t channel_id)
 {     
@@ -852,13 +852,13 @@ __STATIC_INLINE void std_tim_ccx_channel_disable(TIM_t *timx, uint32_t channel_i
 
 
 /**
-* @brief  Ê¹ÄÜTIM»¥²¹Êä³öÍ¨µÀ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  ä½¿èƒ½TIMäº’è¡¥è¾“å‡ºé€šé“
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ccxn_channel_enable(TIM_t *timx, uint32_t channel_id)
 {    
@@ -867,13 +867,13 @@ __STATIC_INLINE void std_tim_ccxn_channel_enable(TIM_t *timx, uint32_t channel_i
 
 
 /**
-* @brief  ½ûÖ¹TIM»¥²¹Êä³öÍ¨µÀ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  ç¦æ­¢TIMäº’è¡¥è¾“å‡ºé€šé“
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ccxn_channel_disable(TIM_t *timx, uint32_t channel_id)
 { 
@@ -882,16 +882,16 @@ __STATIC_INLINE void std_tim_ccxn_channel_disable(TIM_t *timx, uint32_t channel_
 
 
 /**
-* @brief  ÅäÖÃTIMÊäÈë²¶»ñÍ¨µÀ¼«ĞÔ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  é…ç½®TIMè¾“å…¥æ•è·é€šé“ææ€§
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
-* @param  input_capture_pol ÊäÈë¼«ĞÔ
+* @param  input_capture_pol è¾“å…¥ææ€§
 *             @arg TIM_INPUT_POL_RISING
 *             @arg TIM_INPUT_POL_FALLING
 *             @arg TIM_INPUT_POL_BOTH
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_input_pol(TIM_t *timx, uint32_t channel_id, uint32_t input_capture_pol)
 { 
@@ -899,12 +899,12 @@ __STATIC_INLINE void std_tim_set_input_pol(TIM_t *timx, uint32_t channel_id, uin
 }
 
 /**
-* @brief  »ñÈ¡TIMÊäÈë²¶»ñÍ¨µÀ¼«ĞÔ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  è·å–TIMè¾“å…¥æ•è·é€šé“ææ€§
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
-* @retval uint32_t ÊäÈë¼«ĞÔ
+* @retval uint32_t è¾“å…¥ææ€§
 *             @arg TIM_INPUT_POL_RISING
 *             @arg TIM_INPUT_POL_FALLING
 *             @arg TIM_INPUT_POL_BOTH
@@ -916,17 +916,17 @@ __STATIC_INLINE uint32_t std_tim_get_input_pol(TIM_t *timx, uint32_t channel_id)
 
 
 /**
-* @brief  ÅäÖÃTIMÍ¨µÀÊä³öµÄ¼«ĞÔ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  é…ç½®TIMé€šé“è¾“å‡ºçš„ææ€§
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @param  output_commpare_pol Êä³ö¼«ĞÔ
+* @param  output_commpare_pol è¾“å‡ºææ€§
 *             @arg TIM_OUTPUT_POL_HIGH
 *             @arg TIM_OUTPUT_POL_LOW
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_output_pol(TIM_t *timx, uint32_t channel_id, uint32_t output_commpare_pol)
 { 
@@ -934,14 +934,14 @@ __STATIC_INLINE void std_tim_set_output_pol(TIM_t *timx, uint32_t channel_id, ui
 }
 
 /**
-* @brief  »ñÈ¡TIMÍ¨µÀÊä³öµÄ¼«ĞÔ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  è·å–TIMé€šé“è¾“å‡ºçš„ææ€§
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @retval uint32_t Êä³ö¼«ĞÔ
+* @retval uint32_t è¾“å‡ºææ€§
 *             @arg TIM_OUTPUT_POL_HIGH
 *             @arg TIM_OUTPUT_POL_LOW
 */
@@ -952,16 +952,16 @@ __STATIC_INLINE uint32_t std_tim_get_output_pol(TIM_t *timx, uint32_t channel_id
 
 
 /**
-* @brief  ÅäÖÃTIM»¥²¹Í¨µÀµÄÊä³ö¼«ĞÔ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  é…ç½®TIMäº’è¡¥é€šé“çš„è¾“å‡ºææ€§
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
-* @param  negtive_output_pol »¥²¹Í¨µÀµÄÊä³ö¼«ĞÔ
+* @param  negtive_output_pol äº’è¡¥é€šé“çš„è¾“å‡ºææ€§
 *             @arg TIM_OUTPUT_NEGTIVE_POL_HIGH
 *             @arg TIM_OUTPUT_NEGTIVE_POL_LOW
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_negtive_output_pol(TIM_t *timx, uint32_t channel_id, uint32_t negtive_output_pol)
 { 
@@ -969,13 +969,13 @@ __STATIC_INLINE void std_tim_set_negtive_output_pol(TIM_t *timx, uint32_t channe
 }
 
 /**
-* @brief  »ñÈ¡TIM»¥²¹Í¨µÀµÄÊä³ö¼«ĞÔ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  è·å–TIMäº’è¡¥é€šé“çš„è¾“å‡ºææ€§
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
-* @retval uint32_t »¥²¹Í¨µÀµÄÊä³ö¼«ĞÔ
+* @retval uint32_t äº’è¡¥é€šé“çš„è¾“å‡ºææ€§
 *             @arg TIM_OUTPUT_NEGTIVE_POL_HIGH
 *             @arg TIM_OUTPUT_NEGTIVE_POL_LOW
 */
@@ -986,17 +986,17 @@ __STATIC_INLINE uint32_t std_tim_get_negtive_output_pol(TIM_t *timx, uint32_t ch
 
 
 /**
-* @brief  ÅäÖÃTIMÍ¨µÀµÄ¿ÕÏĞ×´Ì¬
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  é…ç½®TIMé€šé“çš„ç©ºé—²çŠ¶æ€
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @param  idle_state Í¨µÀ¿ÕÏĞ×´Ì¬
+* @param  idle_state é€šé“ç©ºé—²çŠ¶æ€
 *             @arg TIM_OUTPUT_IDLE_RESET
 *             @arg TIM_OUTPUT_IDLE_SET
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_output_idlestate(TIM_t *timx, uint32_t channel_id, uint32_t idle_state)
 { 
@@ -1004,14 +1004,14 @@ __STATIC_INLINE void std_tim_set_output_idlestate(TIM_t *timx, uint32_t channel_
 }
 
 /**
-* @brief  »ñÈ¡TIMÍ¨µÀµÄ¿ÕÏĞ×´Ì¬
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  è·å–TIMé€šé“çš„ç©ºé—²çŠ¶æ€
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @retval uint32_t Í¨µÀ¿ÕÏĞ×´Ì¬
+* @retval uint32_t é€šé“ç©ºé—²çŠ¶æ€
 *             @arg TIM_OUTPUT_IDLE_RESET
 *             @arg TIM_OUTPUT_IDLE_SET
 */
@@ -1021,16 +1021,16 @@ __STATIC_INLINE uint32_t std_tim_get_output_idlestate(TIM_t *timx, uint32_t chan
 }
 
 /**
-* @brief  ÅäÖÃTIM»¥²¹Í¨µÀµÄ¿ÕÏĞ×´Ì¬
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  é…ç½®TIMäº’è¡¥é€šé“çš„ç©ºé—²çŠ¶æ€
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
-* @param  negtive_idlestate »¥²¹Í¨µÀ¿ÕÏĞ×´Ì¬
+* @param  negtive_idlestate äº’è¡¥é€šé“ç©ºé—²çŠ¶æ€
 *             @arg TIM_OUTPUT_NEGTIVE_IDLE_RESET
 *             @arg TIM_OUTPUT_NEGTIVE_IDLE_SET
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_negtive_output_idlestate(TIM_t *timx, uint32_t channel_id, uint32_t negtive_idlestate)
 { 
@@ -1038,13 +1038,13 @@ __STATIC_INLINE void std_tim_set_negtive_output_idlestate(TIM_t *timx, uint32_t 
 }
 
 /**
-* @brief  »ñÈ¡TIM»¥²¹Í¨µÀµÄ¿ÕÏĞ×´Ì¬
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  è·å–TIMäº’è¡¥é€šé“çš„ç©ºé—²çŠ¶æ€
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
-* @retval uint32_t »¥²¹Í¨µÀ¿ÕÏĞ×´Ì¬
+* @retval uint32_t äº’è¡¥é€šé“ç©ºé—²çŠ¶æ€
 *             @arg TIM_OUTPUT_NEGTIVE_IDLE_RESET
 *             @arg TIM_OUTPUT_NEGTIVE_IDLE_SET
 */
@@ -1054,14 +1054,14 @@ __STATIC_INLINE uint32_t std_tim_get_negtive_output_idlestate(TIM_t *timx, uint3
 }
 
 /**
-* @brief  Ê¹ÄÜÇå³ıOCxREF¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  ä½¿èƒ½æ¸…é™¤OCxREFåŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_channel_clear_ocxref_enable(TIM_t *timx, uint32_t channel_id)
 {
@@ -1069,19 +1069,19 @@ __STATIC_INLINE void std_tim_channel_clear_ocxref_enable(TIM_t *timx, uint32_t c
     uint32_t shift_value = ((channel_id & 0x02) == 0)?0U:4U;    
     __IO uint32_t *preg = (__IO uint32_t *)((uint32_t)(&timx->CCM1) + shift_value);
     
-    /* Ê¹ÄÜÇå³ıOCxREF */ 
+    /* ä½¿èƒ½æ¸…é™¤OCxREF */ 
     *preg |= (TIM_CCM1_OC1CE << tmp_value);
 }
 
 /**
-* @brief  ½ûÖ¹Çå³ıOCxREF¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  ç¦æ­¢æ¸…é™¤OCxREFåŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_channel_clear_ocxref_disable(TIM_t *timx, uint32_t channel_id)
 {
@@ -1089,22 +1089,22 @@ __STATIC_INLINE void std_tim_channel_clear_ocxref_disable(TIM_t *timx, uint32_t 
     uint32_t shift_value = ((channel_id & 0x02) == 0)?0U:4U;      
     __IO uint32_t *preg = (__IO uint32_t *)((uint32_t)(&timx->CCM1) + shift_value);
     
-    /* ½ûÖ¹Çå³ıOCxREF */ 
+    /* ç¦æ­¢æ¸…é™¤OCxREF */ 
     *preg &= (~(TIM_CCM1_OC1CE << tmp_value));
 }
 
 /**
-* @brief  ÉèÖÃÊäÈë²¶»ñÔ¤·ÖÆµÖµ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  è®¾ç½®è¾“å…¥æ•è·é¢„åˆ†é¢‘å€¼
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
-* @param  icxpsc_num ÊäÈë²¶»ñÔ¤·ÖÆµÖµ
+* @param  icxpsc_num è¾“å…¥æ•è·é¢„åˆ†é¢‘å€¼
 *             @arg TIM_INPUT_CAPTURE_PSC_DIV1
 *             @arg TIM_INPUT_CAPTURE_PSC_DIV2
 *             @arg TIM_INPUT_CAPTURE_PSC_DIV4
 *             @arg TIM_INPUT_CAPTURE_PSC_DIV8
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_channel_icxpsc(TIM_t *timx, uint32_t channel_id, uint32_t icxpsc_num)
 {
@@ -1112,18 +1112,18 @@ __STATIC_INLINE void std_tim_set_channel_icxpsc(TIM_t *timx, uint32_t channel_id
     uint32_t shift_value = ((channel_id & 0x02) == 0)?0U:4U;      
     __IO uint32_t *preg = (__IO uint32_t *)((uint32_t)(&timx->CCM1) + shift_value);
     
-    /* ÉèÖÃÊäÈë²¶»ñÔ¤·ÖÆµ */ 
+    /* è®¾ç½®è¾“å…¥æ•è·é¢„åˆ†é¢‘ */ 
     MODIFY_REG(*preg, (TIM_CCM1_IC1PSC << tmp_value), (icxpsc_num << tmp_value));
 }
 
 
 /**
-* @brief  »ñÈ¡ÊäÈë²¶»ñÔ¤·ÖÆµÖµ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  è·å–è¾“å…¥æ•è·é¢„åˆ†é¢‘å€¼
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
-* @retval uint32_t ÊäÈë²¶»ñÔ¤·ÖÆµÖµ
+* @retval uint32_t è¾“å…¥æ•è·é¢„åˆ†é¢‘å€¼
 *             @arg TIM_INPUT_CAPTURE_PSC_DIV1
 *             @arg TIM_INPUT_CAPTURE_PSC_DIV2
 *             @arg TIM_INPUT_CAPTURE_PSC_DIV4
@@ -1135,21 +1135,21 @@ __STATIC_INLINE uint32_t std_tim_get_channel_icxpsc(TIM_t *timx, uint32_t channe
     uint32_t shift_value = ((channel_id & 0x02) == 0)?0U:4U;        
     __IO uint32_t *preg = (__IO uint32_t *)((uint32_t)(&timx->CCM1) + shift_value);
     
-    /* »ñÈ¡ÊäÈë²¶»ñÔ¤·ÖÆµ */ 
+    /* è·å–è¾“å…¥æ•è·é¢„åˆ†é¢‘ */ 
     return ((*preg >> tmp_value) & TIM_CCM1_IC1PSC);
     
 }
 
 
 /**
-* @brief  Ê¹ÄÜTIMÍ¨µÀÊä³ö±È½ÏµÄÔ¤×°ÔØ¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  ä½¿èƒ½TIMé€šé“è¾“å‡ºæ¯”è¾ƒçš„é¢„è£…è½½åŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_preloadccx_channel_enable(TIM_t *timx, uint32_t channel_id)
 { 
@@ -1157,20 +1157,20 @@ __STATIC_INLINE void std_tim_preloadccx_channel_enable(TIM_t *timx, uint32_t cha
     uint32_t shift_value = ((channel_id & 0x02) == 0)?0U:4U;        
     __IO uint32_t *preg = (__IO uint32_t *)((uint32_t)(&timx->CCM1) + shift_value);    
  
-    /* Ê¹ÄÜÊä³ö±È½ÏÔ¤×°ÔØ¹¦ÄÜ */ 
+    /* ä½¿èƒ½è¾“å‡ºæ¯”è¾ƒé¢„è£…è½½åŠŸèƒ½ */ 
     *preg |= (TIM_CCM1_OC1PE << tmp_value);
 }
 
 
 /**
-* @brief  ½ûÖ¹TIMÍ¨µÀÊä³ö±È½ÏµÄÔ¤×°ÔØ¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  ç¦æ­¢TIMé€šé“è¾“å‡ºæ¯”è¾ƒçš„é¢„è£…è½½åŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_preloadccx_channel_disable(TIM_t *timx, uint32_t channel_id)
 { 
@@ -1178,20 +1178,20 @@ __STATIC_INLINE void std_tim_preloadccx_channel_disable(TIM_t *timx, uint32_t ch
     uint32_t shift_value = ((channel_id & 0x02) == 0)?0U:4U;        
     __IO uint32_t *preg = (__IO uint32_t *)((uint32_t)(&timx->CCM1) + shift_value);    
  
-    /* Ê¹ÄÜÊä³ö±È½ÏÔ¤×°ÔØ¹¦ÄÜ */ 
+    /* ä½¿èƒ½è¾“å‡ºæ¯”è¾ƒé¢„è£…è½½åŠŸèƒ½ */ 
     *preg &= (~(TIM_CCM1_OC1PE << tmp_value));
 }
 
 
 /**
-* @brief  Ê¹ÄÜTIMÍ¨µÀ¿ìËÙÄ£Ê½
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  ä½¿èƒ½TIMé€šé“å¿«é€Ÿæ¨¡å¼
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_fastmode_channel_enable(TIM_t *timx, uint32_t channel_id)
 { 
@@ -1199,20 +1199,20 @@ __STATIC_INLINE void std_tim_fastmode_channel_enable(TIM_t *timx, uint32_t chann
     uint32_t shift_value = ((channel_id & 0x02) == 0)?0U:4U;        
     __IO uint32_t *preg = (__IO uint32_t *)((uint32_t)(&timx->CCM1) + shift_value);    
  
-    /* Ê¹ÄÜÊä³ö±È½ÏÔ¤×°ÔØ¹¦ÄÜ */ 
+    /* ä½¿èƒ½è¾“å‡ºæ¯”è¾ƒé¢„è£…è½½åŠŸèƒ½ */ 
     *preg |= (TIM_CCM1_OC1FE << tmp_value);
 }
 
 
 /**
-* @brief  ½ûÖ¹TIMÍ¨µÀ¿ìËÙÄ£Ê½
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  ç¦æ­¢TIMé€šé“å¿«é€Ÿæ¨¡å¼
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_fastmode_channel_disable(TIM_t *timx, uint32_t channel_id)
 { 
@@ -1220,20 +1220,20 @@ __STATIC_INLINE void std_tim_fastmode_channel_disable(TIM_t *timx, uint32_t chan
     uint32_t shift_value = ((channel_id & 0x02) == 0)?0U:4U;        
     __IO uint32_t *preg = (__IO uint32_t *)((uint32_t)(&timx->CCM1) + shift_value);    
  
-    /* ½ûÖ¹Êä³ö¿ìËÙÄ£Ê½ */ 
+    /* ç¦æ­¢è¾“å‡ºå¿«é€Ÿæ¨¡å¼ */ 
     *preg &= (~(TIM_CCM1_OC1FE << tmp_value));
 }
 
 
 /**
-* @brief  ÅäÖÃÍ¨µÀÊä³öÄ£Ê½
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  é…ç½®é€šé“è¾“å‡ºæ¨¡å¼
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @param  ocmode Êä³öÄ£Ê½Ñ¡Ôñ
+* @param  ocmode è¾“å‡ºæ¨¡å¼é€‰æ‹©
 *             @arg TIM_OUTPUT_MODE_FROZEN         
 *             @arg TIM_OUTPUT_MODE_ACTIVE         
 *             @arg TIM_OUTPUT_MODE_INACTIVE       
@@ -1242,7 +1242,7 @@ __STATIC_INLINE void std_tim_fastmode_channel_disable(TIM_t *timx, uint32_t chan
 *             @arg TIM_OUTPUT_MODE_FORCED_ACTIVE  
 *             @arg TIM_OUTPUT_MODE_PWM1           
 *             @arg TIM_OUTPUT_MODE_PWM2                   
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_ocmode(TIM_t *timx, uint32_t channel_id, uint32_t ocmode)
 {
@@ -1255,15 +1255,15 @@ __STATIC_INLINE void std_tim_set_ocmode(TIM_t *timx, uint32_t channel_id, uint32
 
 
 /**
-* @brief  »ñÈ¡Í¨µÀÊä³öÄ£Ê½
-* @param  timx TIMÍâÉè
-* @param  channel_id Ö¸¶¨TIMÍ¨µÀ
+* @brief  è·å–é€šé“è¾“å‡ºæ¨¡å¼
+* @param  timx TIMå¤–è®¾
+* @param  channel_id æŒ‡å®šTIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @note   ¸Ãº¯ÊıÖ´ĞĞºó£¬»á½«Í¨µÀÉèÖÃÎªÊä³öÄ£Ê½
-* @retval uint32_t Êä³öÄ£Ê½Ñ¡Ôñ
+* @note   è¯¥å‡½æ•°æ‰§è¡Œåï¼Œä¼šå°†é€šé“è®¾ç½®ä¸ºè¾“å‡ºæ¨¡å¼
+* @retval uint32_t è¾“å‡ºæ¨¡å¼é€‰æ‹©
 *             @arg TIM_OUTPUT_MODE_FROZEN         
 *             @arg TIM_OUTPUT_MODE_ACTIVE         
 *             @arg TIM_OUTPUT_MODE_INACTIVE       
@@ -1283,15 +1283,15 @@ __STATIC_INLINE uint32_t std_tim_get_ocmode(TIM_t *timx, uint32_t channel_id)
 }
 
 /**
-* @brief  ÉèÖÃ²¶»ñ/±È½Ï¼Ä´æÆ÷µÄÖµ
-* @param  timx TIMÍâÉè
-* @param  ccx_value ²¶»ñ±È½Ï¼Ä´æÆ÷µÄÖµ
-* @param  channel_id TIM Í¨µÀÅäÖÃ
+* @brief  è®¾ç½®æ•è·/æ¯”è¾ƒå¯„å­˜å™¨çš„å€¼
+* @param  timx TIMå¤–è®¾
+* @param  ccx_value æ•è·æ¯”è¾ƒå¯„å­˜å™¨çš„å€¼
+* @param  channel_id TIM é€šé“é…ç½®
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @retval std_status_t ·µ»ØAPIÖ´ĞĞ½á¹û
+* @retval std_status_t è¿”å›APIæ‰§è¡Œç»“æœ
 */
 __STATIC_INLINE void std_tim_set_ccx_value(TIM_t *timx, uint32_t channel_id, uint32_t ccx_value)
 {    
@@ -1311,14 +1311,14 @@ __STATIC_INLINE void std_tim_set_ccx_value(TIM_t *timx, uint32_t channel_id, uin
 
 
 /**
-* @brief  »ñÈ¡²¶»ñ/±È½Ï¼Ä´æÆ÷µÄÖµ
-* @param  timx TIMÍâÉè
-* @param  channel_id TIM Í¨µÀÅäÖÃ
+* @brief  è·å–æ•è·/æ¯”è¾ƒå¯„å­˜å™¨çš„å€¼
+* @param  timx TIMå¤–è®¾
+* @param  channel_id TIM é€šé“é…ç½®
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
 *             @arg TIM_CHANNEL_3
 *             @arg TIM_CHANNEL_4
-* @retval uint32_t ²¶»ñ±È½Ï¼Ä´æÆ÷µÄÖµ
+* @retval uint32_t æ•è·æ¯”è¾ƒå¯„å­˜å™¨çš„å€¼
 */
 __STATIC_INLINE uint32_t std_tim_get_ccx_value(TIM_t *timx, uint32_t channel_id)
 {
@@ -1339,16 +1339,16 @@ __STATIC_INLINE uint32_t std_tim_get_ccx_value(TIM_t *timx, uint32_t channel_id)
 
 
 /**
-* @brief  ÉèÖÃÍ¨µÀÎªÊäÈëÄ£Ê½
-* @param  timx TIMÍâÉè
-* @param  channel_id TIM Í¨µÀÅäÖÃ
+* @brief  è®¾ç½®é€šé“ä¸ºè¾“å…¥æ¨¡å¼
+* @param  timx TIMå¤–è®¾
+* @param  channel_id TIM é€šé“é…ç½®
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
-* @param  icmode ÊäÈëÄ£Ê½Ñ¡Ôñ
+* @param  icmode è¾“å…¥æ¨¡å¼é€‰æ‹©
 *             @arg TIM_INPUT_CAPTURE_SEL_DIRECTTI
 *             @arg TIM_INPUT_CAPTURE_SEL_INDIRECTTI
 *             @arg TIM_INPUT_CAPTURE_SEL_TRC
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_icmode(TIM_t *timx, uint32_t channel_id, uint32_t icmode)
 {
@@ -1360,12 +1360,12 @@ __STATIC_INLINE void std_tim_set_icmode(TIM_t *timx, uint32_t channel_id, uint32
 }
 
 /**
-* @brief  »ñÈ¡Í¨µÀµÄÊäÈë×´Ì¬
-* @param  timx TIMÍâÉè
-* @param  channel_id TIM Í¨µÀÅäÖÃ
+* @brief  è·å–é€šé“çš„è¾“å…¥çŠ¶æ€
+* @param  timx TIMå¤–è®¾
+* @param  channel_id TIM é€šé“é…ç½®
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
-* @retval uint32_t ÊäÈëÄ£Ê½Ñ¡Ôñ
+* @retval uint32_t è¾“å…¥æ¨¡å¼é€‰æ‹©
 *             @arg TIM_INPUT_CAPTURE_SEL_DIRECTTI
 *             @arg TIM_INPUT_CAPTURE_SEL_INDIRECTTI
 *             @arg TIM_INPUT_CAPTURE_SEL_TRC
@@ -1380,13 +1380,13 @@ __STATIC_INLINE uint32_t std_tim_get_icmode(TIM_t *timx, uint32_t channel_id)
 }
 
 /**
-* @brief  ÉèÖÃÊäÈëÍ¨µÀµÄÂË²¨²ÎÊı
-* @param  timx TIMÍâÉè
-* @param  channel_id TIM Í¨µÀÅäÖÃ
+* @brief  è®¾ç½®è¾“å…¥é€šé“çš„æ»¤æ³¢å‚æ•°
+* @param  timx TIMå¤–è®¾
+* @param  channel_id TIM é€šé“é…ç½®
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
-* @param  icfilter ÊäÈëÂË²¨²ÎÊı£¬ÆäÖµµÄ·¶Î§Îª:0x00~0x0F
-* @retval ÎŞ
+* @param  icfilter è¾“å…¥æ»¤æ³¢å‚æ•°ï¼Œå…¶å€¼çš„èŒƒå›´ä¸º:0x00~0x0F
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_icfilter(TIM_t *timx, uint32_t channel_id, uint32_t icfilter)
 {
@@ -1398,12 +1398,12 @@ __STATIC_INLINE void std_tim_set_icfilter(TIM_t *timx, uint32_t channel_id, uint
 }
 
 /**
-* @brief  »ñÈ¡ÊäÈëÍ¨µÀµÄÂË²¨²ÎÊı
-* @param  timx TIMÍâÉè
-* @param  channel_id TIM Í¨µÀÅäÖÃ
+* @brief  è·å–è¾“å…¥é€šé“çš„æ»¤æ³¢å‚æ•°
+* @param  timx TIMå¤–è®¾
+* @param  channel_id TIM é€šé“é…ç½®
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
-* @retval uint32_t ÊäÈëÂË²¨²ÎÊı£¬ÆäÖµµÄ·¶Î§Îª:0x00~0x0F
+* @retval uint32_t è¾“å…¥æ»¤æ³¢å‚æ•°ï¼Œå…¶å€¼çš„èŒƒå›´ä¸º:0x00~0x0F
 */
 __STATIC_INLINE uint32_t std_tim_get_icfilter(TIM_t *timx, uint32_t channel_id)
 {
@@ -1416,9 +1416,9 @@ __STATIC_INLINE uint32_t std_tim_get_icfilter(TIM_t *timx, uint32_t channel_id)
 
 
 /**
-* @brief  ÉèÖÃÖ÷Ä£Ê½£¨TRIG_OUT£©Êä³ö²ÎÊı
-* @param  timx TIMÍâÉè
-* @param  trigout_mode Ö÷Ä£Ê½Êä³ö²ÎÊı¶¨Òå
+* @brief  è®¾ç½®ä¸»æ¨¡å¼ï¼ˆTRIG_OUTï¼‰è¾“å‡ºå‚æ•°
+* @param  timx TIMå¤–è®¾
+* @param  trigout_mode ä¸»æ¨¡å¼è¾“å‡ºå‚æ•°å®šä¹‰
 *             @arg TIM_TRIG_OUT_RESET
 *             @arg TIM_TRIG_OUT_ENABLE
 *             @arg TIM_TRIG_OUT_UPDATE
@@ -1427,7 +1427,7 @@ __STATIC_INLINE uint32_t std_tim_get_icfilter(TIM_t *timx, uint32_t channel_id)
 *             @arg TIM_TRIG_OUT_OC2REF   
 *             @arg TIM_TRIG_OUT_OC3REF   
 *             @arg TIM_TRIG_OUT_OC4REF
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_trigout_mode_config(TIM_t *timx, uint32_t trigout_mode)
 {
@@ -1436,14 +1436,14 @@ __STATIC_INLINE void std_tim_trigout_mode_config(TIM_t *timx, uint32_t trigout_m
 
 
 /**
-* @brief  ÉèÖÃ´ÓÄ£Ê½²ÎÊı
-* @param  timx TIMÍâÉè
-* @param  slave_mode ´ÓÄ£Ê½²ÎÊı¶¨Òå
+* @brief  è®¾ç½®ä»æ¨¡å¼å‚æ•°
+* @param  timx TIMå¤–è®¾
+* @param  slave_mode ä»æ¨¡å¼å‚æ•°å®šä¹‰
 *             @arg TIM_SLAVE_MODE_DISABLE 
 *             @arg TIM_SLAVE_MODE_RESET   
 *             @arg TIM_SLAVE_MODE_GATED   
 *             @arg TIM_SLAVE_MODE_TRIG    
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_slave_mode_config(TIM_t *timx, uint32_t slave_mode)
 {
@@ -1451,14 +1451,14 @@ __STATIC_INLINE void std_tim_slave_mode_config(TIM_t *timx, uint32_t slave_mode)
 }
 
 /**
-* @brief  ÉèÖÃ´¥·¢ÊäÈëÔ´
-* @param  timx TIMÍâÉè
-* @param  trig_source ´¥·¢ÊäÈëÔ´¶¨Òå
+* @brief  è®¾ç½®è§¦å‘è¾“å…¥æº
+* @param  timx TIMå¤–è®¾
+* @param  trig_source è§¦å‘è¾“å…¥æºå®šä¹‰
 *             @arg TIM_TRIG_SOURCE_ITR0    
 *             @arg TIM_TRIG_SOURCE_TI1F_ED
 *             @arg TIM_TRIG_SOURCE_TI1FP1 
 *             @arg TIM_TRIG_SOURCE_TI2FP2  
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_trig_source_config(TIM_t *timx, uint32_t trig_source)
 {
@@ -1467,9 +1467,9 @@ __STATIC_INLINE void std_tim_trig_source_config(TIM_t *timx, uint32_t trig_sourc
 
 
 /**
-* @brief  Ê¹ÄÜÖ÷/´ÓÄ£Ê½
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ä½¿èƒ½ä¸»/ä»æ¨¡å¼
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_master_mode_enable(TIM_t *timx)
 {
@@ -1478,9 +1478,9 @@ __STATIC_INLINE void std_tim_master_mode_enable(TIM_t *timx)
 
 
 /**
-* @brief  ½ûÖ¹Ö÷/´ÓÄ£Ê½
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ç¦æ­¢ä¸»/ä»æ¨¡å¼
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_master_mode_disable(TIM_t *timx)
 {
@@ -1489,12 +1489,12 @@ __STATIC_INLINE void std_tim_master_mode_disable(TIM_t *timx)
 
 
 /**
-* @brief  ÅäÖÃTIM OCREF CLEARÊäÈëÔ´
-* @param  timx TIMÍâÉè
-* @param  ocrefclr_source OCREF CLRÔ´Ñ¡Ôñ
-*             @arg TIM_CLEAR_INPUT_SRC_COMP1: OCREF CLRÁ¬½Óµ½COMP1
-*             @arg TIM_CLEAR_INPUT_SRC_COMP2: OCREF CLRÁ¬½Óµ½COMP2
-* @retval ÎŞ
+* @brief  é…ç½®TIM OCREF CLEARè¾“å…¥æº
+* @param  timx TIMå¤–è®¾
+* @param  ocrefclr_source OCREF CLRæºé€‰æ‹©
+*             @arg TIM_CLEAR_INPUT_SRC_COMP1: OCREF CLRè¿æ¥åˆ°COMP1
+*             @arg TIM_CLEAR_INPUT_SRC_COMP2: OCREF CLRè¿æ¥åˆ°COMP2
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ocrefclr_source_config(TIM_t *timx, uint32_t ocrefclr_source)
 {
@@ -1503,10 +1503,10 @@ __STATIC_INLINE void std_tim_ocrefclr_source_config(TIM_t *timx, uint32_t ocrefc
 
 
 /**
-* @brief  Ê¹ÄÜÊäÈë²¶»ñ/Êä³ö±È½Ï»»ÏàÔ¤×°ÔØ
-* @param  timx TIMÍâÉè
-* @note   ¸Ãº¯Êı½ö¶Ô»¥²¹Í¨µÀÓĞĞ§
-* @retval ÎŞ
+* @brief  ä½¿èƒ½è¾“å…¥æ•è·/è¾“å‡ºæ¯”è¾ƒæ¢ç›¸é¢„è£…è½½
+* @param  timx TIMå¤–è®¾
+* @note   è¯¥å‡½æ•°ä»…å¯¹äº’è¡¥é€šé“æœ‰æ•ˆ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ccreload_enable(TIM_t *timx)
 {
@@ -1514,10 +1514,10 @@ __STATIC_INLINE void std_tim_ccreload_enable(TIM_t *timx)
 }
 
 /**
-* @brief  ½ûÖ¹ÊäÈë²¶»ñ/Êä³ö±È½Ï»»ÏàÔ¤×°ÔØ
-* @param  timx TIMÍâÉè
-* @note   ¸Ãº¯Êı½ö¶Ô»¥²¹Í¨µÀÓĞĞ§
-* @retval ÎŞ
+* @brief  ç¦æ­¢è¾“å…¥æ•è·/è¾“å‡ºæ¯”è¾ƒæ¢ç›¸é¢„è£…è½½
+* @param  timx TIMå¤–è®¾
+* @note   è¯¥å‡½æ•°ä»…å¯¹äº’è¡¥é€šé“æœ‰æ•ˆ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ccreload_disable(TIM_t *timx)
 {
@@ -1526,13 +1526,13 @@ __STATIC_INLINE void std_tim_ccreload_disable(TIM_t *timx)
 
 
 /**
-* @brief  ÅäÖÃ»»Ïà¿ØÖÆ¸üĞÂÔ´Ñ¡Ôñ
-* @param  timx TIMÍâÉè
-* @param  ccupdate_source »»Ïà¸üĞÂÔ´
+* @brief  é…ç½®æ¢ç›¸æ§åˆ¶æ›´æ–°æºé€‰æ‹©
+* @param  timx TIMå¤–è®¾
+* @param  ccupdate_source æ¢ç›¸æ›´æ–°æº
 *             @arg TIM_COM_SOFTWARE
 *             @arg TIM_COM_TRGI
-* @note   ¸Ãº¯Êı½ö¶Ô»¥²¹Í¨µÀÓĞĞ§
-* @retval ÎŞ
+* @note   è¯¥å‡½æ•°ä»…å¯¹äº’è¡¥é€šé“æœ‰æ•ˆ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_cc_set_update_source(TIM_t *timx, uint32_t ccupdate_source)
 {
@@ -1542,9 +1542,9 @@ __STATIC_INLINE void std_tim_cc_set_update_source(TIM_t *timx, uint32_t ccupdate
 
 
 /**
-* @brief  Ê¹ÄÜTI1µÄXOR¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ä½¿èƒ½TI1çš„XORåŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ti1xor_enable(TIM_t *timx)
 {
@@ -1553,9 +1553,9 @@ __STATIC_INLINE void std_tim_ti1xor_enable(TIM_t *timx)
 
 
 /**
-* @brief  ½ûÖ¹TI1µÄXOR¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ç¦æ­¢TI1çš„XORåŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ti1xor_disable(TIM_t *timx)
 {
@@ -1564,29 +1564,29 @@ __STATIC_INLINE void std_tim_ti1xor_disable(TIM_t *timx)
 
 
 /**
-* @brief  ÅäÖÃTIMÊäÈëÍ¨µÀÖØÓ³Éä¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @param  ti_sel Í¨µÀÊäÈëÔ´Ñ¡Ôñ²ÎÊı
-*             @arg TIM_TIM3_TI1_GPIO:           TIM3 TI1Á¬½Óµ½GPIO
-*             @arg TIM_TIM3_TI1_COMP1:          TIM3 TI1Á¬½Óµ½COMP1Êä³ö
-*             @arg TIM_TIM3_TI2_GPIO:           TIM3 TI2Á¬½Óµ½GPIO
-*             @arg TIM_TIM3_TI2_COMP2:          TIM3 TI2Á¬½Óµ½COMP2Êä³ö
-* @param  channel_id TIMÍ¨µÀ
+* @brief  é…ç½®TIMè¾“å…¥é€šé“é‡æ˜ å°„åŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @param  ti_sel é€šé“è¾“å…¥æºé€‰æ‹©å‚æ•°
+*             @arg TIM_TIM3_TI1_GPIO:           TIM3 TI1è¿æ¥åˆ°GPIO
+*             @arg TIM_TIM3_TI1_COMP1:          TIM3 TI1è¿æ¥åˆ°COMP1è¾“å‡º
+*             @arg TIM_TIM3_TI2_GPIO:           TIM3 TI2è¿æ¥åˆ°GPIO
+*             @arg TIM_TIM3_TI2_COMP2:          TIM3 TI2è¿æ¥åˆ°COMP2è¾“å‡º
+* @param  channel_id TIMé€šé“
 *             @arg TIM_CHANNEL_1
 *             @arg TIM_CHANNEL_2
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_channel_remap(TIM_t *timx, uint32_t ti_sel, uint32_t channel_id)
 {
-    MODIFY_REG(timx->TISEL, (TIM_TISEL_TI1_SEL << (channel_id << 3)), ti_sel);
+    MODIFY_REG(timx->TISEL, (TIM_TISEL_TI1_SEL << (channel_id << 8)), ti_sel);		// davidd modify from 3 to 8, reg: timx->TISEL
 }
 
 
 
 /**
-* @brief  TIMÊä³öÊ¹ÄÜ
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  TIMè¾“å‡ºä½¿èƒ½
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_moen_enable(TIM_t *timx)            
 {
@@ -1594,9 +1594,9 @@ __STATIC_INLINE void std_tim_moen_enable(TIM_t *timx)
 }
 
 /**
-* @brief  TIMÊä³ö½ûÖ¹
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  TIMè¾“å‡ºç¦æ­¢
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_moen_disable(TIM_t *timx)        
 {
@@ -1604,9 +1604,9 @@ __STATIC_INLINE void std_tim_moen_disable(TIM_t *timx)
 }
 
 /**
-* @brief  TIM×Ô¶¯Êä³öÊ¹ÄÜ
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  TIMè‡ªåŠ¨è¾“å‡ºä½¿èƒ½
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_aoen_enable(TIM_t *timx)            
 {
@@ -1614,9 +1614,9 @@ __STATIC_INLINE void std_tim_aoen_enable(TIM_t *timx)
 }
 
 /**
-* @brief  TIM×Ô¶¯Êä³ö½ûÖ¹
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  TIMè‡ªåŠ¨è¾“å‡ºç¦æ­¢
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_aoen_disable(TIM_t *timx)        
 {
@@ -1625,9 +1625,9 @@ __STATIC_INLINE void std_tim_aoen_disable(TIM_t *timx)
 
 
 /** 
-* @brief  Ê¹ÄÜOSSR¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ä½¿èƒ½OSSRåŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ossr_enable(TIM_t *timx)                
 {
@@ -1635,9 +1635,9 @@ __STATIC_INLINE void std_tim_ossr_enable(TIM_t *timx)
 }
 
 /** 
-* @brief  ½ûÖ¹OSSR¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ç¦æ­¢OSSRåŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ossr_disable(TIM_t *timx)                
 {
@@ -1645,9 +1645,9 @@ __STATIC_INLINE void std_tim_ossr_disable(TIM_t *timx)
 }
 
 /** 
-* @brief  Ê¹ÄÜOSSI¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ä½¿èƒ½OSSIåŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ossi_enable(TIM_t *timx)                
 {
@@ -1655,9 +1655,9 @@ __STATIC_INLINE void std_tim_ossi_enable(TIM_t *timx)
 }
 
 /** 
-* @brief  ½ûÖ¹OSSI¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ç¦æ­¢OSSIåŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_ossi_disable(TIM_t *timx)                
 {
@@ -1666,9 +1666,9 @@ __STATIC_INLINE void std_tim_ossi_disable(TIM_t *timx)
 
 
 /** 
-* @brief  Ê¹ÄÜTIM¶ÏÂ·
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ä½¿èƒ½TIMæ–­è·¯
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_bken_enable(TIM_t *timx)                
 {
@@ -1676,9 +1676,9 @@ __STATIC_INLINE void std_tim_bken_enable(TIM_t *timx)
 }
 
 /** 
-* @brief  ½ûÖ¹TIM¶ÏÂ·
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ç¦æ­¢TIMæ–­è·¯
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_bken_disable(TIM_t *timx)                
 {
@@ -1687,13 +1687,13 @@ __STATIC_INLINE void std_tim_bken_disable(TIM_t *timx)
 
 
 /** 
-* @brief  Ê¹ÄÜ¶ÏÂ·Ô´
-* @param  timx TIMÍâÉè
-* @param  brk_source ¶ÏÂ·ÊäÈëÔ´¶¨Òå
+* @brief  ä½¿èƒ½æ–­è·¯æº
+* @param  timx TIMå¤–è®¾
+* @param  brk_source æ–­è·¯è¾“å…¥æºå®šä¹‰
 *             @arg TIM_BREAK_INPUT_SRC_GPIO
 *             @arg TIM_BREAK_INPUT_SRC_COMP1
 *             @arg TIM_BREAK_INPUT_SRC_COMP2
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_brk_source_enable(TIM_t *timx, uint32_t brk_source)
 {
@@ -1702,16 +1702,16 @@ __STATIC_INLINE void std_tim_brk_source_enable(TIM_t *timx, uint32_t brk_source)
 
 
 /** 
-* @brief  ÅäÖÃ¶ÏÂ·µÄ¼«ĞÔ
-* @param  timx TIMÍâÉè
-* @param  brk_source ¶ÏÂ·ÊäÈëÔ´¶¨Òå
+* @brief  é…ç½®æ–­è·¯çš„ææ€§
+* @param  timx TIMå¤–è®¾
+* @param  brk_source æ–­è·¯è¾“å…¥æºå®šä¹‰
 *             @arg TIM_BREAK_INPUT_SRC_GPIO
 *             @arg TIM_BREAK_INPUT_SRC_COMP1
 *             @arg TIM_BREAK_INPUT_SRC_COMP2
-* @param  brk_pol ¶ÏÂ·ÊäÈë¼«ĞÔ¶¨Òå
+* @param  brk_pol æ–­è·¯è¾“å…¥ææ€§å®šä¹‰
 *             @arg TIM_BREAK_INPUT_POL_HIGH
 *             @arg TIM_BREAK_INPUT_POL_LOW
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_brk_pol(TIM_t *timx, uint32_t brk_source, uint32_t brk_pol)
 {   
@@ -1720,10 +1720,10 @@ __STATIC_INLINE void std_tim_set_brk_pol(TIM_t *timx, uint32_t brk_source, uint3
 
 
 /**
-* @brief  ÅäÖÃTIMËÀÇøÊ±¼ä
-* @param  timx TIMÍâÉè
-* @param  deadtime ËÀÇøÊ±¼ä£¬¸ÃÖµµÄ·¶Î§:0x00~0xFF
-* @retval ÎŞ
+* @brief  é…ç½®TIMæ­»åŒºæ—¶é—´
+* @param  timx TIMå¤–è®¾
+* @param  deadtime æ­»åŒºæ—¶é—´ï¼Œè¯¥å€¼çš„èŒƒå›´:0x00~0xFF
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_deadtime(TIM_t *timx, uint32_t deadtime)
 {
@@ -1732,9 +1732,9 @@ __STATIC_INLINE void std_tim_set_deadtime(TIM_t *timx, uint32_t deadtime)
 
 
 /**
-* @brief  »ñÈ¡TIMËÀÇøÊ±¼ä
-* @param  timx TIMÍâÉè
-* @retval uint32_t ËÀÇøÊ±¼ä£¬ÆäÖµ·¶Î§Îª:0x00~0xFF
+* @brief  è·å–TIMæ­»åŒºæ—¶é—´
+* @param  timx TIMå¤–è®¾
+* @retval uint32_t æ­»åŒºæ—¶é—´ï¼Œå…¶å€¼èŒƒå›´ä¸º:0x00~0xFF
 */
 __STATIC_INLINE uint32_t std_tim_get_deadtime(TIM_t *timx)
 {
@@ -1743,14 +1743,14 @@ __STATIC_INLINE uint32_t std_tim_get_deadtime(TIM_t *timx)
 
 
 /**
-* @brief  ÅäÖÃTIMµÄËø¶¨¼¶±ğ
-* @param  timx TIMÍâÉè
-* @param  locklevel LOCKËø¶¨¼¶±ğ
+* @brief  é…ç½®TIMçš„é”å®šçº§åˆ«
+* @param  timx TIMå¤–è®¾
+* @param  locklevel LOCKé”å®šçº§åˆ«
 *             @arg TIM_LOCK_LEVEL_OFF
 *             @arg TIM_LOCK_LEVEL1
 *             @arg TIM_LOCK_LEVEL2
 *             @arg TIM_LOCK_LEVEL3
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_set_locklevel(TIM_t *timx, uint32_t locklevel)
 {
@@ -1759,9 +1759,9 @@ __STATIC_INLINE void std_tim_set_locklevel(TIM_t *timx, uint32_t locklevel)
 
 
 /**
-* @brief  »ñÈ¡TIMËø¶¨¼¶±ğ
-* @param  timx TIMÍâÉè
-* @retval uint32_t LOCKËø¶¨¼¶±ğ
+* @brief  è·å–TIMé”å®šçº§åˆ«
+* @param  timx TIMå¤–è®¾
+* @retval uint32_t LOCKé”å®šçº§åˆ«
 *             @arg TIM_LOCK_LEVEL_OFF
 *             @arg TIM_LOCK_LEVEL1
 *             @arg TIM_LOCK_LEVEL2
@@ -1774,9 +1774,9 @@ __STATIC_INLINE uint32_t std_tim_get_locklevel(TIM_t *timx)
 
 
 /** 
-* @brief  Ê¹ÄÜLOCKUPËø¶¨¹¦ÄÜ
-* @param  timx TIMÍâÉè
-* @retval ÎŞ
+* @brief  ä½¿èƒ½LOCKUPé”å®šåŠŸèƒ½
+* @param  timx TIMå¤–è®¾
+* @retval æ— 
 */
 __STATIC_INLINE void std_tim_lockup_lock_enable(TIM_t *timx)
 {
@@ -1786,20 +1786,20 @@ __STATIC_INLINE void std_tim_lockup_lock_enable(TIM_t *timx)
 
 
 
-/* »ù´¡¼ÆÊı¹¦ÄÜ³õÊ¼»¯/È¥³õÊ¼»¯ */
+/* åŸºç¡€è®¡æ•°åŠŸèƒ½åˆå§‹åŒ–/å»åˆå§‹åŒ– */
 void std_tim_deinit(TIM_t *timx);
 void std_tim_init(TIM_t *timx, std_tim_basic_init_t *tim_init_param);
 void std_tim_struct_init(std_tim_basic_init_t *tim_init_struct);
 
-/* ÊäÈë²¶»ñ³õÊ¼»¯ */
+/* è¾“å…¥æ•è·åˆå§‹åŒ– */
 void std_tim_input_capture_init(TIM_t *timx, std_tim_input_capture_init_t *input_config, uint32_t channel_id);
 void std_tim_input_capture_struct_init(std_tim_input_capture_init_t *input_init_struct);
 
-/* Êä³öÄ£Ê½³õÊ¼»¯¼°²ÎÊıÅäÖÃº¯Êı */
+/* è¾“å‡ºæ¨¡å¼åˆå§‹åŒ–åŠå‚æ•°é…ç½®å‡½æ•° */
 void std_tim_output_compare_init(TIM_t *timx, std_tim_output_compare_init_t *output_config, uint32_t channel_id);
 void std_tim_output_compare_struct_init(std_tim_output_compare_init_t *output_init_struct);
 
-/* ¶ÏÂ·¹¦ÄÜ³õÊ¼»¯ */
+/* æ–­è·¯åŠŸèƒ½åˆå§‹åŒ– */
 void std_tim_bdt_init(TIM_t* timx, std_tim_break_init_t *bdt_init_param);
 void std_tim_bdt_struct_init(std_tim_break_init_t *bdt_init_struct);
 

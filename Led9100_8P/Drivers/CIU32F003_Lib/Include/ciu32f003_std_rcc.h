@@ -2,8 +2,8 @@
 /**
 * @file               ciu32f003_std_rcc.h
 * @author             MCU Ecosystem Development Team
-* @brief              RCC STD¿âÇı¶¯Í·ÎÄ¼ş¡£
-*                     Ìá¹©RCCÏà¹ØµÄSTD¿â²Ù×÷º¯ÊıÉùÃ÷¡¢Êı¾İÀàĞÍÒÔ¼°³£Á¿µÄ¶¨Òå¡£                         
+* @brief              RCC STDåº“é©±åŠ¨å¤´æ–‡ä»¶ã€‚
+*                     æä¾›RCCç›¸å…³çš„STDåº“æ“ä½œå‡½æ•°å£°æ˜ã€æ•°æ®ç±»å‹ä»¥åŠå¸¸é‡çš„å®šä¹‰ã€‚                         
 *                     
 *
 **************************************************************************************************
@@ -13,7 +13,7 @@
 **************************************************************************************************
 */
 
-/*±ÜÃâÍ·ÎÄ¼şÖØ¸´ÒıÓÃ*/
+/*é¿å…å¤´æ–‡ä»¶é‡å¤å¼•ç”¨*/
 #ifndef CIU32F003_STD_RCC_H
 #define CIU32F003_STD_RCC_H
 
@@ -25,7 +25,7 @@
 
 /**
 * @defgroup RCC RCC
-* @brief ¸´Î»ºÍÊ±ÖÓ¿ØÖÆÆ÷µÄSTD¿âÇı¶¯
+* @brief å¤ä½å’Œæ—¶é’Ÿæ§åˆ¶å™¨çš„STDåº“é©±åŠ¨
 * @{
 */
 /************************************************************************************************/
@@ -44,135 +44,135 @@
 /************************************************************************************************/
 /**
 * @defgroup RCC_Constants RCC Constants 
-* @brief  RCC³£Á¿¶¨Òå¼°ºê¶¨Òå
+* @brief  RCCå¸¸é‡å®šä¹‰åŠå®å®šä¹‰
 * @{
 *
 */
 /************************************************************************************************/
-/* ÏµÍ³Ê±ÖÓÔ´Ñ¡Ôñ */
-#define RCC_SYSCLK_SRC_RCHDIV6         RCC_CFG_SYSW_RCHDIV6                         /**< Ñ¡ÔñRCHDIV6×÷ÎªÏµÍ³Ê±ÖÓÔ´   */
-#define RCC_SYSCLK_SRC_RCHDIV3         RCC_CFG_SYSW_RCHDIV3                         /**< Ñ¡ÔñRCHDIV3×÷ÎªÏµÍ³Ê±ÖÓÔ´   */
-#define RCC_SYSCLK_SRC_RCH             RCC_CFG_SYSW_RCH                             /**< Ñ¡ÔñRCH×÷ÎªÏµÍ³Ê±ÖÓÔ´       */
-#define RCC_SYSCLK_SRC_RCL             RCC_CFG_SYSW_RCL                             /**< Ñ¡ÔñRCL×÷ÎªÏµÍ³Ê±ÖÓÔ´       */
-#define RCC_SYSCLK_SRC_EXTCLK          RCC_CFG_SYSW_EXTCLK                          /**< Ñ¡ÔñEXTCLK×÷ÎªÏµÍ³Ê±ÖÓÔ´    */
+/* ç³»ç»Ÿæ—¶é’Ÿæºé€‰æ‹© */
+#define RCC_SYSCLK_SRC_RCHDIV6         RCC_CFG_SYSW_RCHDIV6                         /**< é€‰æ‹©RCHDIV6ä½œä¸ºç³»ç»Ÿæ—¶é’Ÿæº   */
+#define RCC_SYSCLK_SRC_RCHDIV3         RCC_CFG_SYSW_RCHDIV3                         /**< é€‰æ‹©RCHDIV3ä½œä¸ºç³»ç»Ÿæ—¶é’Ÿæº   */
+#define RCC_SYSCLK_SRC_RCH             RCC_CFG_SYSW_RCH                             /**< é€‰æ‹©RCHä½œä¸ºç³»ç»Ÿæ—¶é’Ÿæº       */
+#define RCC_SYSCLK_SRC_RCL             RCC_CFG_SYSW_RCL                             /**< é€‰æ‹©RCLä½œä¸ºç³»ç»Ÿæ—¶é’Ÿæº       */
+#define RCC_SYSCLK_SRC_EXTCLK          RCC_CFG_SYSW_EXTCLK                          /**< é€‰æ‹©EXTCLKä½œä¸ºç³»ç»Ÿæ—¶é’Ÿæº    */
 
-/* ÏµÍ³Ê±ÖÓÔ´×´Ì¬¶¨Òå */
-#define RCC_SYSCLK_SRC_STATUS_RCHDIV6      RCC_CFG_SYSWS_RCHDIV6                    /**< ÏµÍ³Ê±ÖÓÎªRCHDIV6  */
-#define RCC_SYSCLK_SRC_STATUS_RCHDIV3      RCC_CFG_SYSWS_RCHDIV3                    /**< ÏµÍ³Ê±ÖÓÎªRCHDIV3  */
-#define RCC_SYSCLK_SRC_STATUS_RCH          RCC_CFG_SYSWS_RCH                        /**< ÏµÍ³Ê±ÖÓÎªRCH      */
-#define RCC_SYSCLK_SRC_STATUS_RCL          RCC_CFG_SYSWS_RCL                        /**< ÏµÍ³Ê±ÖÓÎªRCL      */
-#define RCC_SYSCLK_SRC_STATUS_EXTCLK       RCC_CFG_SYSWS_EXTCLK                     /**< ÏµÍ³Ê±ÖÓÎªEXTCLK   */
+/* ç³»ç»Ÿæ—¶é’ŸæºçŠ¶æ€å®šä¹‰ */
+#define RCC_SYSCLK_SRC_STATUS_RCHDIV6      RCC_CFG_SYSWS_RCHDIV6                    /**< ç³»ç»Ÿæ—¶é’Ÿä¸ºRCHDIV6  */
+#define RCC_SYSCLK_SRC_STATUS_RCHDIV3      RCC_CFG_SYSWS_RCHDIV3                    /**< ç³»ç»Ÿæ—¶é’Ÿä¸ºRCHDIV3  */
+#define RCC_SYSCLK_SRC_STATUS_RCH          RCC_CFG_SYSWS_RCH                        /**< ç³»ç»Ÿæ—¶é’Ÿä¸ºRCH      */
+#define RCC_SYSCLK_SRC_STATUS_RCL          RCC_CFG_SYSWS_RCL                        /**< ç³»ç»Ÿæ—¶é’Ÿä¸ºRCL      */
+#define RCC_SYSCLK_SRC_STATUS_EXTCLK       RCC_CFG_SYSWS_EXTCLK                     /**< ç³»ç»Ÿæ—¶é’Ÿä¸ºEXTCLK   */
 
-/* AHBÊ±ÖÓ·ÖÆµ²ÎÊı¶¨Òå */
-#define RCC_HCLK_DIV1                      RCC_CFG_HPRE_1                           /**< HCLK²»·ÖÆµ         */
-#define RCC_HCLK_DIV2                      RCC_CFG_HPRE_2                           /**< HCLK·ÖÆµÒò×Ó = 2   */
-#define RCC_HCLK_DIV4                      RCC_CFG_HPRE_4                           /**< HCLK·ÖÆµÒò×Ó = 4   */
-#define RCC_HCLK_DIV8                      RCC_CFG_HPRE_8                           /**< HCLK·ÖÆµÒò×Ó = 8   */
-#define RCC_HCLK_DIV16                     RCC_CFG_HPRE_16                          /**< HCLK·ÖÆµÒò×Ó = 16  */
-#define RCC_HCLK_DIV32                     RCC_CFG_HPRE_32                          /**< HCLK·ÖÆµÒò×Ó = 32  */
-#define RCC_HCLK_DIV64                     RCC_CFG_HPRE_64                          /**< HCLK·ÖÆµÒò×Ó = 64  */
-#define RCC_HCLK_DIV128                    RCC_CFG_HPRE_128                         /**< HCLK·ÖÆµÒò×Ó = 128 */
+/* AHBæ—¶é’Ÿåˆ†é¢‘å‚æ•°å®šä¹‰ */
+#define RCC_HCLK_DIV1                      RCC_CFG_HPRE_1                           /**< HCLKä¸åˆ†é¢‘         */
+#define RCC_HCLK_DIV2                      RCC_CFG_HPRE_2                           /**< HCLKåˆ†é¢‘å› å­ = 2   */
+#define RCC_HCLK_DIV4                      RCC_CFG_HPRE_4                           /**< HCLKåˆ†é¢‘å› å­ = 4   */
+#define RCC_HCLK_DIV8                      RCC_CFG_HPRE_8                           /**< HCLKåˆ†é¢‘å› å­ = 8   */
+#define RCC_HCLK_DIV16                     RCC_CFG_HPRE_16                          /**< HCLKåˆ†é¢‘å› å­ = 16  */
+#define RCC_HCLK_DIV32                     RCC_CFG_HPRE_32                          /**< HCLKåˆ†é¢‘å› å­ = 32  */
+#define RCC_HCLK_DIV64                     RCC_CFG_HPRE_64                          /**< HCLKåˆ†é¢‘å› å­ = 64  */
+#define RCC_HCLK_DIV128                    RCC_CFG_HPRE_128                         /**< HCLKåˆ†é¢‘å› å­ = 128 */
 
-/* APBÊ±ÖÓ·ÖÆµ²ÎÊı¶¨Òå */
-#define RCC_PCLK_DIV1                      RCC_CFG_PPRE_1                           /**< APB×ÜÏßÊ±ÖÓ²»·ÖÆµ        */
-#define RCC_PCLK_DIV2                      RCC_CFG_PPRE_2                           /**< APB×ÜÏßÊ±ÖÓ·ÖÆµÒò×Ó = 2  */
-#define RCC_PCLK_DIV4                      RCC_CFG_PPRE_4                           /**< APB×ÜÏßÊ±ÖÓ·ÖÆµÒò×Ó = 4  */
-#define RCC_PCLK_DIV8                      RCC_CFG_PPRE_8                           /**< APB×ÜÏßÊ±ÖÓ·ÖÆµÒò×Ó = 8  */
-#define RCC_PCLK_DIV16                     RCC_CFG_PPRE_16                          /**< APB×ÜÏßÊ±ÖÓ·ÖÆµÒò×Ó = 16 */
+/* APBæ—¶é’Ÿåˆ†é¢‘å‚æ•°å®šä¹‰ */
+#define RCC_PCLK_DIV1                      RCC_CFG_PPRE_1                           /**< APBæ€»çº¿æ—¶é’Ÿä¸åˆ†é¢‘        */
+#define RCC_PCLK_DIV2                      RCC_CFG_PPRE_2                           /**< APBæ€»çº¿æ—¶é’Ÿåˆ†é¢‘å› å­ = 2  */
+#define RCC_PCLK_DIV4                      RCC_CFG_PPRE_4                           /**< APBæ€»çº¿æ—¶é’Ÿåˆ†é¢‘å› å­ = 4  */
+#define RCC_PCLK_DIV8                      RCC_CFG_PPRE_8                           /**< APBæ€»çº¿æ—¶é’Ÿåˆ†é¢‘å› å­ = 8  */
+#define RCC_PCLK_DIV16                     RCC_CFG_PPRE_16                          /**< APBæ€»çº¿æ—¶é’Ÿåˆ†é¢‘å› å­ = 16 */
         
-/* MCOÊ±ÖÓÔ´²ÎÊı¶¨Òå */                                                                            
-#define RCC_MCO_SRC_DISABLE                RCC_CFG_MCOSEL_DISABLE                   /**< MCOÊä³öÎŞĞ§         */
-#define RCC_MCO_SRC_SYSCLK                 RCC_CFG_MCOSEL_SYSCLK                    /**< MCOÑ¡ÔñSYSCLKÊä³ö   */
-#define RCC_MCO_SRC_RCHDIV6                RCC_CFG_MCOSEL_RCHDIV6                   /**< MCOÑ¡ÔñRCHDIV6Êä³ö  */
-#define RCC_MCO_SRC_EXTCLK                 RCC_CFG_MCOSEL_EXTCLK                    /**< MCOÑ¡ÔñEXTCLKÊä³ö   */
-#define RCC_MCO_SRC_RCL                    RCC_CFG_MCOSEL_RCL                       /**< MCOÑ¡ÔñRCLÊä³ö      */
+/* MCOæ—¶é’Ÿæºå‚æ•°å®šä¹‰ */                                                                            
+#define RCC_MCO_SRC_DISABLE                RCC_CFG_MCOSEL_DISABLE                   /**< MCOè¾“å‡ºæ— æ•ˆ         */
+#define RCC_MCO_SRC_SYSCLK                 RCC_CFG_MCOSEL_SYSCLK                    /**< MCOé€‰æ‹©SYSCLKè¾“å‡º   */
+#define RCC_MCO_SRC_RCHDIV6                RCC_CFG_MCOSEL_RCHDIV6                   /**< MCOé€‰æ‹©RCHDIV6è¾“å‡º  */
+#define RCC_MCO_SRC_EXTCLK                 RCC_CFG_MCOSEL_EXTCLK                    /**< MCOé€‰æ‹©EXTCLKè¾“å‡º   */
+#define RCC_MCO_SRC_RCL                    RCC_CFG_MCOSEL_RCL                       /**< MCOé€‰æ‹©RCLè¾“å‡º      */
 
-/* MCOÊ±ÖÓ·ÖÆµ²ÎÊı¶¨Òå */
-#define RCC_MCO_DIV1                       RCC_CFG_MCOPRE_DIV1                      /**< MCO²»·ÖÆµ         */
-#define RCC_MCO_DIV2                       RCC_CFG_MCOPRE_DIV2                      /**< MCO·ÖÆµÒò×Ó = 2   */
-#define RCC_MCO_DIV4                       RCC_CFG_MCOPRE_DIV4                      /**< MCO·ÖÆµÒò×Ó = 4   */
-#define RCC_MCO_DIV8                       RCC_CFG_MCOPRE_DIV8                      /**< MCO·ÖÆµÒò×Ó = 8   */
-#define RCC_MCO_DIV16                      RCC_CFG_MCOPRE_DIV16                     /**< MCO·ÖÆµÒò×Ó = 16  */
-#define RCC_MCO_DIV32                      RCC_CFG_MCOPRE_DIV32                     /**< MCO·ÖÆµÒò×Ó = 32  */
-#define RCC_MCO_DIV64                      RCC_CFG_MCOPRE_DIV64                     /**< MCO·ÖÆµÒò×Ó = 64  */
-#define RCC_MCO_DIV128                     RCC_CFG_MCOPRE_DIV128                    /**< MCO·ÖÆµÒò×Ó = 128 */
+/* MCOæ—¶é’Ÿåˆ†é¢‘å‚æ•°å®šä¹‰ */
+#define RCC_MCO_DIV1                       RCC_CFG_MCOPRE_DIV1                      /**< MCOä¸åˆ†é¢‘         */
+#define RCC_MCO_DIV2                       RCC_CFG_MCOPRE_DIV2                      /**< MCOåˆ†é¢‘å› å­ = 2   */
+#define RCC_MCO_DIV4                       RCC_CFG_MCOPRE_DIV4                      /**< MCOåˆ†é¢‘å› å­ = 4   */
+#define RCC_MCO_DIV8                       RCC_CFG_MCOPRE_DIV8                      /**< MCOåˆ†é¢‘å› å­ = 8   */
+#define RCC_MCO_DIV16                      RCC_CFG_MCOPRE_DIV16                     /**< MCOåˆ†é¢‘å› å­ = 16  */
+#define RCC_MCO_DIV32                      RCC_CFG_MCOPRE_DIV32                     /**< MCOåˆ†é¢‘å› å­ = 32  */
+#define RCC_MCO_DIV64                      RCC_CFG_MCOPRE_DIV64                     /**< MCOåˆ†é¢‘å› å­ = 64  */
+#define RCC_MCO_DIV128                     RCC_CFG_MCOPRE_DIV128                    /**< MCOåˆ†é¢‘å› å­ = 128 */
 
-/* RCCÖĞ¶Ï¿ØÖÆÎ»¶¨Òå */
-#define RCC_INTERRUPT_RCL_READY            RCC_IER_RCL_RDYIE                        /**< RCL ReadyµÄÖĞ¶Ï¿ØÖÆÎ»   */
-#define RCC_INTERRUPT_RCH_READY            RCC_IER_RCH_RDYIE                        /**< RCH ReadyµÄÖĞ¶Ï¿ØÖÆÎ»   */
+/* RCCä¸­æ–­æ§åˆ¶ä½å®šä¹‰ */
+#define RCC_INTERRUPT_RCL_READY            RCC_IER_RCL_RDYIE                        /**< RCL Readyçš„ä¸­æ–­æ§åˆ¶ä½   */
+#define RCC_INTERRUPT_RCH_READY            RCC_IER_RCH_RDYIE                        /**< RCH Readyçš„ä¸­æ–­æ§åˆ¶ä½   */
 
-/* RCCÖĞ¶Ï±êÖ¾Î»¶¨Òå */
-#define RCC_FLAG_RCL_READY                 RCC_ISR_RCL_RDYF                         /**< RCL ReadyµÄÖĞ¶Ï±êÖ¾Î»   */
-#define RCC_FLAG_RCH_READY                 RCC_ISR_RCH_RDYF                         /**< RCH ReadyµÄÖĞ¶Ï±êÖ¾Î»   */
+/* RCCä¸­æ–­æ ‡å¿—ä½å®šä¹‰ */
+#define RCC_FLAG_RCL_READY                 RCC_ISR_RCL_RDYF                         /**< RCL Readyçš„ä¸­æ–­æ ‡å¿—ä½   */
+#define RCC_FLAG_RCH_READY                 RCC_ISR_RCH_RDYF                         /**< RCH Readyçš„ä¸­æ–­æ ‡å¿—ä½   */
 
-/* RCCÇå³ı¿ØÖÆÎ»¶¨Òå */
-#define RCC_CLEAR_RCL_READY                RCC_ICR_RCL_RDYC                         /**< RCL ReadyµÄÇå³ı¿ØÖÆÎ»   */
-#define RCC_CLEAR_RCH_READY                RCC_ICR_RCH_RDYC                         /**< RCH ReadyµÄÇå³ı¿ØÖÆÎ»   */
+/* RCCæ¸…é™¤æ§åˆ¶ä½å®šä¹‰ */
+#define RCC_CLEAR_RCL_READY                RCC_ICR_RCL_RDYC                         /**< RCL Readyçš„æ¸…é™¤æ§åˆ¶ä½   */
+#define RCC_CLEAR_RCH_READY                RCC_ICR_RCH_RDYC                         /**< RCH Readyçš„æ¸…é™¤æ§åˆ¶ä½   */
 
-/* IO¶Ë¿ÚÊ±ÖÓÑ¡Ôñ */
-#define RCC_PERIPH_CLK_GPIOA              RCC_IOPEN_GPIOAEN                        /**< GPIOA Ê±ÖÓ¿ØÖÆÎ»  */
-#define RCC_PERIPH_CLK_GPIOB              RCC_IOPEN_GPIOBEN                        /**< GPIOB Ê±ÖÓ¿ØÖÆÎ»  */
-#define RCC_PERIPH_CLK_GPIOC              RCC_IOPEN_GPIOCEN                        /**< GPIOC Ê±ÖÓ¿ØÖÆÎ»  */
+/* IOç«¯å£æ—¶é’Ÿé€‰æ‹© */
+#define RCC_PERIPH_CLK_GPIOA              RCC_IOPEN_GPIOAEN                        /**< GPIOA æ—¶é’Ÿæ§åˆ¶ä½  */
+#define RCC_PERIPH_CLK_GPIOB              RCC_IOPEN_GPIOBEN                        /**< GPIOB æ—¶é’Ÿæ§åˆ¶ä½  */
+#define RCC_PERIPH_CLK_GPIOC              RCC_IOPEN_GPIOCEN                        /**< GPIOC æ—¶é’Ÿæ§åˆ¶ä½  */
 
-/* IO¶Ë¿Ú¸´Î»Ñ¡Ôñ */
-#define RCC_PERIPH_RESET_GPIOA            RCC_IOPRST_GPIOA_RST                            /**< GPIOA¶Ë¿Ú¸´Î»¿ØÖÆÎ»  */
-#define RCC_PERIPH_RESET_GPIOB            RCC_IOPRST_GPIOB_RST                            /**< GPIOB¶Ë¿Ú¸´Î»¿ØÖÆÎ»  */
-#define RCC_PERIPH_RESET_GPIOC            RCC_IOPRST_GPIOC_RST                            /**< GPIOC¶Ë¿Ú¸´Î»¿ØÖÆÎ»  */
+/* IOç«¯å£å¤ä½é€‰æ‹© */
+#define RCC_PERIPH_RESET_GPIOA            RCC_IOPRST_GPIOA_RST                            /**< GPIOAç«¯å£å¤ä½æ§åˆ¶ä½  */
+#define RCC_PERIPH_RESET_GPIOB            RCC_IOPRST_GPIOB_RST                            /**< GPIOBç«¯å£å¤ä½æ§åˆ¶ä½  */
+#define RCC_PERIPH_RESET_GPIOC            RCC_IOPRST_GPIOC_RST                            /**< GPIOCç«¯å£å¤ä½æ§åˆ¶ä½  */
 
-/* AHBÍâÉèÊ±ÖÓÑ¡Ôñ */
-#define RCC_PERIPH_CLK_CRC                RCC_AHBEN_CRCEN                                 /**< AHBÍâÉèCRCÊ±ÖÓ¿ØÖÆÎ»  */
+/* AHBå¤–è®¾æ—¶é’Ÿé€‰æ‹© */
+#define RCC_PERIPH_CLK_CRC                RCC_AHBEN_CRCEN                                 /**< AHBå¤–è®¾CRCæ—¶é’Ÿæ§åˆ¶ä½  */
 
-/* AHBÍâÉè¸´Î»Ñ¡Ôñ */
-#define RCC_PERIPH_RESET_CRC              RCC_AHBRST_CRC_RST                              /**< AHBÍâÉèCRC¸´Î»¿ØÖÆÎ»  */
+/* AHBå¤–è®¾å¤ä½é€‰æ‹© */
+#define RCC_PERIPH_RESET_CRC              RCC_AHBRST_CRC_RST                              /**< AHBå¤–è®¾CRCå¤ä½æ§åˆ¶ä½  */
 
-/* APBÍâÉèÊ±ÖÓÑ¡Ôñ */
-#define RCC_PERIPH_CLK_TIM3               RCC_APBEN1_TIM3EN                               /**< APBÍâÉèTIM3Ê±ÖÓ¿ØÖÆÎ»    */
-#define RCC_PERIPH_CLK_UART2              RCC_APBEN1_UART2EN                              /**< APBÍâÉèUART2Ê±ÖÓ¿ØÖÆÎ»   */
-#define RCC_PERIPH_CLK_I2C1               RCC_APBEN1_I2C1EN                               /**< APBÍâÉèI2C1Ê±ÖÓ¿ØÖÆÎ»    */
-#define RCC_PERIPH_CLK_PMU                RCC_APBEN1_PMUEN                                /**< APBÍâÉèPMUÊ±ÖÓ¿ØÖÆÎ»     */
-#define RCC_PERIPH_CLK_LPTIM1             RCC_APBEN1_LPTIM1EN                             /**< APBÍâÉèLPTIM1Ê±ÖÓ¿ØÖÆÎ»  */
+/* APBå¤–è®¾æ—¶é’Ÿé€‰æ‹© */
+#define RCC_PERIPH_CLK_TIM3               RCC_APBEN1_TIM3EN                               /**< APBå¤–è®¾TIM3æ—¶é’Ÿæ§åˆ¶ä½    */
+#define RCC_PERIPH_CLK_UART2              RCC_APBEN1_UART2EN                              /**< APBå¤–è®¾UART2æ—¶é’Ÿæ§åˆ¶ä½   */
+#define RCC_PERIPH_CLK_I2C1               RCC_APBEN1_I2C1EN                               /**< APBå¤–è®¾I2C1æ—¶é’Ÿæ§åˆ¶ä½    */
+#define RCC_PERIPH_CLK_PMU                RCC_APBEN1_PMUEN                                /**< APBå¤–è®¾PMUæ—¶é’Ÿæ§åˆ¶ä½     */
+#define RCC_PERIPH_CLK_LPTIM1             RCC_APBEN1_LPTIM1EN                             /**< APBå¤–è®¾LPTIM1æ—¶é’Ÿæ§åˆ¶ä½  */
 
-#define RCC_PERIPH_CLK_COMP               RCC_APBEN2_COMPEN                               /**< APBÍâÉèCOMPÊ±ÖÓ¿ØÖÆÎ»    */
-#define RCC_PERIPH_CLK_TIM1               RCC_APBEN2_TIM1EN                               /**< APBÍâÉèTIM1Ê±ÖÓ¿ØÖÆÎ»    */
-#define RCC_PERIPH_CLK_SPI1               RCC_APBEN2_SPI1EN                               /**< APBÍâÉèSPI1Ê±ÖÓ¿ØÖÆÎ»    */
-#define RCC_PERIPH_CLK_UART1              RCC_APBEN2_UART1EN                              /**< APBÍâÉèUART1Ê±ÖÓ¿ØÖÆÎ»   */
-#define RCC_PERIPH_CLK_ADC                RCC_APBEN2_ADCEN                                /**< APBÍâÉèADCÊ±ÖÓ¿ØÖÆÎ»     */
-#define RCC_PERIPH_CLK_DBG                RCC_APBEN2_DBGEN                                /**< APBÍâÉèDBGÊ±ÖÓ¿ØÖÆÎ»     */
+#define RCC_PERIPH_CLK_COMP               RCC_APBEN2_COMPEN                               /**< APBå¤–è®¾COMPæ—¶é’Ÿæ§åˆ¶ä½    */
+#define RCC_PERIPH_CLK_TIM1               RCC_APBEN2_TIM1EN                               /**< APBå¤–è®¾TIM1æ—¶é’Ÿæ§åˆ¶ä½    */
+#define RCC_PERIPH_CLK_SPI1               RCC_APBEN2_SPI1EN                               /**< APBå¤–è®¾SPI1æ—¶é’Ÿæ§åˆ¶ä½    */
+#define RCC_PERIPH_CLK_UART1              RCC_APBEN2_UART1EN                              /**< APBå¤–è®¾UART1æ—¶é’Ÿæ§åˆ¶ä½   */
+#define RCC_PERIPH_CLK_ADC                RCC_APBEN2_ADCEN                                /**< APBå¤–è®¾ADCæ—¶é’Ÿæ§åˆ¶ä½     */
+#define RCC_PERIPH_CLK_DBG                RCC_APBEN2_DBGEN                                /**< APBå¤–è®¾DBGæ—¶é’Ÿæ§åˆ¶ä½     */
 
-/* APBÍâÉè¸´Î»Ñ¡Ôñ */
-#define RCC_PERIPH_RESET_TIM3             RCC_APBRST1_TIM3_RST                            /**< APBÍâÉèTIM3¸´Î»¿ØÖÆÎ»    */
-#define RCC_PERIPH_RESET_UART2            RCC_APBRST1_UART2_RST                           /**< APBÍâÉèUART2¸´Î»¿ØÖÆÎ»   */
-#define RCC_PERIPH_RESET_I2C1             RCC_APBRST1_I2C1_RST                            /**< APBÍâÉèI2C1¸´Î»¿ØÖÆÎ»    */
-#define RCC_PERIPH_RESET_LPTIM1           RCC_APBRST1_LPTIM1_RST                          /**< APBÍâÉèLPTIM1¸´Î»¿ØÖÆÎ»  */
+/* APBå¤–è®¾å¤ä½é€‰æ‹© */
+#define RCC_PERIPH_RESET_TIM3             RCC_APBRST1_TIM3_RST                            /**< APBå¤–è®¾TIM3å¤ä½æ§åˆ¶ä½    */
+#define RCC_PERIPH_RESET_UART2            RCC_APBRST1_UART2_RST                           /**< APBå¤–è®¾UART2å¤ä½æ§åˆ¶ä½   */
+#define RCC_PERIPH_RESET_I2C1             RCC_APBRST1_I2C1_RST                            /**< APBå¤–è®¾I2C1å¤ä½æ§åˆ¶ä½    */
+#define RCC_PERIPH_RESET_LPTIM1           RCC_APBRST1_LPTIM1_RST                          /**< APBå¤–è®¾LPTIM1å¤ä½æ§åˆ¶ä½  */
                                                                                                                                                                   
-#define RCC_PERIPH_RESET_COMP             RCC_APBRST2_COMP_RST                            /**< APBÍâÉèCOMP¸´Î»ÖÆÎ»      */
-#define RCC_PERIPH_RESET_TIM1             RCC_APBRST2_TIM1_RST                            /**< APBÍâÉèTIM1¸´Î»¿ØÖÆÎ»    */
-#define RCC_PERIPH_RESET_SPI1             RCC_APBRST2_SPI1_RST                            /**< APBÍâÉèSPI1¸´Î»¿ØÖÆÎ»    */
-#define RCC_PERIPH_RESET_UART1            RCC_APBRST2_UART1_RST                           /**< APBÍâÉèUART¸´Î»¿ØÖÆÎ»    */
-#define RCC_PERIPH_RESET_ADC              RCC_APBRST2_ADC_RST                             /**< APBÍâÉèADC¸´Î»¿ØÖÆÎ»     */
-#define RCC_PERIPH_RESET_DBG              RCC_APBRST2_DBG_RST                             /**< APBÍâÉèDBG¸´Î»¿ØÖÆÎ»     */
+#define RCC_PERIPH_RESET_COMP             RCC_APBRST2_COMP_RST                            /**< APBå¤–è®¾COMPå¤ä½åˆ¶ä½      */
+#define RCC_PERIPH_RESET_TIM1             RCC_APBRST2_TIM1_RST                            /**< APBå¤–è®¾TIM1å¤ä½æ§åˆ¶ä½    */
+#define RCC_PERIPH_RESET_SPI1             RCC_APBRST2_SPI1_RST                            /**< APBå¤–è®¾SPI1å¤ä½æ§åˆ¶ä½    */
+#define RCC_PERIPH_RESET_UART1            RCC_APBRST2_UART1_RST                           /**< APBå¤–è®¾UARTå¤ä½æ§åˆ¶ä½    */
+#define RCC_PERIPH_RESET_ADC              RCC_APBRST2_ADC_RST                             /**< APBå¤–è®¾ADCå¤ä½æ§åˆ¶ä½     */
+#define RCC_PERIPH_RESET_DBG              RCC_APBRST2_DBG_RST                             /**< APBå¤–è®¾DBGå¤ä½æ§åˆ¶ä½     */
 
-/* LPTIM1Òì²½Ê±ÖÓÔ´Ñ¡Ôñ */
-#define RCC_LPTIM1_ASYNC_CLK_SRC_PCLK         RCC_CLKSEL_LPTIM1_SEL_PCLK             /**< PCLKÊ±ÖÓ×÷ÎªLPTIM1Ê±ÖÓ      */
-#define RCC_LPTIM1_ASYNC_CLK_SRC_RCL          RCC_CLKSEL_LPTIM1_SEL_RCL              /**< RCLÊ±ÖÓ×÷ÎªLPTIM1Ê±ÖÓ       */
-#define RCC_LPTIM1_ASYNC_CLK_SRC_MCO          RCC_CLKSEL_LPTIM1_SEL_MCO              /**< MCOÊ±ÖÓ×÷ÎªLPTIM1Ê±ÖÓ       */
+/* LPTIM1å¼‚æ­¥æ—¶é’Ÿæºé€‰æ‹© */
+#define RCC_LPTIM1_ASYNC_CLK_SRC_PCLK         RCC_CLKSEL_LPTIM1_SEL_PCLK             /**< PCLKæ—¶é’Ÿä½œä¸ºLPTIM1æ—¶é’Ÿ      */
+#define RCC_LPTIM1_ASYNC_CLK_SRC_RCL          RCC_CLKSEL_LPTIM1_SEL_RCL              /**< RCLæ—¶é’Ÿä½œä¸ºLPTIM1æ—¶é’Ÿ       */
+#define RCC_LPTIM1_ASYNC_CLK_SRC_MCO          RCC_CLKSEL_LPTIM1_SEL_MCO              /**< MCOæ—¶é’Ÿä½œä¸ºLPTIM1æ—¶é’Ÿ       */
 
-/* COMP1Òì²½Ê±ÖÓÔ´Ñ¡Ôñ */
-#define RCC_COMP1_ASYNC_CLK_SRC_PCLK          RCC_CLKSEL_COMP1_SEL_PCLK             /**< PCLKÊ±ÖÓ×÷ÎªCOMP1Ê±ÖÓ      */
-#define RCC_COMP1_ASYNC_CLK_SRC_RCL           RCC_CLKSEL_COMP1_SEL_RCL              /**< RCLÊ±ÖÓ×÷ÎªCOMP1Ê±ÖÓ       */
+/* COMP1å¼‚æ­¥æ—¶é’Ÿæºé€‰æ‹© */
+#define RCC_COMP1_ASYNC_CLK_SRC_PCLK          RCC_CLKSEL_COMP1_SEL_PCLK             /**< PCLKæ—¶é’Ÿä½œä¸ºCOMP1æ—¶é’Ÿ      */
+#define RCC_COMP1_ASYNC_CLK_SRC_RCL           RCC_CLKSEL_COMP1_SEL_RCL              /**< RCLæ—¶é’Ÿä½œä¸ºCOMP1æ—¶é’Ÿ       */
 
-/* COMP2Òì²½Ê±ÖÓÔ´Ñ¡Ôñ */
-#define RCC_COMP2_ASYNC_CLK_SRC_PCLK          RCC_CLKSEL_COMP2_SEL_PCLK             /**< PCLKÊ±ÖÓ×÷ÎªCOMP2Ê±ÖÓ      */
-#define RCC_COMP2_ASYNC_CLK_SRC_RCL           RCC_CLKSEL_COMP2_SEL_RCL              /**< RCLÊ±ÖÓ×÷ÎªCOMP2Ê±ÖÓ       */
+/* COMP2å¼‚æ­¥æ—¶é’Ÿæºé€‰æ‹© */
+#define RCC_COMP2_ASYNC_CLK_SRC_PCLK          RCC_CLKSEL_COMP2_SEL_PCLK             /**< PCLKæ—¶é’Ÿä½œä¸ºCOMP2æ—¶é’Ÿ      */
+#define RCC_COMP2_ASYNC_CLK_SRC_RCL           RCC_CLKSEL_COMP2_SEL_RCL              /**< RCLæ—¶é’Ÿä½œä¸ºCOMP2æ—¶é’Ÿ       */
 
-/* ¸´Î»±êÖ¾¶¨Òå */
-#define RCC_RESET_FLAG_LOCKUP                   RCC_CSR2_LOCKUP_RSTF                  /**< LOCKUP¸´Î»±êÖ¾           */
-#define RCC_RESET_FLAG_NRST                     RCC_CSR2_NRST_RSTF                    /**< NRSTÒı½Å¸´Î»±êÖ¾         */
-#define RCC_RESET_FLAG_PMU                      RCC_CSR2_PMU_RSTF                     /**< POR/PDR¡¢BOR¸´Î»±êÖ¾     */
-#define RCC_RESET_FLAG_SW                       RCC_CSR2_SW_RSTF                      /**< Èí¼ş¸´Î»±êÖ¾             */
-#define RCC_RESET_FLAG_IWDG                     RCC_CSR2_IWDG_RSTF                    /**< IWDG¸´Î»±êÖ¾             */
-#define RCC_RESET_FLAG_LPM                      RCC_CSR2_LPM_RSTF                     /**< µÍ¹¦ºÄ¸´Î»±êÖ¾           */
-#define RCC_RESET_FLAG_ALL                     (0xFFUL<<RCC_CSR2_LOCKUP_RSTF_POS)     /**< ËùÓĞ¸´Î»±êÖ¾             */
+/* å¤ä½æ ‡å¿—å®šä¹‰ */
+#define RCC_RESET_FLAG_LOCKUP                   RCC_CSR2_LOCKUP_RSTF                  /**< LOCKUPå¤ä½æ ‡å¿—           */
+#define RCC_RESET_FLAG_NRST                     RCC_CSR2_NRST_RSTF                    /**< NRSTå¼•è„šå¤ä½æ ‡å¿—         */
+#define RCC_RESET_FLAG_PMU                      RCC_CSR2_PMU_RSTF                     /**< POR/PDRã€BORå¤ä½æ ‡å¿—     */
+#define RCC_RESET_FLAG_SW                       RCC_CSR2_SW_RSTF                      /**< è½¯ä»¶å¤ä½æ ‡å¿—             */
+#define RCC_RESET_FLAG_IWDG                     RCC_CSR2_IWDG_RSTF                    /**< IWDGå¤ä½æ ‡å¿—             */
+#define RCC_RESET_FLAG_LPM                      RCC_CSR2_LPM_RSTF                     /**< ä½åŠŸè€—å¤ä½æ ‡å¿—           */
+#define RCC_RESET_FLAG_ALL                     (0xFFUL<<RCC_CSR2_LOCKUP_RSTF_POS)     /**< æ‰€æœ‰å¤ä½æ ‡å¿—             */
 
 
 /** 
@@ -184,15 +184,15 @@
 /************************************************************************************************/
 /**
 * @defgroup RCC_External_Functions RCC External Functions
-* @brief    RCC¶ÔÍâº¯Êı
+* @brief    RCCå¯¹å¤–å‡½æ•°
 * @{
 *
 */
 /************************************************************************************************/
 /** 
-* @brief  Ê¹ÄÜRCHÊ±ÖÓ
-* @note   Ê¹ÄÜRCHºó£¬Èí¼şÓ¦µÈ´ıRCHRDY±êÖ¾ÖÃÎ»ºó£¬ÔÙÊ¹ÓÃ¸ÃÊ±ÖÓ
-* @retval ÎŞ
+* @brief  ä½¿èƒ½RCHæ—¶é’Ÿ
+* @note   ä½¿èƒ½RCHåï¼Œè½¯ä»¶åº”ç­‰å¾…RCHRDYæ ‡å¿—ç½®ä½åï¼Œå†ä½¿ç”¨è¯¥æ—¶é’Ÿ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_rch_enable(void)
 {
@@ -200,10 +200,10 @@ __STATIC_INLINE void std_rcc_rch_enable(void)
 } 
 
 /** 
-* @brief  ¹Ø±ÕRCHÊ±ÖÓ
-* @note   Èç¹ûRCHÎªÏµÍ³Ê±ÖÓÔ´£¬ÔòÆä²»ÄÜ±»Í£Ö¹¡£´ËÊ±ÓÃ»§Ó¦ÏÈ½«ÏµÍ³Ê±ÖÓÔ´ÇĞ»»ÎªÆäËûÊ±ÖÓ£¬ÔÙ¹Ø±Õ¸ÃÊ±ÖÓÔ´
-* @note   µ±¹Ø±ÕRCHÊ±£¬ĞèµÈ´ıRCHRDY±êÖ¾ÇåÁã
-* @retval ÎŞ
+* @brief  å…³é—­RCHæ—¶é’Ÿ
+* @note   å¦‚æœRCHä¸ºç³»ç»Ÿæ—¶é’Ÿæºï¼Œåˆ™å…¶ä¸èƒ½è¢«åœæ­¢ã€‚æ­¤æ—¶ç”¨æˆ·åº”å…ˆå°†ç³»ç»Ÿæ—¶é’Ÿæºåˆ‡æ¢ä¸ºå…¶ä»–æ—¶é’Ÿï¼Œå†å…³é—­è¯¥æ—¶é’Ÿæº
+* @note   å½“å…³é—­RCHæ—¶ï¼Œéœ€ç­‰å¾…RCHRDYæ ‡å¿—æ¸…é›¶
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_rch_disable(void)
 {
@@ -211,10 +211,10 @@ __STATIC_INLINE void std_rcc_rch_disable(void)
 }
 
 /** 
-* @brief  »ñÈ¡RCH ready±êÖ¾
-* @retval uint32_t ·µ»ØRCH RDY±êÖ¾×´Ì¬
-*             @arg ·Ç0£º ±íÊ¾RCH readyÒÑÖÃÎ»
-*             @arg 0£º±íÊ¾RCH readyÎ´ÖÃÎ»
+* @brief  è·å–RCH readyæ ‡å¿—
+* @retval uint32_t è¿”å›RCH RDYæ ‡å¿—çŠ¶æ€
+*             @arg é0ï¼š è¡¨ç¤ºRCH readyå·²ç½®ä½
+*             @arg 0ï¼šè¡¨ç¤ºRCH readyæœªç½®ä½
 */
 __STATIC_INLINE uint32_t std_rcc_get_rch_ready(void) 
 {
@@ -222,14 +222,14 @@ __STATIC_INLINE uint32_t std_rcc_get_rch_ready(void)
 }        
 
 /** 
-* @brief  ÉèÖÃÏµÍ³Ê±ÖÓÔ´
-* @param  clocksource ÏµÍ³Ê±ÖÓÔ´
+* @brief  è®¾ç½®ç³»ç»Ÿæ—¶é’Ÿæº
+* @param  clocksource ç³»ç»Ÿæ—¶é’Ÿæº
 *             @arg RCC_SYSCLK_SRC_RCHDIV6
 *             @arg RCC_SYSCLK_SRC_RCHDIV3   
 *             @arg RCC_SYSCLK_SRC_RCH    
 *             @arg RCC_SYSCLK_SRC_RCL     
 *             @arg RCC_SYSCLK_SRC_EXTCLK
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_set_sysclk_source(uint32_t clocksource)
 {
@@ -237,8 +237,8 @@ __STATIC_INLINE void std_rcc_set_sysclk_source(uint32_t clocksource)
 }    
 
 /** 
-* @brief  »ñÈ¡ÏµÍ³Ê±ÖÓÔ´ĞÅÏ¢
-* @retval uint32_t ÏµÍ³Ê±ÖÓÔ´
+* @brief  è·å–ç³»ç»Ÿæ—¶é’Ÿæºä¿¡æ¯
+* @retval uint32_t ç³»ç»Ÿæ—¶é’Ÿæº
 *             @arg RCC_SYSCLK_SRC_STATUS_RCHDIV6  
 *             @arg RCC_SYSCLK_SRC_STATUS_RCHDIV3   
 *             @arg RCC_SYSCLK_SRC_STATUS_RCH    
@@ -251,13 +251,13 @@ __STATIC_INLINE uint32_t std_rcc_get_sysclk_source(void)
 }    
 
 /** 
-* @brief  ÉèÖÃAHBÊ±ÖÓ·ÖÆµÒò×Ó
-* @param  ahb_div AHB·ÖÆµÒò×Ó
+* @brief  è®¾ç½®AHBæ—¶é’Ÿåˆ†é¢‘å› å­
+* @param  ahb_div AHBåˆ†é¢‘å› å­
 *             @arg RCC_HCLK_DIV1   
 *             @arg RCC_HCLK_DIV2     
 *             @arg ...   
 *             @arg RCC_HCLK_DIV128
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_set_ahbdiv(uint32_t ahb_div)
 {
@@ -265,8 +265,8 @@ __STATIC_INLINE void std_rcc_set_ahbdiv(uint32_t ahb_div)
 }    
 
 /** 
-* @brief  »ñÈ¡AHBÊ±ÖÓ·ÖÆµÒò×Ó
-* @retval uint32_t HCLKÊ±ÖÓ·ÖÆµÒò×Ó
+* @brief  è·å–AHBæ—¶é’Ÿåˆ†é¢‘å› å­
+* @retval uint32_t HCLKæ—¶é’Ÿåˆ†é¢‘å› å­
 *             @arg RCC_HCLK_DIV1   
 *             @arg RCC_HCLK_DIV2     
 *             @arg ...   
@@ -278,13 +278,13 @@ __STATIC_INLINE uint32_t std_rcc_get_ahbdiv(void)
 } 
 
 /** 
-* @brief  ÉèÖÃAPBÊ±ÖÓ·ÖÆµÒò×Ó
-* @param  apb_div APB·ÖÆµÒò×Ó
+* @brief  è®¾ç½®APBæ—¶é’Ÿåˆ†é¢‘å› å­
+* @param  apb_div APBåˆ†é¢‘å› å­
 *             @arg RCC_PCLK_DIV1   
 *             @arg RCC_PCLK_DIV2     
 *             @arg ...   
 *             @arg RCC_PCLK_DIV16
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_set_apbdiv(uint32_t apb_div)
 {
@@ -292,8 +292,8 @@ __STATIC_INLINE void std_rcc_set_apbdiv(uint32_t apb_div)
 }    
 
 /** 
-* @brief  »ñÈ¡APBÊ±ÖÓ·ÖÆµÒò×Ó
-* @retval uint32_t PCLK1Ê±ÖÓ·ÖÆµÒò×Ó
+* @brief  è·å–APBæ—¶é’Ÿåˆ†é¢‘å› å­
+* @retval uint32_t PCLK1æ—¶é’Ÿåˆ†é¢‘å› å­
 *             @arg RCC_PCLK_DIV1   
 *             @arg RCC_PCLK_DIV2     
 *             @arg ...   
@@ -305,18 +305,18 @@ __STATIC_INLINE uint32_t std_rcc_get_apbdiv(void)
 } 
 
 /**
-* @brief  ÅäÖÃMCOÊä³öĞÅÏ¢
-* @param  mco_source MCOÊä³öÔ´Ñ¡Ôñ
+* @brief  é…ç½®MCOè¾“å‡ºä¿¡æ¯
+* @param  mco_source MCOè¾“å‡ºæºé€‰æ‹©
 *             @arg RCC_MCO_SRC_SYSCLK
 *             @arg RCC_MCO_SRC_RCHDIV6
 *             @arg RCC_MCO_SRC_EXTCLK
 *             @arg RCC_MCO_SRC_RCL
-* @param  mco_psc MCOÊä³ö·ÖÆµÒò×Ó
+* @param  mco_psc MCOè¾“å‡ºåˆ†é¢‘å› å­
 *             @arg RCC_MCO_DIV1
 *             @arg RCC_MCO_DIV2
 *             @arg ...
 *             @arg RCC_MCO_DIV128
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_mco_config(uint32_t mco_source, uint32_t mco_psc)
 {
@@ -324,8 +324,8 @@ __STATIC_INLINE void std_rcc_mco_config(uint32_t mco_source, uint32_t mco_psc)
 }
 
 /** 
-* @brief  Ê¹ÄÜEXTCLKÊ±ÖÓ
-* @retval ÎŞ
+* @brief  ä½¿èƒ½EXTCLKæ—¶é’Ÿ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_extclk_enable(void) 
 {
@@ -333,8 +333,8 @@ __STATIC_INLINE void std_rcc_extclk_enable(void)
 }
 
 /** 
-* @brief  ¹Ø±ÕEXTCLKÊ±ÖÓ
-* @retval ÎŞ
+* @brief  å…³é—­EXTCLKæ—¶é’Ÿ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_extclk_disable(void)
 {
@@ -342,11 +342,11 @@ __STATIC_INLINE void std_rcc_extclk_disable(void)
 } 
 
 /** 
-* @brief  Ê¹ÄÜRCCÖĞ¶Ï
-* @param  interrupt Ê¹ÄÜRCCÖĞ¶ÏÔ´µÄĞÅÏ¢
+* @brief  ä½¿èƒ½RCCä¸­æ–­
+* @param  interrupt ä½¿èƒ½RCCä¸­æ–­æºçš„ä¿¡æ¯
 *             @arg  RCC_INTERRUPT_RCL_READY
 *             @arg  RCC_INTERRUPT_RCH_READY
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_interrupt_enable(uint32_t interrupt)     
 {
@@ -354,11 +354,11 @@ __STATIC_INLINE void std_rcc_interrupt_enable(uint32_t interrupt)
 }
 
 /** 
-* @brief  ¹Ø±ÕRCCÖĞ¶Ï
-* @param  interrupt ¹Ø±ÕRCCÖĞ¶ÏÔ´µÄĞÅÏ¢
+* @brief  å…³é—­RCCä¸­æ–­
+* @param  interrupt å…³é—­RCCä¸­æ–­æºçš„ä¿¡æ¯
 *             @arg  RCC_INTERRUPT_RCL_READY
 *             @arg  RCC_INTERRUPT_RCH_READY
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_interrupt_disable(uint32_t interrupt)    
 {
@@ -366,13 +366,13 @@ __STATIC_INLINE void std_rcc_interrupt_disable(uint32_t interrupt)
 } 
 
 /**
-* @brief  »ñÈ¡RCCÖĞ¶ÏÊ¹ÄÜ×´Ì¬
-* @param  interrupt RCCÖĞ¶ÏÔ´ĞÅÏ¢
+* @brief  è·å–RCCä¸­æ–­ä½¿èƒ½çŠ¶æ€
+* @param  interrupt RCCä¸­æ–­æºä¿¡æ¯
 *             @arg  RCC_INTERRUPT_RCL_READY
 *             @arg  RCC_INTERRUPT_RCH_READY
-* @retval uint32_t ·µ»ØÊäÈëÖĞ¶Ï±êÖ¾ÖÃÎ»×´Ì¬
-*             @arg ·Ç0£º ±íÊ¾Ö¸¶¨µÄÖĞ¶Ï´¦ÓÚÊ¹ÄÜ×´Ì¬
-*             @arg 0£º±íÊ¾Ö¸¶¨µÄÖĞ¶Ï´¦ÓÚ½ûÖ¹×´Ì¬
+* @retval uint32_t è¿”å›è¾“å…¥ä¸­æ–­æ ‡å¿—ç½®ä½çŠ¶æ€
+*             @arg é0ï¼š è¡¨ç¤ºæŒ‡å®šçš„ä¸­æ–­å¤„äºä½¿èƒ½çŠ¶æ€
+*             @arg 0ï¼šè¡¨ç¤ºæŒ‡å®šçš„ä¸­æ–­å¤„äºç¦æ­¢çŠ¶æ€
 */
 __STATIC_INLINE uint32_t std_rcc_get_interrupt_enable(uint32_t interrupt)    
 {
@@ -380,13 +380,13 @@ __STATIC_INLINE uint32_t std_rcc_get_interrupt_enable(uint32_t interrupt)
 }
 
 /**
-* @brief  »ñÈ¡RCCÖĞ¶Ï±êÖ¾×´Ì¬
-* @param  flag RCCÖĞ¶Ï±êÖ¾ĞÅÏ¢
+* @brief  è·å–RCCä¸­æ–­æ ‡å¿—çŠ¶æ€
+* @param  flag RCCä¸­æ–­æ ‡å¿—ä¿¡æ¯
 *             @arg  RCC_FLAG_RCL_READY
 *             @arg  RCC_FLAG_RCH_READY
-* @retval uint32_t ·µ»ØÊäÈëÖĞ¶Ï±êÖ¾ÖÃÎ»×´Ì¬
-*             @arg ·Ç0£º ±íÊ¾Ö¸¶¨µÄÖĞ¶ÏÒÑÖÃÎ»
-*             @arg 0£º±íÊ¾Ö¸¶¨µÄÖĞ¶ÏÎ´ÖÃÎ»
+* @retval uint32_t è¿”å›è¾“å…¥ä¸­æ–­æ ‡å¿—ç½®ä½çŠ¶æ€
+*             @arg é0ï¼š è¡¨ç¤ºæŒ‡å®šçš„ä¸­æ–­å·²ç½®ä½
+*             @arg 0ï¼šè¡¨ç¤ºæŒ‡å®šçš„ä¸­æ–­æœªç½®ä½
 */
 __STATIC_INLINE uint32_t std_rcc_get_flag(uint32_t flag) 
 {
@@ -394,11 +394,11 @@ __STATIC_INLINE uint32_t std_rcc_get_flag(uint32_t flag)
 }
 
 /** 
-* @brief  Çå³ıRCC±êÖ¾
-* @param  flags Çå³ı±êÖ¾Î»
+* @brief  æ¸…é™¤RCCæ ‡å¿—
+* @param  flags æ¸…é™¤æ ‡å¿—ä½
 *             @arg  RCC_CLEAR_RCL_READY
 *             @arg  RCC_CLEAR_RCH_READY
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_clear_flag(uint32_t flags)   
 {
@@ -406,9 +406,9 @@ __STATIC_INLINE void std_rcc_clear_flag(uint32_t flags)
 }
 
 /** 
-* @brief  Ê¹ÄÜRCLÊ±ÖÓ
-* @note   Ê¹ÄÜRCLºó£¬Èí¼şÓ¦µÈ´ıRCLRDY±êÖ¾ÖÃÎ»ºó£¬ÔÙÊ¹ÓÃ¸ÃÊ±ÖÓ
-* @retval ÎŞ
+* @brief  ä½¿èƒ½RCLæ—¶é’Ÿ
+* @note   ä½¿èƒ½RCLåï¼Œè½¯ä»¶åº”ç­‰å¾…RCLRDYæ ‡å¿—ç½®ä½åï¼Œå†ä½¿ç”¨è¯¥æ—¶é’Ÿ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_rcl_enable(void)
 {
@@ -416,10 +416,10 @@ __STATIC_INLINE void std_rcc_rcl_enable(void)
 }          
 
 /** 
-* @brief  ¹Ø±ÕRCLÊ±ÖÓ
-* @note   Èç¹ûRCLÎªÏµÍ³Ê±ÖÓÔ´£¬ÔòÆä²»ÄÜ±»Í£Ö¹¡£´ËÊ±ÓÃ»§Ó¦ÏÈ½«ÏµÍ³Ê±ÖÓÔ´ÇĞ»»ÎªÆäËûÊ±ÖÓ£¬ÔÙ¹Ø±Õ¸ÃÊ±ÖÓÔ´
-* @note   µ±¹Ø±ÕRCLÊ±£¬RCLRDY±êÖ¾»áÔÚRCL¹Ø±Õºó×Ô¶¯ÇåÁã
-* @retval ÎŞ
+* @brief  å…³é—­RCLæ—¶é’Ÿ
+* @note   å¦‚æœRCLä¸ºç³»ç»Ÿæ—¶é’Ÿæºï¼Œåˆ™å…¶ä¸èƒ½è¢«åœæ­¢ã€‚æ­¤æ—¶ç”¨æˆ·åº”å…ˆå°†ç³»ç»Ÿæ—¶é’Ÿæºåˆ‡æ¢ä¸ºå…¶ä»–æ—¶é’Ÿï¼Œå†å…³é—­è¯¥æ—¶é’Ÿæº
+* @note   å½“å…³é—­RCLæ—¶ï¼ŒRCLRDYæ ‡å¿—ä¼šåœ¨RCLå…³é—­åè‡ªåŠ¨æ¸…é›¶
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_rcl_disable(void) 
 {
@@ -427,10 +427,10 @@ __STATIC_INLINE void std_rcc_rcl_disable(void)
 }        
 
 /** 
-* @brief  »ñÈ¡RCL ready±êÖ¾
-* @retval uint32_t ·µ»ØRCL RDY±êÖ¾×´Ì¬
-*             @arg ·Ç0£º ±íÊ¾RCL readyÒÑÖÃÎ»
-*             @arg 0£º±íÊ¾RCL readyÎ´ÖÃÎ»
+* @brief  è·å–RCL readyæ ‡å¿—
+* @retval uint32_t è¿”å›RCL RDYæ ‡å¿—çŠ¶æ€
+*             @arg é0ï¼š è¡¨ç¤ºRCL readyå·²ç½®ä½
+*             @arg 0ï¼šè¡¨ç¤ºRCL readyæœªç½®ä½
 */
 __STATIC_INLINE uint32_t std_rcc_get_rcl_ready(void)          
 {
@@ -438,8 +438,8 @@ __STATIC_INLINE uint32_t std_rcc_get_rcl_ready(void)
 }
 
 /** 
-* @brief  »ñÈ¡¸´Î»±êÖ¾
-* @param  reset_flag Ö¸¶¨Òª»ñÈ¡µÄ¸´Î»±êÖ¾
+* @brief  è·å–å¤ä½æ ‡å¿—
+* @param  reset_flag æŒ‡å®šè¦è·å–çš„å¤ä½æ ‡å¿—
 *             @arg RCC_RESET_FLAG_LOCKUP
 *             @arg RCC_RESET_FLAG_NRST  
 *             @arg RCC_RESET_FLAG_PMU   
@@ -447,9 +447,9 @@ __STATIC_INLINE uint32_t std_rcc_get_rcl_ready(void)
 *             @arg RCC_RESET_FLAG_IWDG  
 *             @arg RCC_RESET_FLAG_LPM   
 *             @arg RCC_RESET_FLAG_ALL   
-* @retval uint32_t ·µ»Ø×´Ì¬±êÖ¾
-*             @arg ·Ç0£º ±íÊ¾Ö¸¶¨µÄ¸´Î»±êÖ¾ÒÑÖÃÎ»
-*             @arg 0£º±íÊ¾Ö¸¶¨µÄ¸´Î»±êÖ¾Î´ÖÃÎ»
+* @retval uint32_t è¿”å›çŠ¶æ€æ ‡å¿—
+*             @arg é0ï¼š è¡¨ç¤ºæŒ‡å®šçš„å¤ä½æ ‡å¿—å·²ç½®ä½
+*             @arg 0ï¼šè¡¨ç¤ºæŒ‡å®šçš„å¤ä½æ ‡å¿—æœªç½®ä½
 */
 __STATIC_INLINE uint32_t std_rcc_get_reset_flag(uint32_t reset_flag)            
 {
@@ -457,9 +457,9 @@ __STATIC_INLINE uint32_t std_rcc_get_reset_flag(uint32_t reset_flag)
 } 
 
 /** 
-* @brief  Çå³ı¸´Î»±êÖ¾
-* @note   ¸Ãº¯Êı½«Çå³ıËùÓĞ¸´Î»±êÖ¾
-* @retval ÎŞ
+* @brief  æ¸…é™¤å¤ä½æ ‡å¿—
+* @note   è¯¥å‡½æ•°å°†æ¸…é™¤æ‰€æœ‰å¤ä½æ ‡å¿—
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_clear_reset_flags(void)           
 {
@@ -467,44 +467,44 @@ __STATIC_INLINE void std_rcc_clear_reset_flags(void)
 }
 
 /** 
-* @brief  GPIO¶Ë¿ÚÊ±ÖÓÊ¹ÄÜ
-* @param  gpiox_clock Ö¸¶¨Ê¹ÄÜµÄGPIOÊ±ÖÓ
+* @brief  GPIOç«¯å£æ—¶é’Ÿä½¿èƒ½
+* @param  gpiox_clock æŒ‡å®šä½¿èƒ½çš„GPIOæ—¶é’Ÿ
 *             @arg RCC_PERIPH_CLK_GPIOA
 *             @arg RCC_PERIPH_CLK_GPIOB
 *             @arg RCC_PERIPH_CLK_GPIOC
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_gpio_clk_enable(uint32_t gpiox_clock)
 {
     RCC->IOPEN |= gpiox_clock; 
     
-    /* RCCÍâÎ§Ê±ÖÓÆôÓÃºóµÄÑÓ³Ù */  
+    /* RCCå¤–å›´æ—¶é’Ÿå¯ç”¨åçš„å»¶è¿Ÿ */  
     __NOP(); __NOP(); __NOP(); 
 }
 
 /** 
-* @brief  GPIO¶Ë¿ÚÊ±ÖÓ½ûÖ¹
-* @param  gpiox_clock Ö¸¶¨½ûÖ¹µÄGPIOÊ±ÖÓ
+* @brief  GPIOç«¯å£æ—¶é’Ÿç¦æ­¢
+* @param  gpiox_clock æŒ‡å®šç¦æ­¢çš„GPIOæ—¶é’Ÿ
 *             @arg RCC_PERIPH_CLK_GPIOA
 *             @arg RCC_PERIPH_CLK_GPIOB
 *             @arg RCC_PERIPH_CLK_GPIOC
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_gpio_clk_disable(uint32_t gpiox_clock) 
 {
     RCC->IOPEN &= (~(gpiox_clock)); 
     
-    /* RCCÍâÎ§Ê±ÖÓÆôÓÃºóµÄÑÓ³Ù */  
+    /* RCCå¤–å›´æ—¶é’Ÿå¯ç”¨åçš„å»¶è¿Ÿ */  
     __NOP(); __NOP(); __NOP(); 
 }
 
 /** 
-* @brief  GPIO¶Ë¿Ú¸´Î»
-* @param  gpiox_rst Ö¸¶¨¸´Î»µÄGPIO¶Ë¿Ú
+* @brief  GPIOç«¯å£å¤ä½
+* @param  gpiox_rst æŒ‡å®šå¤ä½çš„GPIOç«¯å£
 *             @arg RCC_PERIPH_RESET_GPIOA
 *             @arg RCC_PERIPH_RESET_GPIOB
 *             @arg RCC_PERIPH_RESET_GPIOC
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_gpio_reset(uint32_t gpiox_rst)
 {
@@ -513,24 +513,24 @@ __STATIC_INLINE void std_rcc_gpio_reset(uint32_t gpiox_rst)
 }         
 
 /** 
-* @brief  AHBÍâÉèÊ±ÖÓÊ¹ÄÜ
-* @param  periph_clock Ö¸¶¨Ê¹ÄÜµÄAHBÍâÉèÊ±ÖÓ
+* @brief  AHBå¤–è®¾æ—¶é’Ÿä½¿èƒ½
+* @param  periph_clock æŒ‡å®šä½¿èƒ½çš„AHBå¤–è®¾æ—¶é’Ÿ
 *             @arg RCC_PERIPH_CLK_CRC  
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_ahb_clk_enable(uint32_t periph_clock)
 {
     RCC->AHBEN |= periph_clock;
     
-    /* RCCÍâÎ§Ê±ÖÓÆôÓÃºóµÄÑÓ³Ù */    
+    /* RCCå¤–å›´æ—¶é’Ÿå¯ç”¨åçš„å»¶è¿Ÿ */    
     __NOP(); __NOP(); __NOP(); 
 }   
 
 /** 
-* @brief  AHBÍâÉèÊ±ÖÓ½ûÖ¹
-* @param  periph_clock Ö¸¶¨½ûÖ¹µÄAHBÍâÉèÊ±ÖÓ
+* @brief  AHBå¤–è®¾æ—¶é’Ÿç¦æ­¢
+* @param  periph_clock æŒ‡å®šç¦æ­¢çš„AHBå¤–è®¾æ—¶é’Ÿ
 *             @arg RCC_PERIPH_CLK_CRC  
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_ahb_clk_disable(uint32_t periph_clock)            
 {
@@ -538,10 +538,10 @@ __STATIC_INLINE void std_rcc_ahb_clk_disable(uint32_t periph_clock)
 }
 
 /** 
-* @brief  AHBÍâÉè¸´Î»
-* @param  periph_rst Ö¸¶¨¸´Î»µÄAHBÍâÉè
+* @brief  AHBå¤–è®¾å¤ä½
+* @param  periph_rst æŒ‡å®šå¤ä½çš„AHBå¤–è®¾
 *             @arg RCC_PERIPH_RESET_CRC
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_ahb_reset(uint32_t periph_rst)
 {
@@ -550,32 +550,32 @@ __STATIC_INLINE void std_rcc_ahb_reset(uint32_t periph_rst)
 }       
 
 /** 
-* @brief  APBÍâÉè1Ê±ÖÓÊ¹ÄÜ
-* @param  periph_clock Ö¸¶¨Ê¹ÄÜµÄAPBÍâÉè1Ê±ÖÓ
+* @brief  APBå¤–è®¾1æ—¶é’Ÿä½¿èƒ½
+* @param  periph_clock æŒ‡å®šä½¿èƒ½çš„APBå¤–è®¾1æ—¶é’Ÿ
 *             @arg RCC_PERIPH_CLK_TIM3   
 *             @arg RCC_PERIPH_CLK_UART2 
 *             @arg RCC_PERIPH_CLK_I2C1   
 *             @arg RCC_PERIPH_CLK_PMU       
 *             @arg RCC_PERIPH_CLK_LPTIM1 
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_apb1_clk_enable(uint32_t periph_clock)
 {
     RCC->APBEN1 |= periph_clock;
     
-    /* RCCÍâÎ§Ê±ÖÓÆôÓÃºóµÄÑÓ³Ù */    
+    /* RCCå¤–å›´æ—¶é’Ÿå¯ç”¨åçš„å»¶è¿Ÿ */    
     __NOP(); __NOP(); __NOP(); 
 }
 
 /** 
-* @brief  APBÍâÉè1Ê±ÖÓ½ûÖ¹
-* @param  periph_clock Ö¸¶¨½ûÖ¹µÄAPBÍâÉè1Ê±ÖÓ
+* @brief  APBå¤–è®¾1æ—¶é’Ÿç¦æ­¢
+* @param  periph_clock æŒ‡å®šç¦æ­¢çš„APBå¤–è®¾1æ—¶é’Ÿ
 *             @arg RCC_PERIPH_CLK_TIM3      
 *             @arg RCC_PERIPH_CLK_UART2 
 *             @arg RCC_PERIPH_CLK_I2C1   
 *             @arg RCC_PERIPH_CLK_PMU      
 *             @arg RCC_PERIPH_CLK_LPTIM1 
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_apb1_clk_disable(uint32_t periph_clock)            
 {
@@ -583,13 +583,13 @@ __STATIC_INLINE void std_rcc_apb1_clk_disable(uint32_t periph_clock)
 }
 
 /** 
-* @brief  APBÍâÉè1¸´Î»
-* @param  periph_rst Ö¸¶¨¸´Î»µÄAPBÍâÉè1
+* @brief  APBå¤–è®¾1å¤ä½
+* @param  periph_rst æŒ‡å®šå¤ä½çš„APBå¤–è®¾1
 *             @arg RCC_PERIPH_RESET_TIM3     
 *             @arg RCC_PERIPH_RESET_UART2 
 *             @arg RCC_PERIPH_RESET_I2C1   
 *             @arg RCC_PERIPH_RESET_LPTIM1 
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_apb1_reset(uint32_t periph_rst)
 {
@@ -598,34 +598,34 @@ __STATIC_INLINE void std_rcc_apb1_reset(uint32_t periph_rst)
 }       
 
 /** 
-* @brief  APBÍâÉè2Ê±ÖÓÊ¹ÄÜ
-* @param  periph_clock Ö¸¶¨Ê¹ÄÜµÄAPBÍâÉè2Ê±ÖÓ
+* @brief  APBå¤–è®¾2æ—¶é’Ÿä½¿èƒ½
+* @param  periph_clock æŒ‡å®šä½¿èƒ½çš„APBå¤–è®¾2æ—¶é’Ÿ
 *             @arg RCC_PERIPH_CLK_COMP
 *             @arg RCC_PERIPH_CLK_TIM1   
 *             @arg RCC_PERIPH_CLK_SPI1   
 *             @arg RCC_PERIPH_CLK_UART1 
 *             @arg RCC_PERIPH_CLK_ADC    
 *             @arg RCC_PERIPH_CLK_DBG
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_apb2_clk_enable(uint32_t periph_clock)
 {
     RCC->APBEN2 |= periph_clock;
     
-    /* RCCÍâÎ§Ê±ÖÓÆôÓÃºóµÄÑÓ³Ù */    
+    /* RCCå¤–å›´æ—¶é’Ÿå¯ç”¨åçš„å»¶è¿Ÿ */    
     __NOP(); __NOP(); __NOP(); 
 }
 
 /** 
-* @brief  APBÍâÉè2Ê±ÖÓ½ûÖ¹
-* @param  periph_clock Ö¸¶¨½ûÖ¹µÄAPBÍâÉè2Ê±ÖÓ
+* @brief  APBå¤–è®¾2æ—¶é’Ÿç¦æ­¢
+* @param  periph_clock æŒ‡å®šç¦æ­¢çš„APBå¤–è®¾2æ—¶é’Ÿ
 *             @arg RCC_PERIPH_CLK_COMP
 *             @arg RCC_PERIPH_CLK_TIM1   
 *             @arg RCC_PERIPH_CLK_SPI1   
 *             @arg RCC_PERIPH_CLK_UART1 
 *             @arg RCC_PERIPH_CLK_ADC    
 *             @arg RCC_PERIPH_CLK_DBG
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_apb2_clk_disable(uint32_t periph_clock)            
 {
@@ -633,15 +633,15 @@ __STATIC_INLINE void std_rcc_apb2_clk_disable(uint32_t periph_clock)
 }
 
 /** 
-* @brief  APBÍâÉè2¸´Î»
-* @param  periph_rst Ö¸¶¨¸´Î»µÄAPBÍâÉè2
+* @brief  APBå¤–è®¾2å¤ä½
+* @param  periph_rst æŒ‡å®šå¤ä½çš„APBå¤–è®¾2
 *             @arg RCC_PERIPH_RESET_COMP   
 *             @arg RCC_PERIPH_RESET_TIM1   
 *             @arg RCC_PERIPH_RESET_SPI1   
 *             @arg RCC_PERIPH_RESET_UART1 
 *             @arg RCC_PERIPH_RESET_ADC    
 *             @arg RCC_PERIPH_RESET_DBG  
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_apb2_reset(uint32_t periph_rst)
 {
@@ -650,8 +650,8 @@ __STATIC_INLINE void std_rcc_apb2_reset(uint32_t periph_rst)
 }       
 
 /** 
-* @brief  Ê¹ÄÜLOCKUP¸´Î»
-* @retval ÎŞ
+* @brief  ä½¿èƒ½LOCKUPå¤ä½
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_lockup_reset_enable(void)
 {
@@ -659,8 +659,8 @@ __STATIC_INLINE void std_rcc_lockup_reset_enable(void)
 }
 
 /** 
-* @brief  ½ûÖ¹LOCKUP¸´Î»
-* @retval ÎŞ
+* @brief  ç¦æ­¢LOCKUPå¤ä½
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_lockup_reset_disable(void)
 {
@@ -668,12 +668,12 @@ __STATIC_INLINE void std_rcc_lockup_reset_disable(void)
 }
 
 /** 
-* @brief  LPTIM1Ê±ÖÓÔ´Ñ¡Ôñ
-* @param  lptim1clk_select LPTIM1Ê±ÖÓÔ´
+* @brief  LPTIM1æ—¶é’Ÿæºé€‰æ‹©
+* @param  lptim1clk_select LPTIM1æ—¶é’Ÿæº
 *             @arg RCC_LPTIM1_ASYNC_CLK_SRC_PCLK
 *             @arg RCC_LPTIM1_ASYNC_CLK_SRC_RCL
 *             @arg RCC_LPTIM1_ASYNC_CLK_SRC_MCO
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_set_lptim1clk_source(uint32_t lptim1clk_select)
 {
@@ -681,8 +681,8 @@ __STATIC_INLINE void std_rcc_set_lptim1clk_source(uint32_t lptim1clk_select)
 }       
 
 /** 
-* @brief  »ñÈ¡LPTIM1Ê±ÖÓÔ´
-* @retval uint32_t ·µ»ØLPTIM1Ê±ÖÓÔ´ĞÅÏ¢
+* @brief  è·å–LPTIM1æ—¶é’Ÿæº
+* @retval uint32_t è¿”å›LPTIM1æ—¶é’Ÿæºä¿¡æ¯
 *             @arg RCC_LPTIM1_ASYNC_CLK_SRC_PCLK1
 *             @arg RCC_LPTIM1_ASYNC_CLK_SRC_RCL
 *             @arg RCC_LPTIM1_ASYNC_CLK_SRC_MCO
@@ -693,11 +693,11 @@ __STATIC_INLINE uint32_t std_rcc_get_lptim1clk_source(void)
 } 
 
 /** 
-* @brief  COMP1Ê±ÖÓÔ´Ñ¡Ôñ
-* @param  comp1clk_select COMP1Ê±ÖÓÔ´
+* @brief  COMP1æ—¶é’Ÿæºé€‰æ‹©
+* @param  comp1clk_select COMP1æ—¶é’Ÿæº
 *             @arg RCC_COMP1_ASYNC_CLK_SRC_PCLK
 *             @arg RCC_COMP1_ASYNC_CLK_SRC_RCL
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_set_comp1clk_source(uint32_t comp1clk_select)
 {
@@ -705,8 +705,8 @@ __STATIC_INLINE void std_rcc_set_comp1clk_source(uint32_t comp1clk_select)
 }       
 
 /** 
-* @brief  »ñÈ¡COMP1Ê±ÖÓÔ´
-* @retval uint32_t ·µ»ØCOMP1Ê±ÖÓÔ´ĞÅÏ¢
+* @brief  è·å–COMP1æ—¶é’Ÿæº
+* @retval uint32_t è¿”å›COMP1æ—¶é’Ÿæºä¿¡æ¯
 *             @arg RCC_COMP1_ASYNC_CLK_SRC_PCLK
 *             @arg RCC_COMP1_ASYNC_CLK_SRC_RCL
 */
@@ -716,11 +716,11 @@ __STATIC_INLINE uint32_t std_rcc_get_comp1clk_source(void)
 } 
 
 /** 
-* @brief  COMP2Ê±ÖÓÔ´Ñ¡Ôñ
-* @param  comp2clk_select COMP2Ê±ÖÓÔ´
+* @brief  COMP2æ—¶é’Ÿæºé€‰æ‹©
+* @param  comp2clk_select COMP2æ—¶é’Ÿæº
 *             @arg RCC_COMP2_ASYNC_CLK_SRC_PCLK
 *             @arg RCC_COMP2_ASYNC_CLK_SRC_RCL
-* @retval ÎŞ
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_set_comp2clk_source(uint32_t comp2clk_select)
 {
@@ -728,8 +728,8 @@ __STATIC_INLINE void std_rcc_set_comp2clk_source(uint32_t comp2clk_select)
 }       
 
 /** 
-* @brief  »ñÈ¡COMP2Ê±ÖÓÔ´
-* @retval uint32_t ·µ»ØCOMP2Ê±ÖÓÔ´ĞÅÏ¢
+* @brief  è·å–COMP2æ—¶é’Ÿæº
+* @retval uint32_t è¿”å›COMP2æ—¶é’Ÿæºä¿¡æ¯
 *             @arg RCC_COMP2_ASYNC_CLK_SRC_PCLK
 *             @arg RCC_COMP2_ASYNC_CLK_SRC_RCL
 */
@@ -739,9 +739,9 @@ __STATIC_INLINE uint32_t std_rcc_get_comp2clk_source(void)
 } 
 
 /** 
-* @brief  Ğ´RCLĞ£×¼Öµ
-* @param  cal_value RCLĞ£×¼Öµ
-* @retval ÎŞ
+* @brief  å†™RCLæ ¡å‡†å€¼
+* @param  cal_value RCLæ ¡å‡†å€¼
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_write_rcl_calibration(uint32_t cal_value)
 {
@@ -749,8 +749,8 @@ __STATIC_INLINE void std_rcc_write_rcl_calibration(uint32_t cal_value)
 }
 
 /** 
-* @brief  ¶ÁÈ¡RCLĞ£×¼Öµ
-* @retval uint32_t RCLĞ£×¼Öµ
+* @brief  è¯»å–RCLæ ¡å‡†å€¼
+* @retval uint32_t RCLæ ¡å‡†å€¼
 */
 __STATIC_INLINE uint32_t std_rcc_read_rcl_calibration(void)
 {
@@ -758,9 +758,9 @@ __STATIC_INLINE uint32_t std_rcc_read_rcl_calibration(void)
 }
 
 /** 
-* @brief  Ğ´RCHÊ±ÖÓ´Öµ÷Öµ
-* @param  cal_value RCHÊ±ÖÓ´Öµ÷Öµ
-* @retval ÎŞ
+* @brief  å†™RCHæ—¶é’Ÿç²—è°ƒå€¼
+* @param  cal_value RCHæ—¶é’Ÿç²—è°ƒå€¼
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_write_rch_coarse_calibration(uint32_t cal_value)
 {
@@ -768,8 +768,8 @@ __STATIC_INLINE void std_rcc_write_rch_coarse_calibration(uint32_t cal_value)
 }
 
 /** 
-* @brief  ¶ÁÈ¡RCHÊ±ÖÓ´Öµ÷Öµ
-* @retval uint32_t RCHÊ±ÖÓ´Öµ÷Öµ
+* @brief  è¯»å–RCHæ—¶é’Ÿç²—è°ƒå€¼
+* @retval uint32_t RCHæ—¶é’Ÿç²—è°ƒå€¼
 */
 __STATIC_INLINE uint32_t std_rcc_read_rch_coarse_calibration(void)
 {
@@ -777,9 +777,9 @@ __STATIC_INLINE uint32_t std_rcc_read_rch_coarse_calibration(void)
 }
 
 /** 
-* @brief  Ğ´RCHÊ±ÖÓÎ¢µ÷Öµ
-* @param  trim_value  RCHÊ±ÖÓÎ¢µ÷Öµ
-* @retval ÎŞ
+* @brief  å†™RCHæ—¶é’Ÿå¾®è°ƒå€¼
+* @param  trim_value  RCHæ—¶é’Ÿå¾®è°ƒå€¼
+* @retval æ— 
 */
 __STATIC_INLINE void std_rcc_write_rch_fine_calibration(uint32_t trim_value)
 {
@@ -787,8 +787,8 @@ __STATIC_INLINE void std_rcc_write_rch_fine_calibration(uint32_t trim_value)
 }
 
 /** 
-* @brief  ¶ÁÈ¡RCHÊ±ÖÓÎ¢µ÷Öµ
-* @retval uint32_t RCHÊ±ÖÓÎ¢µ÷Öµ
+* @brief  è¯»å–RCHæ—¶é’Ÿå¾®è°ƒå€¼
+* @retval uint32_t RCHæ—¶é’Ÿå¾®è°ƒå€¼
 */
 __STATIC_INLINE uint32_t std_rcc_read_rch_fine_calibration(void)
 {
@@ -796,7 +796,7 @@ __STATIC_INLINE uint32_t std_rcc_read_rch_fine_calibration(void)
 }
 
 
-/* »ñÈ¡Ê±ÖÓÆµÂÊº¯Êı */
+/* è·å–æ—¶é’Ÿé¢‘ç‡å‡½æ•° */
 uint32_t std_rcc_get_sysclkfreq(void);
 uint32_t std_rcc_get_hclkfreq(void);
 uint32_t std_rcc_get_pclkfreq(void); 

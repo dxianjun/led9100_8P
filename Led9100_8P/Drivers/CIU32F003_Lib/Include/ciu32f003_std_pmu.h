@@ -2,8 +2,8 @@
 /**
 * @file               ciu32f003_std_pmu.h
 * @author             MCU Ecosystem Development Team
-* @brief              PMU STD������ͷ�ļ���
-*                     �ṩPMU���STD������������������������Լ������Ķ��塣 
+* @brief              PMU STD库驱动头文件。
+*                     提供PMU相关STD库操作函数声明、数据类型以及常量的定义。 
 *                      
 *
 **************************************************************************************************
@@ -13,7 +13,7 @@
 **************************************************************************************************
 */
 
-/*����ͷ�ļ��ظ�����*/
+/*避免头文件重复引用*/
 #ifndef CIU32F003_STD_PMU_H
 #define CIU32F003_STD_PMU_H
 
@@ -25,7 +25,7 @@
 
 /**
 * @defgroup PMU PMU
-* @brief ��Դ������Ԫ��STD������
+* @brief 电源管理单元的STD库驱动
 * @{
 */
 /************************************************************************************************/
@@ -42,21 +42,21 @@
 /************************************************************************************************/
 /** 
 * @defgroup PMU_Constants PMU Constants
-* @brief PMU�������弰�궨��
+* @brief PMU常量定义及宏定义
 * @{
 */
 /************************************************************************************************/
-/* �͹��Ľ��뷽ʽ���� */
-#define PMU_ENTRY_LOWPOWER_MODE_WFI         (0x00UL)                            /**< WFI��ʽ����͹���   */
-#define PMU_ENTRY_LOWPOWER_MODE_WFE         (0x01UL)                            /**< WFE��ʽ����͹���   */
+/* 低功耗进入方式定义 */
+#define PMU_ENTRY_LOWPOWER_MODE_WFI         (0x00UL)                            /**< WFI方式进入低功耗   */
+#define PMU_ENTRY_LOWPOWER_MODE_WFE         (0x01UL)                            /**< WFE方式进入低功耗   */
      
-/* �͹���ģʽ���� */     
-#define PMU_MODE_STOP                       PMU_CR_LP_MODE_STOP                 /**< Stopģʽ            */
-#define PMU_MODE_DEEPSTOP                   PMU_CR_LP_MODE_DEEPSTOP             /**< Deepstopģʽ        */
+/* 低功耗模式定义 */     
+#define PMU_MODE_STOP                       PMU_CR_LP_MODE_STOP                 /**< Stop模式            */
+#define PMU_MODE_DEEPSTOP                   PMU_CR_LP_MODE_DEEPSTOP             /**< Deepstop模式        */
 
-/* Deepstopģʽ���ѹ�����Flash�Ļ��ѵȴ�ʱ�䶨�� */
-#define PMU_DEEPSTOP_FLASH_WAKEUP_TIME_0       (0x3UL << PMU_FLASH_WAKEUP_FLASH_WAKEUP_POS)       /**< Deepstopģʽ���ѹ�����Flash�Ļ��ѵȴ�ʱ��Ϊ0us   */
-#define PMU_DEEPSTOP_FLASH_WAKEUP_TIME_10      (0x00000000U)                                      /**< Deepstopģʽ���ѹ�����Flash�Ļ��ѵȴ�ʱ��Ϊ10us  */
+/* Deepstop模式唤醒过程中Flash的唤醒等待时间定义 */
+#define PMU_DEEPSTOP_FLASH_WAKEUP_TIME_0       (0x3UL << PMU_FLASH_WAKEUP_FLASH_WAKEUP_POS)       /**< Deepstop模式唤醒过程中Flash的唤醒等待时间为0us   */
+#define PMU_DEEPSTOP_FLASH_WAKEUP_TIME_10      (0x00000000U)                                      /**< Deepstop模式唤醒过程中Flash的唤醒等待时间为10us  */
 
 
 /** 
@@ -67,16 +67,16 @@
 /************************************************************************************************/
 /**
 * @defgroup PMU_External_Functions PMU External Functions
-* @brief    PMU���⺯��
+* @brief    PMU对外函数
 * @{
 */
 /************************************************************************************************/
 /**
-* @brief  ����Deepstopģʽ���ѹ�����Flash�Ļ��ѵȴ�ʱ��
-* @param  time_value �ȴ�ʱ��
+* @brief  配置Deepstop模式唤醒过程中Flash的唤醒等待时间
+* @param  time_value 等待时间
 *             @arg PMU_DEEPSTOP_FLASH_WAKEUP_TIME_0 : 0us
 *             @arg PMU_DEEPSTOP_FLASH_WAKEUP_TIME_10: 10us
-* @retval ��
+* @retval 无
 */
 __STATIC_INLINE void std_pmu_deepstop_flash_wakeup_time_config(uint32_t time_value)           
 {
@@ -84,7 +84,7 @@ __STATIC_INLINE void std_pmu_deepstop_flash_wakeup_time_config(uint32_t time_val
 }
 
 
-/* PMU�͹���ģʽ��غ��� */
+/* PMU低功耗模式相关函数 */
 void std_pmu_enter_sleep(uint32_t mode_entry);
 void std_pmu_enter_stop(uint32_t stop_mode, uint32_t mode_entry);
 

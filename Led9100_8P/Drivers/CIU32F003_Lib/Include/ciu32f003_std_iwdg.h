@@ -2,8 +2,8 @@
 /**
 * @file               ciu32f003_std_iwdg.h
 * @author             MCU Ecosystem Development Team
-* @brief              IWDG STD������ͷ�ļ���
-*                     �ṩIWDG��ص�STD������������������������Լ������Ķ��塣 
+* @brief              IWDG STD库驱动头文件。
+*                     提供IWDG相关的STD库操作函数声明、数据类型以及常量的定义。 
 *
 *
 **************************************************************************************************
@@ -13,7 +13,7 @@
 **************************************************************************************************
 */
 
-/* ����ͷ�ļ��ظ����� */
+/* 避免头文件重复引用 */
 #ifndef CIU32F003_STD_IWDG_H
 #define CIU32F003_STD_IWDG_H
 
@@ -25,7 +25,7 @@
 
 /**
 * @defgroup IWDG IWDG
-* @brief �������Ź���STD������
+* @brief 独立看门狗的STD库驱动
 * @{
 *
 */
@@ -43,27 +43,27 @@ extern "C" {
 /************************************************************************************************/
 /**
 * @defgroup IWDG_Constants IWDG Constants
-* @brief IWDG�������弰�궨��
+* @brief IWDG常量定义及宏定义
 * @{
 *
 */
 /************************************************************************************************/
 
-/* IWDG����ֵ���� */
-#define IWDG_RELOAD                      (0x0000AAAAUL)                 /**< IWDG ι��             */
-#define IWDG_ENABLE                      (0x0000CCCCUL)                 /**< IWDG ʹ��             */
-#define IWDG_WRITE_ACCESS_ENABLE         (0x00005555UL)                 /**< IWDG дȨ��ʹ��       */
-#define IWDG_WRITE_ACCESS_DISABLE        (0x00000000UL)                 /**< IWDG дȨ�޹ر�       */
+/* IWDG控制值定义 */
+#define IWDG_RELOAD                      (0x0000AAAAUL)                 /**< IWDG 喂狗             */
+#define IWDG_ENABLE                      (0x0000CCCCUL)                 /**< IWDG 使能             */
+#define IWDG_WRITE_ACCESS_ENABLE         (0x00005555UL)                 /**< IWDG 写权限使能       */
+#define IWDG_WRITE_ACCESS_DISABLE        (0x00000000UL)                 /**< IWDG 写权限关闭       */
 
-/* IWDG�������ʱ�䶨�� */
-#define IWDG_OVERFLOW_PERIOD_128         IWDG_CFG_OVP_128               /**< IWDG���ʱ��Ϊ128ms   */
-#define IWDG_OVERFLOW_PERIOD_256         IWDG_CFG_OVP_256               /**< IWDG���ʱ��Ϊ256ms   */
-#define IWDG_OVERFLOW_PERIOD_512         IWDG_CFG_OVP_512               /**< IWDG���ʱ��Ϊ512ms   */
-#define IWDG_OVERFLOW_PERIOD_1024        IWDG_CFG_OVP_1024              /**< IWDG���ʱ��Ϊ1.024s  */
-#define IWDG_OVERFLOW_PERIOD_2048        IWDG_CFG_OVP_2048              /**< IWDG���ʱ��Ϊ2.048s  */
-#define IWDG_OVERFLOW_PERIOD_4096        IWDG_CFG_OVP_4096              /**< IWDG���ʱ��Ϊ4.096s  */
-#define IWDG_OVERFLOW_PERIOD_8192        IWDG_CFG_OVP_8192              /**< IWDG���ʱ��Ϊ8.192s  */
-#define IWDG_OVERFLOW_PERIOD_16384       IWDG_CFG_OVP_16384             /**< IWDG���ʱ��Ϊ16.384s */
+/* IWDG计数溢出时间定义 */
+#define IWDG_OVERFLOW_PERIOD_128         IWDG_CFG_OVP_128               /**< IWDG溢出时间为128ms   */
+#define IWDG_OVERFLOW_PERIOD_256         IWDG_CFG_OVP_256               /**< IWDG溢出时间为256ms   */
+#define IWDG_OVERFLOW_PERIOD_512         IWDG_CFG_OVP_512               /**< IWDG溢出时间为512ms   */
+#define IWDG_OVERFLOW_PERIOD_1024        IWDG_CFG_OVP_1024              /**< IWDG溢出时间为1.024s  */
+#define IWDG_OVERFLOW_PERIOD_2048        IWDG_CFG_OVP_2048              /**< IWDG溢出时间为2.048s  */
+#define IWDG_OVERFLOW_PERIOD_4096        IWDG_CFG_OVP_4096              /**< IWDG溢出时间为4.096s  */
+#define IWDG_OVERFLOW_PERIOD_8192        IWDG_CFG_OVP_8192              /**< IWDG溢出时间为8.192s  */
+#define IWDG_OVERFLOW_PERIOD_16384       IWDG_CFG_OVP_16384             /**< IWDG溢出时间为16.384s */
 
 
 /** 
@@ -74,15 +74,15 @@ extern "C" {
 /************************************************************************************************/
 /**
 * @defgroup IWDG_External_Functions IWDG External Functions
-* @brief    IWDG���⺯��
+* @brief    IWDG对外函数
 * @{
 *
 */
 /************************************************************************************************/
 /** 
-* @brief  ����IWDG����
-* @note   ʹ��IWDG��,IWDG�޷�ֹͣ
-* @retval ��
+* @brief  启动IWDG计数
+* @note   使能IWDG后,IWDG无法停止
+* @retval 无
 */
 __STATIC_INLINE void std_iwdg_start(void)
 {
@@ -90,8 +90,8 @@ __STATIC_INLINE void std_iwdg_start(void)
 }
 
 /** 
-* @brief  ʹ��IWDG���üĴ���дȨ��
-* @retval ��
+* @brief  使能IWDG配置寄存器写权限
+* @retval 无
 */
 __STATIC_INLINE void std_iwdg_write_access_enable(void)
 {
@@ -99,8 +99,8 @@ __STATIC_INLINE void std_iwdg_write_access_enable(void)
 }
 
 /** 
-* @brief  ��ֹIWDG���üĴ���дȨ��
-* @retval ��
+* @brief  禁止IWDG配置寄存器写权限
+* @retval 无
 */
 __STATIC_INLINE void std_iwdg_write_access_disable(void)
 {
@@ -108,8 +108,8 @@ __STATIC_INLINE void std_iwdg_write_access_disable(void)
 }
 
 /** 
-* @brief  IWDGι��
-* @retval ��
+* @brief  IWDG喂狗
+* @retval 无
 */
 __STATIC_INLINE void std_iwdg_refresh(void)
 {
@@ -117,8 +117,8 @@ __STATIC_INLINE void std_iwdg_refresh(void)
 }
 
 /**
-* @brief  �������ʱ��
-* @param  overflow_period IWDG�����ʱ�䣺
+* @brief  配置溢出时间
+* @param  overflow_period IWDG的溢出时间：
 *             @arg IWDG_OVERFLOW_PERIOD_128
 *             @arg IWDG_OVERFLOW_PERIOD_256
 *             @arg IWDG_OVERFLOW_PERIOD_512
@@ -127,7 +127,7 @@ __STATIC_INLINE void std_iwdg_refresh(void)
 *             @arg IWDG_OVERFLOW_PERIOD_4096
 *             @arg IWDG_OVERFLOW_PERIOD_8192
 *             @arg IWDG_OVERFLOW_PERIOD_16384
-* @retval ��
+* @retval 无
 */
 __STATIC_INLINE void std_iwdg_set_overflow_period(uint32_t overflow_period)
 {
@@ -135,8 +135,8 @@ __STATIC_INLINE void std_iwdg_set_overflow_period(uint32_t overflow_period)
 }
 
 /**
-* @brief  ��ȡ���ʱ��
-* @retval uint32_t IWDG�����ʱ�䣺
+* @brief  获取溢出时间
+* @retval uint32_t IWDG的溢出时间：
 *             @arg IWDG_OVERFLOW_PERIOD_128
 *             @arg IWDG_OVERFLOW_PERIOD_256
 *             @arg IWDG_OVERFLOW_PERIOD_512
@@ -152,8 +152,8 @@ __STATIC_INLINE uint32_t std_iwdg_get_overflow_period(void)
 }
 
 /**
-* @brief ��ȡ����ֵ
-* @retval uint32_t IWDG�ļ���ֵ
+* @brief 获取计数值
+* @retval uint32_t IWDG的计数值
 */
 __STATIC_INLINE uint32_t std_iwdg_get_counter(void)
 {
