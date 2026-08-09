@@ -16,9 +16,10 @@ extern "C" {
 
 // 输入占空比统一量化为12000份。
 #define PWM_SCALE       12000U
-// TIM1计数时钟为48MHz：3000 ticks对应16kHz，24000 ticks对应2kHz。
+// TIM1计数时钟为48MHz：3000 ticks对应16kHz，16000 ticks对应3kHz，24000 ticks对应2kHz。
 #define ARR_16K         3000U
-#define ARR_2K         24000U
+#define ARR_2K         	24000U
+#define ARR_3K			16000U
 
 // DUTY_MAX_NO_ADJ：0表示限制最大逻辑占空比；1表示取消高端限制，允许逻辑脉宽达到整个周期。
 #define DUTY_MAX_NO_ADJ         0
@@ -43,33 +44,59 @@ extern "C" {
 #endif
 #endif
 
-// 定频模式选择：FIX_16K=1时固定3000 ticks/16kHz；FIX_2K=1时固定24000 ticks/2kHz。
-// 两者均为0时，根据亮度曲线在3000~24000 ticks之间动态变频。
+// 定频模式选择：FIX_16K、FIX_3K、FIX_2K分别选择16kHz、3kHz、2kHz。
+// 三者均为0时，根据亮度曲线在3000~24000 ticks之间动态变频。
 #define FIX_16K                 0
 #define FIX_2K                  0
+#define FIX_3K                  1
+
+#if (((FIX_16K != 0) && (FIX_16K != 1)) || \
+     ((FIX_3K != 0) && (FIX_3K != 1)) || \
+     ((FIX_2K != 0) && (FIX_2K != 1)))
+#error "FIX_16K, FIX_3K and FIX_2K must be 0 or 1"
+#endif
+
+#if ((FIX_16K + FIX_3K + FIX_2K) > 1)
+#error "Only one fixed PWM frequency may be enabled"
+#endif
 
 #if (FIX_16K == 1)
-#define DUTY_LIMIT_PERIOD_TICKS ARR_16K
+#define FIXED_PERIOD_TICKS ARR_16K
+#define MAX_BRIGHT_PERIOD_TICKS	ARR_16K		// 最大亮度时的周期ARR_16K
+#elif (FIX_3K == 1)
+#define FIXED_PERIOD_TICKS ARR_3K
+#define MAX_BRIGHT_PERIOD_TICKS	ARR_3K		// 最大亮度时的周期ARR_3K
+#elif (FIX_2K == 1)
+#define FIXED_PERIOD_TICKS ARR_2K
+#define MAX_BRIGHT_PERIOD_TICKS	ARR_2K		// 最大亮度时的周期ARR_2K
 #else
-#define DUTY_LIMIT_PERIOD_TICKS ARR_2K
+#define FIXED_PERIOD_TICKS ARR_2K
+#define MAX_BRIGHT_PERIOD_TICKS	ARR_16K		// 最大亮度时的周期ARR_16K
 #endif
 
 #if (DUTY_MAX_NO_ADJ == 0)
 // 最大占空比保护随当前定频周期缩放；动态变频模式保持原16kHz基准保护值。
-#define DUTY_ADJ_OUT            ((DUTY_LIMIT_PERIOD_TICKS * (100U - MAX_OUTPUT_PERCENT)) / 100U)
+#define DUTY_ADJ_OUT            ((MAX_BRIGHT_PERIOD_TICKS * (100U - MAX_OUTPUT_PERCENT)) / 100U)
 #endif
 
 // 1：当前硬件为TSSOP20调试板；0：当前硬件为8脚版本。
-#define TSSOP20                 1
+#define TSSOP20                 0
 #if (TSSOP20 == 1)
 // CH1/CH2仅用于TSSOP20调试波形；CH3/CH4始终作为正式PWM输出。
 #define DEBUG_PWM_OUTPUT        1
 // TSSOP20调试板具备状态LED。
 #define STATUS_LED_ENABLE       0
+// TSSOP20使用PA3/PA4作为UART1，不占用SWD引脚。
+#define UART1_USE_SWD_PINS      0
 #else
-// 8脚硬件不具备CH1/CH2调试输出和状态LED能力。
+// 8脚硬件不具备CH1/CH2调试输出和状态LED能力，UART1复用SWD引脚。
 #define DEBUG_PWM_OUTPUT        0
 #define STATUS_LED_ENABLE       0
+#define UART1_USE_SWD_PINS      1
+#endif
+
+#if ((UART1_USE_SWD_PINS != 0) && (UART1_USE_SWD_PINS != 1))
+#error "UART1_USE_SWD_PINS must be 0 or 1"
 #endif
 
 #define CHIP_9100   0
@@ -89,16 +116,16 @@ extern "C" {
 // DUTY_DELT：写CCR时增加的死区补偿tick数，使实际高脉宽等于逻辑脉宽。
 // DT_SET：TIM1硬件死区寄存器设置值。
 #if (CHIP_VER == CHIP_9100)
-#define MIN_PULSE   20U
+#define MIN_PULSE   20U		// davidd 20260721, 最小脉冲改回416.7ns
 #define DUTY_DELT   76U
 #define DT_SET      76U
 #elif (CHIP_VER == CHIP_9101)
-#define MIN_PULSE   4U
-#define DUTY_DELT   20U
+#define MIN_PULSE   2U
+#define DUTY_DELT   22U
 #define DT_SET      22U
 #else   // CHIP_6800
-#define MIN_PULSE   4U
-#define DUTY_DELT   20U
+#define MIN_PULSE   2U
+#define DUTY_DELT   22U
 #define DT_SET      22U
 #endif
 

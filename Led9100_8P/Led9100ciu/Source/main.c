@@ -51,11 +51,37 @@ uint8_t rcc_get_rstflg(void)
 	return ((uint8_t)((RCC->CSR2 & RCC_RESET_FLAG_ALL)>>24));
 }
 
+#if 0
+void swd_gpio_init(void)
+{
+    std_gpio_init_t swd_gpio = {0};
+    std_rcc_gpio_clk_enable(RCC_PERIPH_CLK_GPIOA | RCC_PERIPH_CLK_GPIOB);
+
+    /* UART1 reuses SWD pins: PA2=RX/SWCLK, PB6=TX/SWDIO. */
+    swd_gpio.pin = GPIO_PIN_2;
+    swd_gpio.mode = GPIO_MODE_ALTERNATE;
+    swd_gpio.pull = GPIO_PULLUP;
+    swd_gpio.output_type = GPIO_OUTPUT_PUSHPULL;
+    swd_gpio.alternate = GPIO_AF0_SWCLK;
+    std_gpio_init(GPIOA, &swd_gpio);
+
+    swd_gpio.pin = GPIO_PIN_6;
+	swd_gpio.alternate = GPIO_AF0_SWDIO;
+    std_gpio_init(GPIOB, &swd_gpio);
+
+}
+#endif
+
 int main(void)
 {
 	system_clock_config();
 	SysTick_init();
-
+	
+	#if (UART1_USE_SWD_PINS == 1)
+	// swd_gpio_init();
+	// 为烧录器保留上电连接窗口，之后将SWD引脚切换为UART1。
+	Delay_1ms(500);
+	#endif
 	uart_gpio_init();
 	uart_init();
 	usart_init_int();
@@ -147,7 +173,7 @@ int main(void)
 	#if (STATUS_LED_ENABLE == 1)
 	led_init();
 	#endif
-	// iwdg_init();
+	iwdg_init();
 
 	while (1)
 		{

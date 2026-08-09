@@ -9,7 +9,10 @@
 #define TIM3_ARR_VALUE          (0xFFFFU)
 
 #define INPUT_PERIOD_MIN        (2000U)     /* 24 kHz at 48 MHz */
-#define INPUT_PERIOD_MAX        (60000U)    /* 800 Hz at 48 MHz */
+#define INPUT_PERIOD_MAX 		(64000U)  	/* 750 Hz at 48 MHz */
+
+//#define INPUT_PERIOD_MAX        (80000U)    /* 600 Hz at 48 MHz */
+//#define INPUT_PERIOD_MAX        (60000U)    /* 800 Hz at 48 MHz */
 
 #define DET_CNT                 (4U)
 #define BIT_SHIFT               (2U)
@@ -76,7 +79,7 @@ static uint8_t read_pin_debounced(GPIO_t *gpiox, uint32_t pin)
     return (high_count > (INPUT_TIMEOUT_DEBOUNCE_READS / 2U)) ? 1U : 0U;
 }
 
-uint16_t tim1_period_ticks = DUTY_LIMIT_PERIOD_TICKS;
+uint16_t tim1_period_ticks = FIXED_PERIOD_TICKS;
 
 static uint16_t normalize_pulse_ticks(uint16_t pulse_ticks, uint16_t period_ticks)
 {
@@ -135,6 +138,7 @@ void tim1_apply_output(uint16_t period_ticks, uint16_t pulse1_ticks, uint16_t pu
 	ccr3 = normalized_pulse1;
 	ccr4 = (uint16_t)(period_ticks - normalized_pulse2);
 
+	// 加入死区的补偿
 	if (normalized_pulse1 == 0U)
 		{
 		final_ccr3 = 0U;
@@ -148,6 +152,9 @@ void tim1_apply_output(uint16_t period_ticks, uint16_t pulse1_ticks, uint16_t pu
 		final_ccr3 = (uint16_t)(ccr3 + DUTY_DELT);
 		}
 
+	#if 1	// ch4 没有互补通道，因此死区设置无效，不需要补偿
+	final_ccr4 = ccr4;
+	#else
 	if (normalized_pulse2 == 0U)
 		{
 		final_ccr4 = period_ticks;
@@ -160,7 +167,8 @@ void tim1_apply_output(uint16_t period_ticks, uint16_t pulse1_ticks, uint16_t pu
 		{
 		final_ccr4 = (uint16_t)(ccr4 - DUTY_DELT);
 		}
-
+	#endif
+	
 	std_tim_set_autoreload(TIM1, (uint16_t)(period_ticks - 1U));
 	std_tim_set_ccx_value(TIM1, TIM_CHANNEL_3, final_ccr3);
 	std_tim_set_ccx_value(TIM1, TIM_CHANNEL_4, final_ccr4);

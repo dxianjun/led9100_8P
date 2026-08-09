@@ -7,10 +7,10 @@
 核心功能：
 
 - 采集两路 PWM 输入：`PWM_IN1 = PB0/TIM3_CH1`，`PWM_IN2 = PA7/TIM3_CH2`。
-- 当前使用 `TSSOP20 = 1` 调试配置；正式输出固定为 `PWM_OUT1 = PB2/TIM1_CH3`、`PWM_OUT2 = PB1/TIM1_CH4`。
-- `DEBUG_PWM_OUTPUT = 1` 时额外启用测试 PWM：`TEST_PWM1 = PA0/TIM1_CH1`、`TEST_PWM2 = PA1/TIM1_CH2`；它不影响正式 CH3/CH4 输出。
-- 当前使用 `FIX_2K = 1`，TIM1 周期固定为 24000 ticks，对应 2 kHz。
-- UART1 调试通信：`PA3/UART1_TX`，`PA4/UART1_RX`。
+- 当前使用 `TSSOP20 = 0` 的 8P 配置；正式输出固定为 `PWM_OUT1 = PB2/TIM1_CH3`、`PWM_OUT2 = PB1/TIM1_CH4`。
+- `DEBUG_PWM_OUTPUT = 0`，不启用 `PA0/TIM1_CH1`、`PA1/TIM1_CH2` 测试 PWM；正式 CH3/CH4 输出不受影响。
+- 当前使用 `FIX_3K = 1`，TIM1 周期固定为 16000 ticks，对应 3 kHz。
+- 当前 `UART1_USE_SWD_PINS = 1`：上电保留 500 ms 烧录连接窗口，之后将 `PB6/SWDIO`、`PA2/SWCLK` 切换为 UART1_TX、UART1_RX。
 - 使用 SysTick 维护 125 us、1 ms、10 ms、1 s 软件计时。
 - 支持串口命令打开输入/输出打印、切换模式、分别设置两路测试 PWM 等级。
 
@@ -25,20 +25,21 @@
 | 标准库 | `Drivers/CIU32F003_Lib` |
 | CMSIS | `Drivers/CMSIS` |
 | 输出名 | `led9100ciu` |
-| 当前芯片/封装配置 | `CHIP_VER = CHIP_9100`，`TSSOP20 = 1`（TSSOP20 调试配置） |
+| 当前芯片/封装配置 | `CHIP_VER = CHIP_9100`，`TSSOP20 = 0`（8P 配置） |
 
 ## 3. 当前默认构建配置
 
 | 配置项 | 当前值 | 影响 |
 | --- | --- | --- |
 | `CHIP_VER` | `CHIP_9100` | 使用 LED9100 对应的脉宽、占空比补偿和死区参数 |
-| `TSSOP20` | `1` | 使用 TSSOP20 调试配置 |
-| `DEBUG_PWM_OUTPUT` | `1` | 额外启用 TIM1_CH1/CH2 测试 PWM，正式 CH3/CH4 输出不受影响 |
+| `TSSOP20` | `0` | 使用 8P 配置 |
+| `DEBUG_PWM_OUTPUT` | `0` | 不启用 TIM1_CH1/CH2 测试 PWM，正式 CH3/CH4 输出不受影响 |
 | `STATUS_LED_ENABLE` | `0` | 不初始化或翻转 TSSOP20 调试板状态 LED |
-| `FIX_16K` / `FIX_2K` | `0` / `1` | TIM1 固定 24000 ticks / 2 kHz |
-| `MAX_OUTPUT_PERCENT` | `90U` | 最大逻辑输出限制为 90%，2 kHz 下最大逻辑脉宽为 21600 ticks |
-| `DUTY_LIMIT_PERIOD_TICKS` | `ARR_2K` | TIM1 初始/固定周期及最大占空比保护的周期基准 |
-| `MIN_PULSE` / `DUTY_DELT` / `DT_SET` | `20` / `76` / `76` | LED9100 最小脉宽、死区补偿及硬件死区设置 |
+| `UART1_USE_SWD_PINS` | `1` | UART1 使用 PB6/PA2，与 SWDIO/SWCLK 分时复用 |
+| `FIX_16K` / `FIX_3K` / `FIX_2K` | `0` / `1` / `0` | TIM1 固定 16000 ticks / 3 kHz |
+| `MAX_OUTPUT_PERCENT` | `90U` | 最大逻辑输出限制为 90%，3 kHz 下最大逻辑脉宽为 14400 ticks |
+| `FIXED_PERIOD_TICKS` | `ARR_3K` | TIM1 初始/固定周期及最大占空比保护的周期基准 |
+| `MIN_PULSE` / `DUTY_DELT` / `DT_SET` | `30` / `76` / `76` | LED9100 最小脉宽、死区补偿及硬件死区设置 |
 | `MODE_DEFAULT` | `MODE_DIRECT` | 上电默认进入 Direct 模式 |
 | `DET_CNT` / `BIT_SHIFT` | `4` / `2` | TIM3 输入周期和高电平宽度采用 4 次平均 |
 | `PWM_SCALE` | `12000` | 输入占空比和应用层计算的满量程 |
@@ -79,7 +80,7 @@ Led9100_8P/
 
 1. `system_clock_config()`：启用 RCH，并设置系统时钟为 `RCH_VALUE`。
 2. `SysTick_init()`：配置 125 us SysTick，并在中断中派生 1 ms、10 ms、1 s 标志。
-3. `uart_gpio_init()`、`uart_init()`、`usart_init_int()`：初始化 UART1 和 RXNE 中断。
+3. 当 `UART1_USE_SWD_PINS = 1` 时先延时 500 ms，为烧录器保留上电连接窗口；随后初始化 UART1 和 RXNE 中断，并将 PB6/PA2 切换为 UART1_TX/UART1_RX。
 4. 打印硬件版本、编译日期时间、软件版本。
 5. 读取、打印并清除复位标志，可区分 LOCKUP、NRST、PMU、SW、IWDG 和 LPM 复位。`app_init()`随后初始化应用状态、PWM目标值和模式。
 6. `tim3_gpio_init()`：配置 PB0/PA7 为 TIM3 输入脚。
@@ -97,13 +98,13 @@ Led9100_8P/
 | PWM_IN2 | PA7 | TIM3_CH2 | PWM 输入 2，允许 800 Hz - 24 kHz |
 | PWM_OUT1 | PB2 | TIM1_CH3 | 正式输出通道 1，PWM1 模式，高电平有效 |
 | PWM_OUT2 | PB1 | TIM1_CH4 | 正式输出通道 2，PWM2 模式，高电平有效 |
-| TEST_PWM1 | PA0 | TIM1_CH1 | `DEBUG_PWM_OUTPUT = 1` 时启用，当前启用 |
-| TEST_PWM2 | PA1 | TIM1_CH2 | `DEBUG_PWM_OUTPUT = 1` 时启用，当前启用 |
+| TEST_PWM1 | PA0 | TIM1_CH1 | `DEBUG_PWM_OUTPUT = 1` 时启用，当前不启用 |
+| TEST_PWM2 | PA1 | TIM1_CH2 | `DEBUG_PWM_OUTPUT = 1` 时启用，当前不启用 |
 | LED1 | PB1 | GPIO 输出 | 当前 `STATUS_LED_ENABLE = 0`，不初始化 |
-| UART1_TX | PA3 | UART1_TX | 调试发送 |
-| UART1_RX | PA4 | UART1_RX | 调试接收 |
-| SWDIO | PB6 | SWDIO | 下载/调试 |
-| SWCLK | PA2 | SWCLK | 下载/调试 |
+| SWDIO / UART1_TX | PB6 | SWDIO / UART1_TX | 当前上电连接窗口内用于下载/调试，500 ms 后切换为 UART1 发送 |
+| SWCLK / UART1_RX | PA2 | SWCLK / UART1_RX | 当前上电连接窗口内用于下载/调试，500 ms 后切换为 UART1 接收 |
+| TSSOP20 UART1_TX | PA3 | UART1_TX | `UART1_USE_SWD_PINS = 0` 时使用，当前不使用 |
+| TSSOP20 UART1_RX | PA4 | UART1_RX | `UART1_USE_SWD_PINS = 0` 时使用，当前不使用 |
 
 ## 8. PWM 输入采样
 
@@ -133,17 +134,19 @@ TIM1 输出由 `tim_bsp.c` 负责寄存器写入：
 - 正式输出固定为`TIM1_CH3(PB2)`和`TIM1_CH4(PB1)`，不受`DEBUG_PWM_OUTPUT`控制。
 - CH1 - CH3 使用 PWM1 模式，CH4 使用 PWM2 模式；已启用 ARR 预装载，实际启用的 CCR 通道也会打开预装载。
 - `tim1_apply_output(period_ticks, pulse1_ticks, pulse2_ticks)` 根据目标周期和脉宽写入 ARR、CH3 CCR、CH4 CCR。
-- 当前`FIX_2K = 1`，输出周期固定为`ARR_2K = 24000` ticks；两个定频宏均为0时才使用动态变频曲线。
+- 当前`FIX_3K = 1`，输出周期固定为`ARR_3K = 16000` ticks；三个定频宏均为0时才使用动态变频曲线。
 - `pulse_to_ccr1()` 和 `pulse_to_ccr2n()` 会结合 `MIN_PULSE`、`DUTY_DELT`、`DT_SET` 处理死区补偿和极限输出。
-- `pwmLv1`、`pwmLv2` 命令在 TSSOP20 配置下设置测试 PWM CH1/CH2 等级；跟随输出 CH3/CH4 仍由输入采样和亮度曲线计算。
+- `pwmLv1`、`pwmLv2` 命令仅在 `DEBUG_PWM_OUTPUT = 1` 的 TSSOP20 配置下设置测试 PWM CH1/CH2 等级；当前 8P 配置不启用测试 PWM，跟随输出 CH3/CH4 仍由输入采样和亮度曲线计算。
 
 当前默认构建配置：
 
 ```c
 #define CHIP_VER CHIP_9100
-#define TSSOP20  1
+#define TSSOP20  0
+#define UART1_USE_SWD_PINS 1
 #define FIX_16K  0
-#define FIX_2K   1
+#define FIX_3K   1
+#define FIX_2K   0
 ```
 
 不同芯片版本会影响 `MIN_PULSE`、`DUTY_DELT`、`DT_SET`。
@@ -153,7 +156,7 @@ TIM1 输出由 `tim_bsp.c` 负责寄存器写入：
 `app_service.c` 管理 LED9100 应用状态：
 
 - `brightness_curve_anchors[]`：亮度到输出周期/总脉宽的曲线表。
-- `FIX_16K=1`时使用固定3000 tick/16kHz曲线；当前`FIX_2K=1`，使用固定24000 tick/2kHz曲线，脉宽按16kHz曲线扩大8倍。
+- `FIX_16K=1`时使用固定3000 ticks/16 kHz曲线；当前`FIX_3K=1`，使用固定16000 ticks/3 kHz曲线，脉宽按逻辑占空比缩放到3 kHz周期；`FIX_2K=1`时使用固定24000 ticks/2 kHz曲线。
 - `compute_output_pulses()`：根据模式和两路输入计算 PWM1/PWM2 实际输出脉宽。
 - `app_task()`：运行输入状态机，并在`uc_cal_step = 1`时完成亮度、周期和两路脉宽计算，将结果标记为待应用。
 - `pwm_update_isr()`：每个TIM1周期将两路当前值各向目标移动1级；在周期边界应用主循环计算结果，并刷新测试PWM。
@@ -255,7 +258,7 @@ Led9100ciu/MDK/ciu32f003.uvprojx
 - `system_ciu32f003.c`
 - `startup_ciu32f003.s`
 
-`功能介绍.txt` 中记录了 20260616 历史版本的程序大小、看门狗验证、TSSOP20/SOP8 配置和输出口调整备注。当前工作区默认宏为`CHIP_9100`、`TSSOP20 = 1`、`FIX_2K = 1`、`MAX_OUTPUT_PERCENT = 90U`。发布前仍需执行Keil全量编译和示波器波形验证。
+`功能介绍.txt` 中记录了历史版本的程序大小、看门狗验证、TSSOP20/SOP8 配置和输出口调整备注。当前工作区默认宏为`CHIP_9100`、`TSSOP20 = 0`、`UART1_USE_SWD_PINS = 1`、`FIX_3K = 1`、`MAX_OUTPUT_PERCENT = 90U`。发布前仍需执行Keil全量编译和示波器波形验证。
 
 ## 15. 开发注意事项
 

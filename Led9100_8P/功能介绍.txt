@@ -1,6 +1,55 @@
 Led9100_ciu
 TSSOP20/ SOP8
 
+20260721
+	最小脉冲改回416.7ns
+	频率定频3K 版本
+	LED9100ciu_260721_3k
+	Program Size: Code=12608 RO-data=500 RW-data=140 ZI-data=1124  
+	9101 变频版本 最小脉冲2 对应41.67ns
+	LED9101ciu_260721_2
+
+	Program Size: Code=12608 RO-data=500 RW-data=140 ZI-data=1124  
+	最低频率改为750Hz, 已经到芯片极限了
+	LED9101ciu_260721_750Hz
+
+	Program Size: Code=12420 RO-data=500 RW-data=140 ZI-data=1124  
+	9100定频3K，最低750Hz
+	LED9100ciu_260721_3K_750Hz	
+
+
+20260717
+	最小脉冲增加到625ns, 对齐川电的版本
+	LED9100ciu_260717_2
+	以后都默认用8脚的版本；
+	
+
+20260716
+	定频2K，变频16K，调试都完成；
+	2个问题：1.评估板C4去掉，可以解决小脉冲，不亮的问题，1%附近不亮就是这个问题； 2.冷开机会闪一下，去掉电阻R3和R4，官方的评估板上有上拉电阻，去掉就可以了；
+	8P配置下，PB6复用为UART1_TX，PA2复用为UART1_RX；上电保留500ms烧录连接窗口后切换为UART1；
+	LED9100ciu_260716
+
+	Program Size: Code=12612 RO-data=500 RW-data=140 ZI-data=1124 
+	8脚uart和SWD复用
+	LED9100ciu_260716_2
+
+	Program Size: Code=12424 RO-data=500 RW-data=140 ZI-data=1124  
+	去掉CH4的补偿；
+	LED9100ciu_260716_3
+
+20260715
+	Program Size: Code=10168 RO-data=500 RW-data=148 ZI-data=1124  
+	改为定频2K
+	Program Size: Code=12720 RO-data=500 RW-data=140 ZI-data=1124
+	发现问题，2路同时接入10% 2K信号时，只有1路能识别到；
+	LED9100ciu_260715
+	
+
+20260714
+	功能验证，编译器升级到V6.24后，编译出来的bin不能用；退回V5.04就正常了
+	led9101ciu_20260714
+
 20260616
 	Program Size: Code=12496 RO-data=500 RW-data=144 ZI-data=1184  
 	功能验证ok, 只是不能开看门狗，开了以后，串口等都不能执行了；

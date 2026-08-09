@@ -56,6 +56,38 @@ static const brightness_curve_anchor_t brightness_curve_anchors[] =
     {12000U, 2850U, 3000U }, // 高亮端保持在95%平台 @ 16.00kHz
     #endif
 };
+#elif (FIX_3K==1)
+static const brightness_curve_anchor_t brightness_curve_anchors[] =
+{
+    {  12U,    16U, 16000U }, // 0.10% @ 3.00kHz
+    {  24U,    32U, 16000U }, // 0.20% @ 3.00kHz
+    {  36U,    48U, 16000U }, // 0.30% @ 3.00kHz
+    {  60U,    80U, 16000U }, // 0.50% @ 3.00kHz
+    { 120U,   160U, 16000U }, // 1.00% @ 3.00kHz
+    { 240U,   320U, 16000U }, // 2.00% @ 3.00kHz
+    { 300U,   400U, 16000U }, // 2.50% @ 3.00kHz
+    { 360U,   480U, 16000U }, // 3.00% @ 3.00kHz
+    { 600U,   800U, 16000U }, // 5.00% @ 3.00kHz
+    { 960U,  1280U, 16000U }, // 8.00% @ 3.00kHz
+    {1200U,  1600U, 16000U }, // 10.0% @ 3.00kHz
+    {1440U,  1920U, 16000U }, // 12.0% @ 3.00kHz
+    {1920U,  2560U, 16000U }, // 16.0% @ 3.00kHz
+    {2400U,  3200U, 16000U }, // 20.0% @ 3.00kHz
+    {2765U,  3687U, 16000U }, // 23.04% @ 3.00kHz
+    #if (DUTY_MAX_NO_ADJ == 1)
+    {10800U, 14400U, 16000U }, // 逻辑脉宽达到90% @ 3.00kHz
+    {11400U, 15200U, 16000U }, // 逻辑脉宽达到95% @ 3.00kHz
+    {12000U, 16000U, 16000U }, // 逻辑脉宽达到100% @ 3.00kHz
+    #elif (MAX_OUTPUT_PERCENT == 90U)
+    {10800U, 14400U, 16000U }, // 逻辑脉宽达到90% @ 3.00kHz
+    {12000U, 14400U, 16000U }, // 高亮端保持在90%平台 @ 3.00kHz
+    #elif (MAX_OUTPUT_PERCENT == 95U)
+    {10800U, 14400U, 16000U }, // 逻辑脉宽达到90% @ 3.00kHz
+    {11400U, 15200U, 16000U }, // 逻辑脉宽达到95% @ 3.00kHz
+    {12000U, 15200U, 16000U }, // 高亮端保持在95%平台 @ 3.00kHz
+    #endif
+};
+
 #elif (FIX_2K==1)
 static const brightness_curve_anchor_t brightness_curve_anchors[] =
 {

@@ -21,15 +21,30 @@ void uart_gpio_init(void)
 {
     std_gpio_init_t uart_gpio = {0};
 
+	#if (UART1_USE_SWD_PINS == 1)
+    std_rcc_gpio_clk_enable(RCC_PERIPH_CLK_GPIOA | RCC_PERIPH_CLK_GPIOB);
+
+    /* UART1 reuses SWD pins: PA2=RX/SWCLK, PB6=TX/SWDIO. */
+    uart_gpio.pin = GPIO_PIN_2;
+    uart_gpio.mode = GPIO_MODE_ALTERNATE;
+    uart_gpio.pull = GPIO_PULLUP;
+    uart_gpio.output_type = GPIO_OUTPUT_PUSHPULL;
+    uart_gpio.alternate = GPIO_AF1_UART1;
+    std_gpio_init(GPIOA, &uart_gpio);
+
+    uart_gpio.pin = GPIO_PIN_6;
+    std_gpio_init(GPIOB, &uart_gpio);
+	#else
     std_rcc_gpio_clk_enable(RCC_PERIPH_CLK_GPIOA);
 
-    /* UART1: PA3=TX, PA4=RX, PB4/PB5 reserved and not used. */
+    /* UART1: PA3=TX, PA4=RX. */
     uart_gpio.pin = GPIO_PIN_3 | GPIO_PIN_4;
     uart_gpio.mode = GPIO_MODE_ALTERNATE;
     uart_gpio.pull = GPIO_PULLUP;
     uart_gpio.output_type = GPIO_OUTPUT_PUSHPULL;
     uart_gpio.alternate = GPIO_AF1_UART1;
     std_gpio_init(GPIOA, &uart_gpio);
+	#endif
 }
 
 void uart_init(void)
